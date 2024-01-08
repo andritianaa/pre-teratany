@@ -27,7 +27,6 @@ const useFetchSearchByQuery = (query: string, type?: string) => {
           toast.error(error_message);
         } else {
           setResults(response?.data as ISearch);
-
         }
       }
     } fetchResults()
