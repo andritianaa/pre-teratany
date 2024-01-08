@@ -30,6 +30,7 @@ export const DrawerContainer: React.FC<DrawerProps> = ({
   return isOpen ? (
     <React.Fragment>
       <Drawer
+        placeholder=""
         open={isOpen}
         onClose={onClose}
         className="p-4 z-1000 rounded-l-2xl rounded-r-2xl !h-[90%] !max-h-[90%]"

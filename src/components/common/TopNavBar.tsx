@@ -1,5 +1,6 @@
 import React from "react";
 import LogoTeratany from "../../assets/Teratany.jpg";
+import SwitchLangage from "../SwitchLangage";
 
 interface TopNavBarProps {
   notifCount: number;
@@ -13,6 +14,7 @@ const TopNavBar: React.FC<TopNavBarProps> = (props: any) => {
         <p className="text-lg font-serif flex justify-center font-medium">
           <img className="h-10" src={LogoTeratany} alt="instagram" />
         </p>
+        <SwitchLangage />
         {/* <div className="flex items-center">
           <div className=" relative px-2">
             <IoNotificationsOutline

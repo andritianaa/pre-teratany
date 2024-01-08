@@ -61,6 +61,7 @@ const DrawerSettings: React.FC<DrawerProps> = ({
     <>
       <React.Fragment>
         <Drawer
+          placeholder=""
           overlay={true}
           placement="bottom"
           open={openBottom}
@@ -69,12 +70,14 @@ const DrawerSettings: React.FC<DrawerProps> = ({
         >
           <div className="flex items-center justify-between w-full mb-2">
             <Typography
+              placeholder=""
               className="text-lg font-semibold border-b border-b-1 border-gray-300"
               color="black"
             >
               Post
             </Typography>
             <IconButton
+              placeholder=""
               variant="text"
               color="blue-gray"
               onClick={handleClickClose}

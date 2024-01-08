@@ -134,7 +134,10 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
                         delete
                       </p>
                     </PopoverHandler>
-                    <PopoverContent className="ml-4 z-1000 shadow-2xl">
+                    <PopoverContent
+                      placeholder=""
+                      className="ml-4 z-1000 shadow-2xl"
+                    >
                       Are you sure to delete this comment ?
                       <div className="flex">
                         <p
