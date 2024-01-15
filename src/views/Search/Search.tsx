@@ -7,11 +7,13 @@ import useToken from "../../hooks/useToken";
 import useFetchProfile from "../../hooks/useFetchProfile";
 import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
 import { IHistory } from "../../types/historique.type";
+import { useTranslation } from "react-i18next";
 
 const Search: React.FC = () => {
   const token = useToken();
   const [searchHistory, setSearchHistory] = useState<IHistory[]>();
   const profileConnected = useFetchProfile();
+  const { t } = useTranslation();
 
   const fetchUserSearchHistory = async () => {
     if (profileConnected) {
@@ -35,7 +37,7 @@ const Search: React.FC = () => {
     <>
       <div className="mx-3 mt-4 flex flex-col items-start">
         <SearchBar />
-        <p className="pt-1 pb-3 text-ms font-medium">Recent</p>
+        <p className="pt-1 pb-3 text-ms font-medium">{t("search.recent")}</p>
       </div>
 
       <RecentCard

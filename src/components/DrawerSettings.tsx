@@ -7,6 +7,7 @@ import useToken from "../hooks/useToken";
 import { deletePublication } from "../api/PublicationApi";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface DrawerProps {
   openBottom: any;
@@ -23,6 +24,9 @@ const DrawerSettings: React.FC<DrawerProps> = ({
     // Appel de la fonction closeBottom du composant parent
     closeBottom();
   };
+  const { t } = useTranslation();
+
+  const toastMessage = t("publications.deleted");
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const token = useToken();
@@ -53,7 +57,7 @@ const DrawerSettings: React.FC<DrawerProps> = ({
         error.message;
       toast.error(error_message);
     } else {
-      toast.success("Publication deleted");
+      toast.success(toastMessage);
     }
   };
 
@@ -74,7 +78,7 @@ const DrawerSettings: React.FC<DrawerProps> = ({
               className="text-lg font-semibold border-b border-b-1 border-gray-300"
               color="black"
             >
-              Post
+              {t("publications.singular")}
             </Typography>
             <IconButton
               placeholder=""
@@ -102,14 +106,16 @@ const DrawerSettings: React.FC<DrawerProps> = ({
             <hr className="z-50" />
             <hr className="z-50" />
             <Link to={`/publication/${id}`}>
-              <p className="hover:bg-slate-100 py-4">Edit</p>
+              <p className="hover:bg-slate-100 py-4">
+                {t("publications.edit")}
+              </p>
             </Link>
             <hr />
             <p
               className="text-red-500 py-4 hover:bg-slate-100"
               onClick={detelePost}
             >
-              Delete
+              {t("comments.delete")}
             </p>
           </div>
         </Drawer>

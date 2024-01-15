@@ -1,11 +1,24 @@
+import { useTranslation } from 'react-i18next';
 
-export const convertDate = (date: string): string => {
+export const ConvertDate = (date: string): string => {
+    const { t } = useTranslation();
+
     const originalDate = new Date(date);
     const day = String(originalDate.getDate()).padStart(2, '0');
 
     const monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
+        t('months.january'),
+        t('months.february'),
+        t('months.march'),
+        t('months.april'),
+        t('months.may'),
+        t('months.june'),
+        t('months.july'),
+        t('months.august'),
+        t('months.september'),
+        t('months.october'),
+        t('months.november'),
+        t('months.december'),
     ];
 
     const month = monthNames[originalDate.getMonth()];
@@ -13,7 +26,5 @@ export const convertDate = (date: string): string => {
 
     const formattedDate = `${month} ${day}, ${year}`;
 
-    return formattedDate
-}
-
-
+    return formattedDate;
+};

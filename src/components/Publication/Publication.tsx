@@ -5,7 +5,7 @@ import { FiSend } from "@react-icons/all-files/fi/FiSend";
 import { useState } from "react";
 import { DrawerContainer } from "../DrawerContainer";
 import { FileServerURL } from "../../api/FileApi";
-import { convertDate } from "../../helpers/DateConverter";
+import { ConvertDate } from "../../helpers/DateConverter";
 import { withAsync } from "../../helpers/withAsync";
 import { toggleReactPublication } from "../../api/PublicationApi";
 import useToken from "../../hooks/useToken";
@@ -21,6 +21,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "../../styles/SwiperPublication.css";
 import { Pagination } from "swiper/modules";
+import { useTranslation } from "react-i18next";
 
 interface PublicationProps {
   _id?: string;
@@ -53,6 +54,7 @@ const Publication: React.FC<PublicationProps> = ({
   const [react, setReact] = useState<number>(reactions!);
   const token = useToken();
   const profile = useFetchProfile();
+  const { t } = useTranslation();
 
   const handleClickLikePost = async (_id: string) => {
     setIsPostLiked(!isPostLiked);
@@ -120,7 +122,7 @@ const Publication: React.FC<PublicationProps> = ({
                   </p>
                 </div>
                 <div className="flex text-sm text-slate-500 white:text-slate-300 white:text-slate-400">
-                  {convertDate(date!)}
+                  {ConvertDate(date!)}
                 </div>
               </div>
             </Link>
@@ -225,7 +227,9 @@ const Publication: React.FC<PublicationProps> = ({
                 </span>
               </div>
               <p className="text-left py-2 text-gray-800 font-medium">
-                {react > 1 ? react + " Likes" : react + " Like"}
+                {react > 1
+                  ? t("publications.likes.plural", { count: react })
+                  : t("publications.likes.singular", { count: react })}
               </p>
             </div>
             <div className="text-container">
@@ -247,7 +251,7 @@ const Publication: React.FC<PublicationProps> = ({
                   className="text-left  text-gray-400 font-normal mb-2"
                   onClick={togglePubContentDetails}
                 >
-                  plus
+                  {t("publications.plus")}
                 </p>
               )}
             </div>
@@ -258,7 +262,7 @@ const Publication: React.FC<PublicationProps> = ({
               onClick={changeDrawerStatus}
               className="text-left  text-gray-400 font-normal"
             >
-              Show {comments} comments
+              {t("publications.showComments", { comments: comments })}
             </p>
           )}
           <p className="text-left text-xs text-gray-400 font-normal">

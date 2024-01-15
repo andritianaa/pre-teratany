@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import useToken from "../../hooks/useToken";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import useFetchProfile from "../../hooks/useFetchProfile";
+import { useTranslation } from "react-i18next";
 
 interface GeneralUserInfo {
   name: string | undefined;
@@ -23,6 +24,7 @@ const ProfileGeneral: React.FC = () => {
   const token = useToken();
   const profile = useFetchProfile();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
+  const { t } = useTranslation();
 
   const initialValues: GeneralUserInfo = {
     name: profile?.name,
@@ -50,7 +52,8 @@ const ProfileGeneral: React.FC = () => {
       toast.error(error_message);
     } else {
       endLoading();
-      toast.success("General information updated!");
+      const sucsessToast = t("settings.successGeneral");
+      toast.success(sucsessToast);
     }
   };
 
@@ -79,7 +82,7 @@ const ProfileGeneral: React.FC = () => {
           ) => (
             <form className="w-[90%]" onSubmit={formik.handleSubmit}>
               <FormField
-                label="Name"
+                label={t("settings.generalUser.name")}
                 type="name"
                 mark="name"
                 height="py-2"
@@ -90,7 +93,7 @@ const ProfileGeneral: React.FC = () => {
               />
               <ErrorMessageForm name="name" />
               <FormField
-                label="Email"
+                label={t("settings.generalUser.email")}
                 type="email"
                 mark="email"
                 height="py-2"
@@ -106,10 +109,10 @@ const ProfileGeneral: React.FC = () => {
                     htmlFor="description"
                     className="text-left block text-sm white:text-white my-2"
                   >
-                    Description
+                    {t("settings.generalPage.description")}
                   </label>
                   <textarea
-                    name="description"
+                    name={t("settings.generalPage.description")}
                     rows={4}
                     value={formik.values.description}
                     className="py-2 custom-border px-4 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 white:bg-gray-800 white:border-gray-700 white:text-gray-400 h-24 max-h-24"

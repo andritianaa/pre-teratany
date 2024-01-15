@@ -1,5 +1,6 @@
 import React from "react";
 import { BsFillChatDotsFill } from "@react-icons/all-files/bs/BsFillChatDotsFill";
+import { useTranslation } from "react-i18next";
 
 interface ButtonProps {
   name: string;
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   isDisabled,
   showLoadingText = true,
 }) => {
+  const { t } = useTranslation();
   if (!isLoading) {
     return (
       <button
@@ -30,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
         className={`${width} ${height} inline-flex justify-center  text-white bg-black font-medium rounded text-sm px-5 py-2.5 text-center mr-2 items-center ${className}`}
       >
-        {name === "Message" ? <BsFillChatDotsFill size={23} /> : name}
+        {name === t("message") ? <BsFillChatDotsFill size={23} /> : name}
       </button>
     );
   } else {

@@ -3,6 +3,7 @@ import { FileServerURL } from "../../api/FileApi";
 import Button from "../../components/common/Button";
 import { IProfile } from "../../types/profile.type";
 import pictureDefault from "../../assets/userPics.jpg";
+import { useTranslation } from "react-i18next";
 
 interface PageProfileProps {
   profile: IProfile;
@@ -17,6 +18,7 @@ const PageProfile: React.FC<PageProfileProps> = ({
   follow,
   changeDrawerStatus,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="mt-16 pb-6 border-b border-gray-200">
       <div className="flex items-start justify-evenly">
@@ -37,7 +39,9 @@ const PageProfile: React.FC<PageProfileProps> = ({
                 {profile?.publications?.length!}
               </p>
               <p className="">
-                {profile?.publications?.length! > 1 ? "Posts" : "Post"}
+                {profile?.publications?.length! > 1
+                  ? t("posts.plural")
+                  : t("posts.singular")}
               </p>
             </div>
             <div className="flex flex-col mx-6">
@@ -45,14 +49,16 @@ const PageProfile: React.FC<PageProfileProps> = ({
                 {profile?.followers?.length!}
               </p>
               <p className="">
-                {profile?.followers?.length! > 1 ? "Followers" : "Follower"}
+                {profile?.followers?.length! > 1
+                  ? t("followers.plural")
+                  : "follower.singular"}
               </p>
             </div>
             <div className="flex flex-col ">
               <p className="text-lg font-medium">
                 {profile?.localisation?.country?.value}
               </p>
-              <p className="">Location</p>
+              <p className="">{t("profile.location")}</p>
             </div>
           </div>
           <div className="flex  items-center justify-evenly my-3">
@@ -81,11 +87,11 @@ const PageProfile: React.FC<PageProfileProps> = ({
 
       <div className="flex items-center mx-2">
         <Button width="w-1/2" height="h-7" name={followText} onClick={follow} />
-        <Button width="w-1/2" height="h-7" name="message" />
+        <Button width="w-1/2" height="h-7" name={t("profile.message")} />
         <Button
           width=""
           height="h-7"
-          name="Details"
+          name={t("profile.details")}
           onClick={changeDrawerStatus}
         />
       </div>

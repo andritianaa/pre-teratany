@@ -13,6 +13,7 @@ import useToken from "hooks/useToken";
 import { useNavigate } from "react-router-dom";
 import InputEmoji from "react-input-emoji";
 import profileDefault from "../../../assets/userPics.jpg";
+import { useTranslation } from "react-i18next";
 
 interface PublicationFormProps {
   _id?: string;
@@ -32,6 +33,8 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const [fileViewers, setFileViewers] = useState<string[]>([]);
   const [publicationText, setPublicationText] = useState<string>();
+  const { t } = useTranslation();
+  const toastMessage = [t("toast.error"), t("toast.success")];
 
   const token = useToken();
   const navigate = useNavigate();
@@ -96,13 +99,13 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
         toast.error(error_message);
       } else {
         endLoading();
-        toast.success("Publication created");
+        toast.success(toastMessage[1]);
         setTimeout(() => {
           navigate("/");
         }, 2000);
       }
     } else {
-      toast.error("Publication content required! ");
+      toast.error(toastMessage[0]);
       endLoading();
     }
   };
@@ -124,13 +127,13 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
         toast.error(error_message);
       } else {
         endLoading();
-        toast.success("Publication updated");
+        toast.success(toastMessage[1]);
         setTimeout(() => {
           navigate("/");
         }, 2000);
       }
     } else {
-      toast.error("Publication content required! ");
+      toast.error(toastMessage[0]);
       endLoading();
     }
   };
@@ -141,7 +144,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <TopBar text={`${isNewPub ? "Add" : "Edit"} Publication`} />
+      <TopBar text={`${isNewPub ? t("addPub") : t("editPub")}`} />
       <div className="w-[90%] flex justify-start items-center space-x-4 mt-20">
         <img
           className="w-10 h-10 rounded-full"
@@ -154,7 +157,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
         value={publicationText!}
         onChange={setPublicationText}
         cleanOnEnter
-        placeholder="Write your thoughts here..."
+        placeholder={t("publicationPlaceholder")}
         inputClass="custom-emoji-style"
         keepOpened={true}
       />

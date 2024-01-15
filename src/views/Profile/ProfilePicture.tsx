@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { FileServerURL, uploadFile } from "../../api/FileApi";
 import useFetchProfile from "../../hooks/useFetchProfile";
 import profileDefault from "../../assets/userPics.jpg";
+import { useTranslation } from "react-i18next";
 
 const ProfilePicture: React.FC = () => {
   const token = useToken();
@@ -18,6 +19,7 @@ const ProfilePicture: React.FC = () => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [fileViewer, setFileViewer] = useState<string>(defaultProfilePicture);
   const [isLoading, startLoading, endLoading] = useLoadingButton();
+  const { t } = useTranslation();
 
   const handleChange = (e: any) => {
     setFileViewer(URL.createObjectURL(e.target.files[0]));
@@ -63,7 +65,8 @@ const ProfilePicture: React.FC = () => {
       toast.error(error_message);
     } else {
       endLoading();
-      toast.success("Profile picture updated!");
+      const successToast = t("settings.picture.success");
+      toast.success(successToast);
     }
   };
 
@@ -77,7 +80,7 @@ const ProfilePicture: React.FC = () => {
 
   return (
     <>
-      <TopBar text="Profile picture" />
+      <TopBar text={t("settings.picture.name")} />
       <div className="mt-20 w-[90%] mx-auto flex flex-col items-center justify-center">
         <img
           src={fileViewer ? fileViewer : profileDefault}
@@ -94,7 +97,7 @@ const ProfilePicture: React.FC = () => {
           <Button
             height="py-3"
             width="w-full"
-            name="Save"
+            name={t("settings.save")}
             onClick={updateProfilePicture}
             isLoading={isLoading}
             isDisabled={isDisabled}

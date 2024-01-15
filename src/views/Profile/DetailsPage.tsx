@@ -7,6 +7,7 @@ import { IoMailUnreadOutline } from "@react-icons/all-files/io5/IoMailUnreadOutl
 import { MdLocationCity } from "@react-icons/all-files/md/MdLocationCity";
 import React from "react";
 import EditType from "../../components/EditType";
+import { useTranslation } from "react-i18next";
 
 interface DetailsProps {
   profileType?: string;
@@ -36,18 +37,23 @@ const DetailsPage: React.FC<DetailsProps> = ({
   const walletIcon = <BsWallet size={23} />;
   const addressIcon = <MdLocationCity size={23} />;
   const websiteIcon = <GiWorld size={23} />;
+  const { t } = useTranslation();
   return (
     <>
       <div className="mt-2">
         <EditType
-          name={profileType === "association" ? "Association" : "Entreprise"}
+          name={
+            profileType === "association"
+              ? t("details.association")
+              : t("details.entreprise")
+          }
           type="page"
           path="/profile/edit/general"
           icon={pageType}
         />
         <div className=" rounded-md p-3 border my-2 ">
           <div className="flex gap-3 items-center">
-            <h3 className="font-bold">Description</h3>
+            <h3 className="font-bold">{t("details.description")}</h3>
           </div>
 
           <p className="flex text-left text-gray-600 mt-2">{description}</p>

@@ -1,4 +1,180 @@
 {
     "greeting": "Welcome to Teratany",
-    "noPublication": "You need to follow some profiles to see theirs posts. Have a nice day."
-  }
+    "noPublication": "You need to follow some profiles to see theirs posts. Have a nice day.",
+    "search":{
+      "recent":"Recent",
+      "placeholder":"Search...",
+      "all":"All"
+    },
+    "users":{
+      "plural":"Users",
+      "singular":"User",
+      "setting":"User settings"
+    },
+    "publications":{
+      "plural":"Publications",
+      "singular":"Publication",
+      "plus":"More",
+      "likes":{
+        "plural":"{{count}} Likes",
+        "singular":"{{count}} Like"
+      },
+      "addPub":"Add publication",
+      "showComments":"Show {{comments}} comments",
+      "edit":"Edit",
+      "publicationPlaceholder":"Write your thoughts here...",
+      "editPub":"Edit publication",
+      "deleted":"Publication deleted"},
+    "posts":{
+      "plural":"Posts",
+      "singular":"Post",
+      "deleted":"Publication deleted"},
+    "pages":{
+      "plural":"Pages",
+      "singular":"Page",
+      "setting":"settings"
+    },
+    "months":{
+      "january":"January",
+      "february":"February",
+      "march":"Mars",
+      "april":"April",
+      "may":"May",
+      "june":"June",
+      "july":"July",
+      "august":"August",
+      "september":"September",
+      "october":"October",
+      "november":"November",
+      "december":"December"
+    },
+    "time":{
+      "seconds":"A few seconds ago",
+      "minures":"minutes ago",
+      "month":"a month ago"
+    },
+    "comments":{
+      "name":"comments",
+      "yourComment":"Your comment",
+      "postComment":"Post comment",
+      "deleteConfirm":"Are you sure to delete this comment ?",
+      "delete":"Delete",
+      "deleteValidate":"Yes I'm sure"
+    },
+    "toast":{
+      "error":"Publication content required!",
+      "success":"Publication created"
+    },
+    "followers":{
+      "follow":"Follow",
+      "unfollow":"Unfollow",
+      "number":"{{followers}} followers",
+      "plural":"Followers",
+      "singular":"Follower",
+      "followedPage":"Followed page"
+    },
+    "profile":{
+      "location":"Location",
+      "message":"Message",
+      "details":"Details"
+    },
+    "settings":{
+      "general":"General",
+      "location":{
+        "name":"Location parameter",
+        "locationDesc":"You have the choice to make your location public or private. The location data is only utilized within the map page, and we absolutely do not make any use of your personal data in any way.",
+        "successLocation":"Location information updated!",
+        "switch":"Show Location"
+      },
+      "password":{
+        "name":"Edit password",
+        "success":"Password updated!",
+        "current":"Current password",
+        "new":"New password",
+        "confirm":"Confirm password"
+      },
+      "picture":{
+        "name":"Profile picture",
+        "success":"Profile picture updated!"
+      },
+      "myPages":"My page",
+      "addPage":{
+        "name":"Add page",
+        "titleModal":"Register your organization",
+        "text":"Welcome to the page where you can register your association or business for CSR. You are invited to fill in the required information, except for those marked as optional. This information will only be made available to users to help them recognize you quickly and will not be used for advertising purposes under any circumstances.",
+        "accept":"I accept",
+        "decline":"Decline",
+        "typeChoice":{
+          "name":"Your organization type",
+          "assoc":"Association",
+          "entreprise":"Entreprise"
+        },
+        "titleStep2":"Select your position",
+        "error":"Coordonates information required!!!",
+        "savePosition":"Save my position",
+        "step2Notice":"Enter the location of your organization by selecting it on the following interactive map. Organizations registering on our platform are required to be transparent. Your data will be used solely to inform users interested in your organization about your location and will not be used for advertising purposes.",
+        "step3":{
+          "title":"Select your categories",
+          "success":"Page added successfully"
+        }
+      },
+      "disconnect":"Disconnect",
+      "successGeneral":"General information updated!",
+      "generalUser":{
+        "name":"Name",
+        "email":"Email",
+        "address":"Address",
+        "phone":"Phone Number"
+      },
+      "generalPage":{
+        "description":"Description",
+        "website":"Website (optional)",
+        "next":"Next step",
+        "cancel":"Cancel",
+        "country":"Country",
+        "select":"Select country"
+      },
+      "save":"Save",
+      "finish":"Finish",
+      "categories": {
+        "nopoverty": "No poverty",
+        "zerohunger": "Zero hunger",
+        "goodhealthandwellbeing": "Good health and well-being",
+        "qualityeducation": "Quality education",
+        "genderequality": "Gender equality",
+        "clearwaterandsanitation": "Clear water and sanitation",
+        "affordableandcleanenergy": "Affordable and clean energy",
+        "decentworkandgrowth": "Decent work and growth",
+        "industryinnovationandinfrastructure": "Industry, innovation and infrastructure",
+        "reduceinequalities": "Reduce inequalities",
+        "sustainablecitiesandcommunities": "Sustainable cities and communities",
+        "responsibleconsumptionandproduction": "Responsible consumption and production",
+        "climateaction": "Climate action",
+        "lifebelowwater": "Life below water",
+        "lifeonland": "Life on land",
+        "peacejustice": "Peace, justice",
+        "partnershipsforothergoals": "Partnerships for other goals",
+        "innovative": "Innovative",
+        "attractive": "Attractive",
+        "developsshortcircuitsandresponsiblepurchasing": "Develops short circuits and responsible purchasing",
+        "promotesemploymentintheregion": "Promotes employment in the region",
+        "developitscompetitiveness": "Develop its competitiveness",
+        "respectstheenvironmentandbiodiversity": "Respects the environment and biodiversity",
+        "promotesequalityanddiversity": "Promotes equality and diversity",
+        "promotessafetyandwell-beingatwork": "Promotes safety and well-being at work",
+        "contributestotheenergytransition": "Contributes to the energy transition",
+        "promotesthedevelopmentofthecirculareconomy": "Promotes the development of the circular economy",
+        "fightagainstcorruption": "Fight against corruption",
+        "opentodialogueandcollaborative": "Open to dialogue and collaborative",
+        "developcultureandriskmanagement": "Develop culture and risk management"
+      }
+    },
+    "details":{
+      "name":"Details",
+      "entreprise":"Entreprise",
+      "association":"Association",
+      "description":"Description"
+    }
+
+    
+}
