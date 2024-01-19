@@ -144,7 +144,11 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <TopBar text={`${isNewPub ? t("addPub") : t("editPub")}`} />
+      <TopBar
+        text={`${
+          isNewPub ? t("publications.addPub") : t("publications.editPub")
+        }`}
+      />
       <div className="w-[90%] flex justify-start items-center space-x-4 mt-20">
         <img
           className="w-10 h-10 rounded-full"
@@ -157,7 +161,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
         value={publicationText!}
         onChange={setPublicationText}
         cleanOnEnter
-        placeholder={t("publicationPlaceholder")}
+        placeholder={t("publications.publicationPlaceholder")}
         inputClass="custom-emoji-style"
         keepOpened={true}
       />

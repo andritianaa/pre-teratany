@@ -126,7 +126,7 @@ const ProfileGeneral: React.FC = () => {
                 <Button
                   height="py-3"
                   width="w-full"
-                  name="Save"
+                  name={t("settings.save")}
                   isLoading={isLoading}
                 />
               </div>

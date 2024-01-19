@@ -69,7 +69,7 @@ const PageList = () => {
                   : "text-sm px-3 !bg-gray-200 !text-gray-800 rounded-full"
               }
             >
-              {t("all")}
+              {t("search.all")}
             </div>
             <div
               onClick={filterByFollowedPage}

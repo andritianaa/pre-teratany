@@ -1,4 +1,185 @@
 {
-    "greeting": "Bienvenue sur Teratany.",
-    "noPublication": "Vous devez suivre certains profils pour voir leurs messages. Passe une bonne journée."
+  "greeting": "Bienvenue sur Teratany",
+  "noPublication": "Vous devez suivre quelques profils pour voir leurs publications. Bonne journée.",
+  "search": {
+    "recent": "Récent",
+    "placeholder": "Recherche...",
+    "all": "Tout"
+  },
+  "users": {
+    "plural": "Utilisateurs",
+    "singular": "Utilisateur",
+    "setting": "Paramètres utilisateur"
+  },
+  "publications": {
+    "plural": "Publications",
+    "singular": "Publication",
+    "plus": "Plus",
+    "likes": {
+      "plural": "{{count}} J'aimes",
+      "singular": "{{count}} J'aime"
+    },
+    "addPub": "Ajouter une publication",
+    "showComments": "Afficher {{comments}} commentaires",
+    "edit": "Modifier",
+    "publicationPlaceholder": "Écrivez vos pensées ici...",
+    "editPub": "Modifier la publication",
+    "deleted": "Publication supprimée"
+  },
+  "posts": {
+    "plural": "Articles",
+    "singular": "Article",
+    "deleted": "Article supprimé"
+  },
+  "pages": {
+    "plural": "Pages",
+    "singular": "Page",
+    "setting": "Paramètres"
+  },
+  "months": {
+    "january": "Janvier",
+    "february": "Février",
+    "march": "Mars",
+    "april": "Avril",
+    "may": "Mai",
+    "june": "Juin",
+    "july": "Juillet",
+    "august": "Août",
+    "september": "Septembre",
+    "october": "Octobre",
+    "november": "Novembre",
+    "december": "Décembre"
+  },
+  "time": {
+    "ago": "{{time}}"
+  },
+  "comments": {
+    "name": "commentaires",
+    "yourComment": "Votre commentaire",
+    "postComment": "Publier le commentaire",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce commentaire ?",
+    "delete": "Supprimer",
+    "deleteValidate": "Oui, je suis sûr"
+  },
+  "toast": {
+    "error": "Contenu de la publication requis !",
+    "success": "Publication créée"
+  },
+  "followers": {
+    "follow": "Suivre",
+    "unfollow": "Ne plus suivre",
+    "number":{
+      "plural":"{{followers}} abonnés",
+      "singular":"{{followers}} abonné"
+    },
+    "plural": "Abonnés",
+    "singular": "Abonné",
+    "followedPage": "Pages suivies"
+  },
+  "profile": {
+    "location": "Localisation",
+    "message": "Message",
+    "details": "Détails"
+  },
+  "settings": {
+    "general": "Général",
+    "location": {
+      "name": "Paramètre de localisation",
+      "locationDesc": "Vous avez le choix de rendre votre localisation publique ou privée. Les données de localisation sont utilisées uniquement sur la page de la carte, et nous n'utilisons absolument pas vos données personnelles de quelque manière que ce soit.",
+      "successLocation": "Informations de localisation mises à jour !",
+      "switch": "Afficher la localisation"
+    },
+    "password": {
+      "name": "Modifier le mot de passe",
+      "success": "Mot de passe mis à jour !",
+      "current": "Mot de passe actuel",
+      "new": "Nouveau mot de passe",
+      "confirm": "Confirmer le mot de passe"
+    },
+    "picture": {
+      "name": "Photo de profil",
+      "success": "Photo de profil mise à jour !"
+    },
+    "myPages": "Mes pages",
+    "addPage": {
+      "name": "Ajouter une page",
+      "titleModal": "Enregistrez votre organisation",
+      "text": "Bienvenue sur la page où vous pouvez enregistrer votre association ou entreprise pour la RSE. Vous êtes invité à remplir les informations requises, sauf celles marquées comme facultatives. Ces informations seront uniquement mises à la disposition des utilisateurs pour les aider à vous reconnaître rapidement et ne seront en aucun cas utilisées à des fins publicitaires.",
+      "accept": "J'accepte",
+      "decline": "Refuser",
+      "typeChoice": {
+        "name": "Votre type d'organisation",
+        "assoc": "Association",
+        "entreprise": "Entreprise"
+      },
+      "titleStep2": "Sélectionnez votre position",
+      "error": "Informations de coordonnées requises !!!",
+      "savePosition": "Enregistrer ma position",
+      "step2Notice": "Entrez l'emplacement de votre organisation en le sélectionnant sur la carte interactive suivante. Les organisations s'inscrivant sur notre plateforme sont tenues d'être transparentes. Vos données seront utilisées uniquement pour informer les utilisateurs intéressés par votre organisation de votre emplacement et ne seront pas utilisées à des fins publicitaires.",
+      "step3": {
+        "title": "Sélectionnez vos catégories",
+        "success": "Page ajoutée avec succès"
+      }
+    },
+    "disconnect": "Déconnexion",
+    "successGeneral": "Informations générales mises à jour !",
+    "generalUser": {
+      "name": "Nom",
+      "email": "E-mail",
+      "address": "Adresse",
+      "phone": "Numéro de téléphone"
+    },
+    "generalPage": {
+      "description": "Description",
+      "website": "Site Web (facultatif)",
+      "next": "Étape suivante",
+      "cancel": "Annuler",
+      "country": "Pays",
+      "select": "Sélectionner un pays"
+    },
+    "save": "Enregistrer",
+    "finish": "Terminer",
+    "categories": {
+      "nopoverty": "Pas de pauvreté",
+      "zerohunger": "Faim zéro",
+      "goodhealthandwellbeing": "Bonne santé et bien-être",
+      "qualityeducation": "Éducation de qualité",
+      "genderequality": "Égalité des sexes",
+      "clearwaterandsanitation": "Eau propre et assainissement",
+      "affordableandcleanenergy": "Énergie propre et abordable",
+      "decentworkandgrowth": "Travail décent et croissance",
+      "industryinnovationandinfrastructure": "Industrie, innovation et infrastructure",
+      "reduceinequalities": "Réduire les inégalités",
+      "sustainablecitiesandcommunities": "Villes et communautés durables",
+      "responsibleconsumptionandproduction": "Consommation et production responsables",
+      "climateaction": "Action climatique",
+      "lifebelowwater": "Vie aquatique",
+      "lifeonland": "Vie terrestre",
+      "peacejustice": "Paix, justice",
+      "partnershipsforothergoals": "Partenariats pour les objectifs",
+      "innovative": "Innovant",
+      "attractive": "Attrayant",
+      "developsshortcircuitsandresponsiblepurchasing": "Développe les circuits courts et les achats responsables",
+      "promotesemploymentintheregion": "Promeut l'emploi dans la région",
+      "developitscompetitiveness": "Développe sa compétitivité",
+      "respectstheenvironmentandbiodiversity": "Respecte l'environnement et la biodiversité",
+      "promotesequalityanddiversity": "Promeut l'égalité et la diversité",
+      "promotessafetyandwell-beingatwork": "Favorise la sécurité et le bien-être au travail",
+      "contributestotheenergytransition": "Contribue à la transition énergétique",
+      "promotesthedevelopmentofthecirculareconomy": "Favorise le développement de l'économie circulaire",
+      "fightagainstcorruption": "Lutte contre la corruption",
+      "opentodialogueandcollaborative": "Ouvert au dialogue et à la collaboration",
+      "developcultureandriskmanagement": "Développe la culture et la gestion des risques"
+    }
+  },
+  "details": {
+    "name": "Détails",
+    "entreprise": "Entreprise",
+    "association": "Association",
+    "description": "Description"
+  },
+  "switchAccount":{
+    "name":"Changer de compte",
+    "switch":"Changer"
   }
+}

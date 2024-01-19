@@ -83,9 +83,14 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
                 color="gray"
                 className="font-normal"
               >
-                {t("followers.number", {
-                  followers: profile?.followers?.length,
-                })}
+                {profile?.followers?.length !== undefined &&
+                  (profile.followers.length > 1
+                    ? t("followers.number.plural", {
+                        followers: profile.followers.length,
+                      })
+                    : t("followers.number.singular", {
+                        followers: profile.followers.length,
+                      }))}
               </Typography>
             </div>
           </ListItem>

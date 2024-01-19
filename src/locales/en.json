@@ -49,9 +49,7 @@
       "december":"December"
     },
     "time":{
-      "seconds":"A few seconds ago",
-      "minures":"minutes ago",
-      "month":"a month ago"
+      "ago": "{{time}}"
     },
     "comments":{
       "name":"comments",
@@ -68,7 +66,10 @@
     "followers":{
       "follow":"Follow",
       "unfollow":"Unfollow",
-      "number":"{{followers}} followers",
+      "number":{
+        "plural":"{{followers}} followers",
+        "singular":"{{followers}} follower"
+      },
       "plural":"Followers",
       "singular":"Follower",
       "followedPage":"Followed page"
@@ -174,6 +175,10 @@
       "entreprise":"Entreprise",
       "association":"Association",
       "description":"Description"
+    },
+    "switchAccount":{
+      "name":"Switch account",
+      "switch":"Switch"
     }
 
     

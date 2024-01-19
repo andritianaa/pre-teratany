@@ -1,4 +1,7 @@
+import moment from "moment";
 import { useTranslation } from "react-i18next";
+import "moment/locale/mg";
+// import "moment/locale/fr";
 
 export const SwitchLangage = () => {
   const { i18n } = useTranslation();
@@ -7,6 +10,7 @@ export const SwitchLangage = () => {
     const lang = e.target.value;
     localStorage.setItem("lang", lang);
     i18n.changeLanguage(lang);
+    moment.locale(lang);
   };
 
   return (

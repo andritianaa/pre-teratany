@@ -93,6 +93,7 @@ const Publication: React.FC<PublicationProps> = ({
   const togglePubContentDetails = () => {
     setIsFullContent(!isFullContent);
   };
+  const formattedDate = moment(date).fromNow();
 
   return (
     // <!-- Wrapper-->
@@ -266,7 +267,7 @@ const Publication: React.FC<PublicationProps> = ({
             </p>
           )}
           <p className="text-left text-xs text-gray-400 font-normal">
-            {moment(date).startOf("second").fromNow()}
+            {t("time.ago", { time: formattedDate })}
           </p>
         </div>
         <DrawerContainer _id={_id} isOpen={drawerOpen} onClose={closeDrawer} />
