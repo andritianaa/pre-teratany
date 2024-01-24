@@ -189,7 +189,7 @@ const Map = () => {
                       />
                     </div>
                     <div className="flex flex-col pl-2">
-                      <span className="overflow-ellipsis text-md font-semibold whitespace-nowrap overflow-ellipsis">
+                      <span className="overflow-ellipsis text-md font-semibold whitespace-nowrap">
                         {profile?.name}
                       </span>
                       <span className="text-gray-800 text-xs">

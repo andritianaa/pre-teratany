@@ -31,6 +31,7 @@ export const SlideOver: React.FC<SlideOverProps> = ({
     });
     setSearchedProfile(resultats);
     onChildData(resultats);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profiles, searchQuery]);
 
   useEffect(() => {

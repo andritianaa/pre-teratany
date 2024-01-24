@@ -2,9 +2,9 @@ import { BiTargetLock } from "@react-icons/all-files/bi/BiTargetLock";
 import { BsInfoCircle } from "@react-icons/all-files/bs/BsInfoCircle";
 import { BsPhone } from "@react-icons/all-files/bs/BsPhone";
 import { BsWallet } from "@react-icons/all-files/bs/BsWallet";
-import { GiWorld } from "@react-icons/all-files/gi/GiWorld";
-import { IoMailUnreadOutline } from "@react-icons/all-files/io5/IoMailUnreadOutline";
-import { MdLocationCity } from "@react-icons/all-files/md/MdLocationCity";
+import { GiWorld } from "react-icons/gi";
+import { IoMailUnreadOutline } from "react-icons/io5";
+import { MdLocationCity } from "react-icons/md";
 import React from "react";
 import EditType from "../../components/EditType";
 
