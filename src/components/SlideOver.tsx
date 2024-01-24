@@ -10,11 +10,13 @@ import { useSelector } from "react-redux";
 type SlideOverProps = {
   isOpen?: boolean;
   onClose: () => void;
+  onChildData: (data: IProfile[]) => void;
 };
 
 export const SlideOver: React.FC<SlideOverProps> = ({
   isOpen = false,
   onClose,
+  onChildData,
 }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const profiles = useSelector<RootState>(
@@ -28,10 +30,12 @@ export const SlideOver: React.FC<SlideOverProps> = ({
       return profile?.name?.toLowerCase().includes(searchQuery?.toLowerCase()!);
     });
     setSearchedProfile(resultats);
+    onChildData(resultats);
   }, [profiles, searchQuery]);
 
   useEffect(() => {
     searchProfile();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profiles, searchQuery]);
 
@@ -52,7 +56,7 @@ export const SlideOver: React.FC<SlideOverProps> = ({
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-[5.7rem]">
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -75,7 +79,7 @@ export const SlideOver: React.FC<SlideOverProps> = ({
                     <div className="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
                       <button
                         type="button"
-                        className="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                        className="relative rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-800 bg-gray-800"
                         onClick={onClose}
                       >
                         <span className="absolute -inset-2.5" />
@@ -87,16 +91,14 @@ export const SlideOver: React.FC<SlideOverProps> = ({
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                    <div className="px-4 sm:px-6">
-                      <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                        Profiles
-                      </Dialog.Title>
+                  <div className="flex h-full flex-col bg-white py-6 shadow-xl">
+                    <div className="px-4 sm:px-4">
+                      <SearchInputField
+                        onChange={(e) => setSearchQuery(e)}
+                        searchQuery={searchQuery}
+                      />
                     </div>
-                    <div className=" mt-4 px-6 sm:px-6">
-                      <SearchInputField onChange={(e) => setSearchQuery(e)} />
-                    </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                    <div className="relative mt-2 flex-1 overflow-y-scroll">
                       <ProfileListMap
                         profiles={searchedProfile}
                         onCloseSlideOver={onClose}

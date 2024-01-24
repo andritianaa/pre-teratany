@@ -3,7 +3,7 @@ import { InfoModal } from "../../components/common/InfoModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Marker, useMapEvents } from "react-leaflet";
-import { MARKER_ICON } from "../../constants/MarkerIcon";
+import { MARKER_USER } from "../../constants/MarkerIcon";
 import Button from "../../components/common/Button";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import { toast } from "react-toastify";
@@ -27,7 +27,7 @@ const LocationMarker = () => {
   });
 
   return position === null ? null : (
-    <Marker position={position} icon={MARKER_ICON}></Marker>
+    <Marker position={position} icon={MARKER_USER}></Marker>
   );
 };
 

@@ -57,6 +57,7 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
       {userConnected?.administratedProfiles?.length! > 0 ? (
         <React.Fragment>
           <Drawer
+            placeholder=""
             placement="bottom"
             open={openBottom}
             onClose={closeBottom}
@@ -64,12 +65,14 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
           >
             <div className="flex items-center justify-between w-full">
               <Typography
+                placeholder=""
                 className="text-lg font-semibold border-b border-b-1 border-gray-300"
                 color="black"
               >
                 Switch account
               </Typography>
               <IconButton
+                placeholder=""
                 variant="text"
                 color="blue-gray"
                 onClick={handleClickClose}

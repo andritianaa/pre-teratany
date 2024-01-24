@@ -35,11 +35,11 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
   };
 
   return (
-    <Card className="w-full shadow-none">
-      <List>
+    <Card className="w-full shadow-none" placeholder="">
+      <List placeholder="">
         {profiles?.map((profile) => (
-          <ListItem>
-            <ListItemPrefix>
+          <ListItem placeholder="">
+            <ListItemPrefix placeholder="">
               <div
                 onClick={() => {
                   setCoordonatesProfile(
@@ -50,6 +50,7 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
                 }}
               >
                 <Avatar
+                  placeholder=""
                   variant="circular"
                   alt="profileImage"
                   src={
@@ -70,11 +71,16 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
                   onCloseSlideOver();
                 }}
               >
-                <Typography variant="h6" color="blue-gray">
+                <Typography placeholder="" variant="h6" color="blue-gray">
                   {profile?.name}
                 </Typography>
               </div>
-              <Typography variant="small" color="gray" className="font-normal">
+              <Typography
+                placeholder=""
+                variant="small"
+                color="gray"
+                className="font-normal"
+              >
                 {profile?.followers?.length} followers
               </Typography>
             </div>

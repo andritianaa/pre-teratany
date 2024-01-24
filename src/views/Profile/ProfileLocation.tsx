@@ -4,7 +4,7 @@ import Button from "../../components/common/Button";
 import TopBar from "../../components/common/TopBar";
 import MapContainerForm from "../../components/MapContainer";
 import { Marker, useMapEvents } from "react-leaflet";
-import { MARKER_ICON } from "../../constants/MarkerIcon";
+import { MARKER_USER } from "../../constants/MarkerIcon";
 import { withAsync } from "../../helpers/withAsync";
 import { updateLocationParameter } from "../../api/ProfileApi";
 import useToken from "../../hooks/useToken";
@@ -29,7 +29,7 @@ const LocationMarker = () => {
   });
 
   return position === null ? null : (
-    <Marker position={position} icon={MARKER_ICON}></Marker>
+    <Marker position={position} icon={MARKER_USER}></Marker>
   );
 };
 
@@ -80,7 +80,7 @@ const ProfileLocation: React.FC = () => {
               profile?.localisation?.coordonates?.latitude!,
               profile?.localisation?.coordonates?.longitude!,
             ]}
-            icon={MARKER_ICON}
+            icon={MARKER_USER}
           ></Marker>
           <LocationMarker />
         </MapContainerForm>
