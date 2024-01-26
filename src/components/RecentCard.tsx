@@ -9,22 +9,28 @@ import { deleteSearchHistory } from "../api/SearchApi";
 import useToken from "../hooks/useToken";
 import { ErrorData, ThrowErrorHandler } from "../helpers/HandleError";
 import profileDefault from "../assets/userPics.jpg";
+import { useDispatch } from "react-redux";
+import { removeHistoryData } from "../store/reducer/history.reducer";
 
 interface recentProps {
   historique: IHistory[];
-  onClick: () => void;
 }
 
-const RecentCard: React.FC<recentProps> = ({ historique, onClick }) => {
+const RecentCard: React.FC<recentProps> = ({ historique }) => {
   const token = useToken();
-  const removeHistory = async (historiqueId: string) => {
-    const { error } = await withAsync(() =>
-      deleteSearchHistory(token, historiqueId)
-    );
-    if (error) {
-      ThrowErrorHandler(error as ErrorData);
+  const dispatch = useDispatch();
+
+  const removeHistory = async (historiqueId: string, query: string) => {
+    if (historiqueId) {
+      const { error } = await withAsync(() =>
+        deleteSearchHistory(token, historiqueId)
+      );
+      if (error) {
+        ThrowErrorHandler(error as ErrorData);
+      }
     }
-    onClick();
+
+    dispatch(removeHistoryData({ text: query }));
   };
 
   return (
@@ -41,7 +47,7 @@ const RecentCard: React.FC<recentProps> = ({ historique, onClick }) => {
             <MdClose
               size={24}
               onClick={() => {
-                removeHistory(history?._id!);
+                removeHistory(history?._id!, history?.text);
               }}
             />
           </div>
@@ -64,7 +70,7 @@ const RecentCard: React.FC<recentProps> = ({ historique, onClick }) => {
               <MdClose
                 size={24}
                 onClick={() => {
-                  removeHistory(history?._id!);
+                  removeHistory(history?._id!, history?.text);
                 }}
               />
             </div>

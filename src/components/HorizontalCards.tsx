@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 import { addSearchHistory } from "../api/SearchApi";
 import { ErrorData, ThrowErrorHandler } from "../helpers/HandleError";
 import profileDefault from "../assets/userPics.jpg";
+import { useDispatch } from "react-redux";
+import { addHistoryData } from "../store/reducer/history.reducer";
+import { IHistory } from "../types/historique.type";
 
 interface horizontalCardsProps {
   name: string;
@@ -34,6 +37,7 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
   const [followText, setFollowText] = useState<string>(
     isFollowed! === true ? "UnFollow" : "Follow"
   );
+  const dispatch = useDispatch();
 
   const follow = async () => {
     setFollowText(followText === "Follow" ? "UnFollow" : "Follow");
@@ -55,7 +59,7 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
     pictureUrl: string
   ) => {
     if (query.length > 4 && query.length < 20) {
-      const { error } = await withAsync(() =>
+      const { error, response } = await withAsync(() =>
         addSearchHistory(
           token,
           profileConnectedUser?._id!,
@@ -66,6 +70,17 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
       );
       if (error) {
         ThrowErrorHandler(error as ErrorData);
+      } else {
+        const historyData = response?.data as IHistory;
+        dispatch(
+          addHistoryData({
+            owner: profileConnectedUser?._id!,
+            text: query,
+            profileId,
+            pictureUrl,
+            _id: historyData?._id,
+          })
+        );
       }
     }
   };

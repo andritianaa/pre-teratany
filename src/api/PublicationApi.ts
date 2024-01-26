@@ -26,8 +26,6 @@ export const getPublicationByProfile = (token: string, profileId: string, ownId:
 }
 export const getOnePublication = (token: string, publicationId: string, ownId: string) => {
 
-    console.log(publicationId, ownId)
-
     return api.get(`${URLS.getOnePublication}/?publicationId=${publicationId}&ownId=${ownId}`, {
         headers: {
             'Authorization': token

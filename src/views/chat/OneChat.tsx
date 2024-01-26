@@ -1,5 +1,5 @@
 import { HiArrowNarrowLeft } from "react-icons/hi";
-import { Message } from "../../components/chat/Message";
+import { Message } from "../../components/chat/Message"
 
 export const OneChat: React.FC = () => {
   const messages = [
