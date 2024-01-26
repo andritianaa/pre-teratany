@@ -17,6 +17,7 @@ import useFetchProfile from "../../hooks/useFetchProfile";
 import { useSelector } from "react-redux";
 import { resetAccountConnected } from "../../store/reducer/account.reducer";
 import { useTranslation } from "react-i18next";
+import SwitchLangage from "../../components/SwitchLangage";
 
 const EditProfileMenu: React.FC = () => {
   const [accordionVisible, setVisibility] = useState(false);
@@ -133,6 +134,7 @@ const EditProfileMenu: React.FC = () => {
             <p className="px-3 text-lg">{t("settings.addPage.name")}</p>
           </div>
         )}
+        <SwitchLangage />
         <div className="flex items-center my-4 mx-1" onClick={logout}>
           <VscDebugDisconnect size={27} />
           <p className="px-3 text-lg">{t("settings.disconnect")}</p>

@@ -4,12 +4,13 @@ import RecentCard from "../../components/RecentCard";
 import { IHistory } from "../../types/historique.type";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useTranslation } from "react-i18next";
 
 const Search: React.FC = () => {
   const profileSearchHistory = useSelector<RootState>(
     (state) => state.teratany_profile_history.history
   ) as IHistory[];
-
+  const { t } = useTranslation();
   return (
     <>
       <div className="mx-3 mt-4 flex flex-col items-start">

@@ -1,40 +1,40 @@
 {
   "greeting": "Tonga soa eto amin'ny Teratany",
-  "noPublication": "Mila mihaino ny hafa ireo profiles hifanaraka amin'ny tatitra. Andriamanitra tsara ho anao.",
+  "noPublication": "Mila manaraka ny mpampiasa hafa eto amin'ny tambazotra ianao mba hahita ireo fizaran'izy ireo.",
   "search": {
-      "recent": "Vaovao",
-      "placeholder": "Search...",
+      "recent": "Mahazatra",
+      "placeholder": "Tadiavina...",
       "all": "Rehetra"
   },
   "users": {
       "plural": "Mpampiasa",
       "singular": "Mpampiasa",
-      "setting": "Soraty Mpampiasa"
+      "setting": "Fanamboarana mpampiasa"
   },
   "publications": {
-      "plural": "Tatitra",
-      "singular": "Tatitra",
+      "plural": "Fizarana",
+      "singular": "Fizarana",
       "plus": "Hafa",
       "likes": {
-          "plural": "{{count}} Miaina",
-          "singular": "{{count}} Miaina"
+          "plural": "Mpankafy {{count}}",
+          "singular": "Mpankafy {{count}}"
       },
-      "addPub": "Manampy tatitra",
-      "showComments": "Aseho ny {{comments}} fanazavana",
+      "addPub": "Fanampiana Fizarana",
+      "showComments": "Aseho ny fanamarihana {{comments}}",
       "edit": "Hanova",
       "publicationPlaceholder": "Tsy maintsy manoratra ny heviny eto...",
-      "editPub": "Hanova tatitra",
-      "deleted": "Tatitra voafafa"
+      "editPub": "Hanova fizarana",
+      "deleted": "Fizarana voafafa"
   },
   "posts": {
-      "plural": "Tatitra",
-      "singular": "Tatitra",
-      "deleted": "Tatitra voafafa"
+      "plural": "Fizarana",
+      "singular": "Fizarana",
+      "deleted": "Fizarana voafafa"
   },
   "pages": {
       "plural": "Pejy",
       "singular": "Pejy",
-      "setting": "Soraty pejy"
+      "setting": "Fanamboarana pejy"
   },
   "months": {
       "january": "Janoary",
@@ -55,79 +55,79 @@
   },
   "comments": {
       "name": "Fanazavana",
-      "yourComment": "Ny fangazavanao",
-      "postComment": "Hanoratra fangazavana",
-      "deleteConfirm": "Ianao dia tsy mendrika handefasana ity fangazavana ity ve?",
-      "delete": "Fafao",
-      "deleteValidate": "Eny, vao fantatra"
+      "yourComment": "Ny fanamarihana nataonao",
+      "postComment": "Hanoratra fanamarihana",
+      "deleteConfirm": "Tena ho fafana ve ity fanamariahana ity?",
+      "delete": "Fafana",
+      "deleteValidate": "Eny ho fafana"
   },
   "toast": {
-      "error": "Fanehoana votoaty azo avy amin'ny tatitra!",
-      "success": "Tatitra natao"
+      "error": "Mila fanazavana ilay fizarana!",
+      "success": "Voaforina ny fizarana"
   },
   "followers": {
-      "follow": "Mifandray",
-      "unfollow": "Tsaratsara",
+      "follow": "Mpanaraka",
+      "unfollow": "Hisitaka",
       "number": {
-          "plural": "{{followers}} mpanampy",
-          "singular": "{{followers}} mpanampy"
+          "plural": "Mpanaraka {{followers}}",
+          "singular": "Mpanaraka {{followers}}"
       },
-      "plural": "Mpanampy",
-      "singular": "Mpanampy",
-      "followedPage": "Pejy efa miandry"
+      "plural": "Mpanaraka",
+      "singular": "Mpanaraka",
+      "followedPage": "Pejy voaharaka"
   },
   "profile": {
       "location": "Toerana",
       "message": "Hafatra",
-      "details": "Takelaka"
+      "details": "Mombamomba"
   },
   "settings": {
-      "general": "Generaly",
+      "general": "Ankapobeany",
       "location": {
-          "name": "Takelaka toerana",
-          "locationDesc": "Mila avela ianao ny mandefa ny toeranao ho sahaza na mahazoalaza. Ny toerana dia ampiasain'ny pejy mapa, ary tsy mahazo manova ny angona samihafa amin'ny fangatahanao.",
-          "successLocation": "Votoaty toerana napetraka!",
-          "switch": "Aseho ny toerana"
+          "name": "Fanamboarana ny toerana misy anao",
+          "locationDesc": "Manana safidy ianao hampiseo na tsia ny toerana misy anao. Ny toerana misy anao dia ampiasain'ny pejy misys sarintany, ary izahay de tsy hampiasa na amin'ny fomba aona na aona ny mombanao.",
+          "successLocation": "Vita ny fanamboarana ny toerana misy anao!",
+          "switch": "Aseho ny toerana ahy"
       },
       "password": {
-          "name": "Hanova tenimiafina",
-          "success": "Tenimiafina napetraka!",
-          "current": "Tenimiafina ankehitriny",
-          "new": "Tenimiafina vaovao",
-          "confirm": "Hakembotra ny tenimiafina"
+          "name": "Hanova teny miafina",
+          "success": "Vita ny fanovana ny teny miafina!",
+          "current": "Teny miafina ankehitriny",
+          "new": "Teny miafina vaovao",
+          "confirm": "Ekeko ny fanovana ny teny miafina"
       },
       "picture": {
-          "name": "Sary profil",
-          "success": "Sary profil napetraka!"
+          "name": "Sarin'ny mpampiasa",
+          "success": "Vita ny fanovana ny sary!"
       },
-      "myPages": "Ny pejy akaiky",
+      "myPages": "Ny pejiko",
       "addPage": {
-          "name": "Manampy pejy",
-          "titleModal": "Dihin'ny fikarakarana ny orinasa",
-          "text": "Tonga soa eto amin'ny pejy hahazoan'ny orinasa na rantsana ny fikarakarana ny Corporate Social Responsibility (CSR) anao. Tadiavo ny angona tokony hiseho, mba tsy hahazo manoloana ny fandraisana anao tsy ho ela amin'ny olon-tsotra. Io angona io no hiombonana ireo mpampiasa mba hahatonga azy ireo hitandrina anao amin'ny fotoana fohy ary tsy hahazo izay hampiasana azy ho an'ny fampahalalam-baovao na hampiasana azy hafa amin'ny sasany.",
-          "accept": "Eny, manamafy",
-          "decline": "Ataovy tsisy",
+          "name": "Fanampiana pejy",
+          "titleModal": "Fampidirana fikambananana",
+          "text": "Tongasoa eto amin'ny pejy ahafahanao misoratra anarana ny fikambanana na orinasanao ho an'ny RSE. Asaina ianao hameno ny fampahalalana ilaina, afa-tsy ireo voamarika ho safidy. Ity fampahalalana ity dia natao ho an'ny mpampiasa fotsiny mba hanampiana azy ireo hamantatra anao haingana ary tsy hampiasaina amin'ny dokam-barotra na inona na inona toe-javatra.",
+          "accept": "Eny, manaiky aho",
+          "decline": "Tsy manaiky aho",
           "typeChoice": {
-              "name": "Karazan'ny orinasa",
-              "assoc": "Associata",
-              "entreprise": "Entreprise"
+              "name": "Karazan'ny fikambananao",
+              "assoc": "Fikambanana",
+              "entreprise": "Orinasa"
           },
           "titleStep2": "Fidirana ao anatin'ny posy",
-          "error": "Mila angona misy ny tarehimarika !!!",
+          "error": "Ilaina ny fanambarana ny toerana !!!",
           "savePosition": "Ampidiro ny toeranao",
-          "step2Notice": "Ampidirina ao anatin'ny posy ny toeranao, amin'ny fametrana azy eo amin'ny sarintany. Ny orinasa manan-kery amin'ny fiaraha-miasa amin'ny tranonkala dia tokony ho tsy manam-pahaizana. Amin'ny fotoana fohy dia ampiasaina ny angonao hahafahan'ny olon-tsotra mahay maneho ny toeranao, ary tsy ho ampiasaina ho fampahalalam-baovao amin'ny heviny.",
+          "step2Notice": "Ampidiro ny toerana misy ny fikambananao amin'ny alàlan'ny fisafidianana azy amin'ity sari-tany manaraka ity. Ny fikambanana misoratra anarana amin'ny sehatra misy anay dia takiana amin'ny mangarahara. Ny angonao dia hampiasaina fotsiny mba hampahafantarana ireo mpampiasa liana amin'ny fandaminana ny toerana misy anao ary tsy hampiasaina amin'ny dokambarotra.",
           "step3": {
-              "title": "Fidirana ao anatin'ny sokajy",
-              "success": "Pejy napetraka mazava!"
+              "title": "Fidio ny sokajy misy azy",
+              "success": "Voaforina ny pejy"
           }
       },
-      "disconnect": "Sokafy",
-      "successGeneral": "Angona jeneraly napetraka!",
+      "disconnect": "Hiala",
+      "successGeneral": "Vita ny fanamboarana ny angona ankapobeany!",
       "generalUser": {
           "name": "Anarana",
           "email": "Mailaka",
           "address": "Adiresy",
-          "phone": "Lokon'ny mpivarotra"
+          "phone": "Laharana finday"
       },
       "generalPage": {
           "description": "Takelaka",
@@ -168,5 +168,18 @@
           "contributestotheenergytransition": "Mampiavaka ny fahantrana rano sy ny fialamboly",
           "promotesthedevelopmentofthecirculareconomy": "Mampiavaka ny fampandrosoana ny toetra mitsikera",
           "fightagainstcorruption": "Fihavanana amin'ny fanafintohina",
-          "opentodialogueandcollaborative": "Manana ny fahalalana sy ny asa"
-      }}}
+          "opentodialogueandcollaborative": "Manana ny fahalalana sy ny asa",
+          "developcultureandriskmanagement": "Fitantanana sy Fanabeazam-pitantanana"
+    }
+  },
+  "details": {
+    "name": "Antontan'isa",
+    "entreprise": "Asa",
+    "association": "Fikambanana",
+    "description": "Andininy"
+  },
+  "switchAccount": {
+    "name": "Hanova kaonty",
+    "switch": "Hanova"
+  }
+}
