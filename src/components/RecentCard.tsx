@@ -1,6 +1,6 @@
 import React from "react";
-import { MdClose } from "@react-icons/all-files/md/MdClose";
-import { RiSearchLine } from "@react-icons/all-files/ri/RiSearchLine";
+import { MdClose } from "react-icons/md";
+import { RiSearchLine } from "react-icons/ri";
 import { IHistory } from "../types/historique.type";
 import { FileServerURL } from "../api/FileApi";
 import { Link } from "react-router-dom";

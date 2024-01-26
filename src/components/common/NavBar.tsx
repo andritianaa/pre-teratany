@@ -1,10 +1,10 @@
 import React from "react";
 import { AiFillHome } from "@react-icons/all-files/ai/AiFillHome";
 import { AiOutlineHome } from "@react-icons/all-files/ai/AiOutlineHome";
-import { RiSearchLine } from "@react-icons/all-files/ri/RiSearchLine";
-import { RiSearchFill } from "@react-icons/all-files/ri/RiSearchFill";
-import { IoMap } from "@react-icons/all-files/io5/IoMap";
-import { IoMapOutline } from "@react-icons/all-files/io5/IoMapOutline";
+import { RiSearchLine } from "react-icons/ri";
+import { RiSearchFill } from "react-icons/ri";
+import { IoMap } from "react-icons/io5";
+import { IoMapOutline } from "react-icons/io5";
 import { BsFillPlusSquareFill } from "@react-icons/all-files/bs/BsFillPlusSquareFill";
 import { BsPlusSquare } from "@react-icons/all-files/bs/BsPlusSquare";
 import ProfilePicture from "../../assets/userPics.jpg";
