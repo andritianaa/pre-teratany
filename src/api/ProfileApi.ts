@@ -32,8 +32,10 @@ export const sendEmailRecovery = (email: string | undefined) => {
     return api.get(`${URLS.passwordRecovery}/?email=${email}`)
 }
 
-export const searchProfile = (token: string, filter: string | undefined, ownId: string | undefined, type?: string | undefined) => {
-    console.log("type == ", type)
+export const searchProfile = (token: string, filter: string | undefined, ownId: string | undefined, type?: string) => {
+    if (type === undefined) {
+        type = ""
+    }
     return api.get(`${URLS.searchProfile}/?filter=${filter}&ownId=${ownId}&type=${type}`, {
         headers: { 'Authorization': token }
     })

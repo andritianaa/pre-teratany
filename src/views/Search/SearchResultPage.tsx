@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "components/SearchBar";
 import SearchFilterBar from "components/SearchFilterBar";
-import { HiArrowNarrowLeft } from "@react-icons/all-files/hi/HiArrowNarrowLeft";
+import { HiArrowNarrowLeft } from "react-icons/hi";
 import Publication from "components/Publication/Publication";
 import HorizontalCards from "components/HorizontalCards";
 import { useParams } from "react-router-dom";

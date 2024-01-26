@@ -6,6 +6,9 @@ import useToken from "../hooks/useToken";
 import useFetchProfile from "../hooks/useFetchProfile";
 import { ErrorData, ThrowErrorHandler } from "../helpers/HandleError";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { addHistoryData } from "../store/reducer/history.reducer";
+import { IHistory } from "../types/historique.type";
 
 interface SearchBarProps {
   textFilter?: string;
@@ -17,14 +20,23 @@ const SearchBar: React.FC<SearchBarProps> = ({ textFilter }) => {
   const navigate = useNavigate();
   const token = useToken();
   const profileConnected = useFetchProfile();
+  const dispatch = useDispatch();
 
   const addSearchResult = async (query: string) => {
     if (query.length > 4 && query.length < 20) {
-      const { error } = await withAsync(() =>
+      const { error, response } = await withAsync(() =>
         addSearchHistory(token, profileConnected?._id!, query)
       );
       if (error) {
         ThrowErrorHandler(error as ErrorData);
+      } else {
+        const historyData = response?.data as IHistory;
+        dispatch(
+          addHistoryData({
+            text: query,
+            _id: historyData?._id,
+          })
+        );
       }
     }
   };

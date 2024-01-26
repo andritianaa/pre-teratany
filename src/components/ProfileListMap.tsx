@@ -37,7 +37,11 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
   };
 
   return (
+<<<<<<< HEAD
     <Card placeholder="" className="w-full shadow-none">
+=======
+    <Card className="w-full shadow-none" placeholder="">
+>>>>>>> 8e7f8db3e663507970759b9162847d6d6b775766
       <List placeholder="">
         {profiles?.map((profile) => (
           <ListItem placeholder="">
