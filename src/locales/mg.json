@@ -1,0 +1,225 @@
+{
+  "greeting": "Tonga soa eto amin'ny Teratany",
+  "noPublication": "Mila manaraka ny mpampiasa hafa eto amin'ny tambazotra ianao mba hahita ireo fizaran'izy ireo.",
+  "search": {
+      "recent": "Mahazatra",
+      "placeholder": "Tadiavina...",
+      "all": "Rehetra"
+  },
+  "users": {
+      "plural": "Mpampiasa",
+      "singular": "Mpampiasa",
+      "setting": "Fanamboarana kaonty"
+  },
+  "publications": {
+      "plural": "Fizarana",
+      "singular": "Fizarana",
+      "plus": "Hafa",
+      "likes": {
+          "plural": "Mpankafy {{count}}",
+          "singular": "Mpankafy {{count}}"
+      },
+      "addPub": "Fanampiana Fizarana",
+      "showComments": "Aseho ny fanamarihana {{comments}}",
+      "edit": "Hanova",
+      "publicationPlaceholder": "Tsy maintsy manoratra ny heviny eto...",
+      "editPub": "Hanova fizarana",
+      "deleted": "Fizarana voafafa",
+      "photo":"Sary"
+  },
+  "posts": {
+      "plural": "Fizarana",
+      "singular": "Fizarana",
+      "deleted": "Fizarana voafafa"
+  },
+  "pages": {
+      "plural": "Pejy",
+      "singular": "Pejy",
+      "setting": "Fanamboarana pejy"
+  },
+  "months": {
+      "january": "Janoary",
+      "february": "Febroary",
+      "march": "Martsa",
+      "april": "Aprily",
+      "may": "Mey",
+      "june": "Jona",
+      "july": "Jolay",
+      "august": "Aogositra",
+      "september": "Septambra",
+      "october": "Oktobra",
+      "november": "Novambra",
+      "december": "Desambra"
+  },
+  "time": {
+      "ago": "{{time}}"
+  },
+  "comments": {
+      "name": "Fanamarihana",
+      "yourComment": "Hanoratra fanamarihana",
+      "postComment": "Alefa ny fanamarihana",
+      "deleteConfirm": "Tena ho fafana ve ity fanamariahana ity?",
+      "delete": "Fafana",
+      "deleteValidate": "Eny ho fafana"
+  },
+  "toast": {
+      "error": "Mila fanazavana ilay fizarana!",
+      "success": "Voaforina ny fizarana"
+  },
+  "followers": {
+      "follow": "Mpanaraka",
+      "unfollow": "Hisitaka",
+      "number": {
+          "plural": "Mpanaraka {{followers}}",
+          "singular": "Mpanaraka {{followers}}"
+      },
+      "plural": "Mpanaraka",
+      "singular": "Mpanaraka",
+      "followedPage": "Pejy voaharaka"
+  },
+  "profile": {
+      "location": "Toerana",
+      "message": "Hafatra",
+      "details": "Mombamomba"
+  },
+  "settings": {
+      "general": "Ankapobeany",
+      "location": {
+          "name": "Toerana misy anao",
+          "locationDesc": "Manana safidy ianao hampiseo na tsia ny toerana misy anao. Ny toerana misy anao dia ampiasain'ny pejy misy sarintany, ary izahay de tsy hampiasa na amin'ny fomba aona na aona ny mombanao.",
+          "successLocation": "Vita ny fanamboarana ny toerana misy anao!",
+          "switch": "Aseo ny toerana misy ahy"
+      },
+      "password": {
+          "name": "Hanova teny miafina",
+          "success": "Vita ny fanovana ny teny miafina!",
+          "current": "Teny miafina ankehitriny",
+          "new": "Teny miafina vaovao",
+          "confirm": "Fanamafisana ny teny miafina vaovao"
+      },
+      "picture": {
+          "name": "Sarin'ny mpampiasa",
+          "success": "Vita ny fanovana ny sary!"
+      },
+      "myPages": "Ny pejiko",
+      "addPage": {
+          "name": "Hanampy pejy",
+          "titleModal": "Fampidirana fikambananana",
+          "text": "Tongasoa eto amin'ny pejy ahafahanao misoratra anarana ny fikambanana na orinasanao ho an'ny RSE. Asaina ianao hameno ny fampahalalana ilaina, afa-tsy ireo voamarika ho safidy. Ity fampahalalana ity dia natao ho an'ny mpampiasa fotsiny mba hanampiana azy ireo hamantatra anao haingana ary tsy hampiasaina amin'ny dokam-barotra na inona na inona toe-javatra.",
+          "accept": "Eny, manaiky aho",
+          "decline": "Tsy manaiky aho",
+          "typeChoice": {
+              "name": "Karazan'ny fikambananao",
+              "assoc": "Fikambanana",
+              "entreprise": "Orinasa"
+          },
+          "titleStep2": "Fidirana ao anatin'ny posy",
+          "error": "Ilaina ny fanambarana ny toerana !!!",
+          "savePosition": "Ampidiro ny toeranao",
+          "step2Notice": "Ampidiro ny toerana misy ny fikambananao amin'ny alàlan'ny fisafidianana azy amin'ity sari-tany manaraka ity. Ny fikambanana misoratra anarana amin'ny sehatra misy anay dia takiana amin'ny mangarahara. Ny angonao dia hampiasaina fotsiny mba hampahafantarana ireo mpampiasa liana amin'ny fandaminana ny toerana misy anao ary tsy hampiasaina amin'ny dokambarotra.",
+          "step3": {
+              "title": "Fidio ny sokajy misy azy",
+              "success": "Voaforina ny pejy"
+          }
+      },
+      "disconnect": "Hiala",
+      "successGeneral": "Vita ny fanamboarana ny angona ankapobeany!",
+      "generalUser": {
+          "name": "Anarana",
+          "email": "Mailaka",
+          "address": "Adiresy",
+          "phone": "Laharana finday"
+      },
+      "generalPage": {
+          "description": "Takelaka",
+          "website": "Tranokala (tsy voatery)",
+          "next": "Iray aloha",
+          "cancel": "Fanelanelanana",
+          "country": "Firenena",
+          "select": "Miditra firenena"
+      },
+      "save": "Ekena",
+      "finish": "Tapitra",
+      "categories": {
+          "nopoverty": "Tsy misy fahantrana",
+          "zerohunger": "Tsy misy hanoanana",
+          "goodhealthandwellbeing": "Fahasalamana sy faharoa",
+          "qualityeducation": "Fikarakarana tsara",
+          "genderequality": "Fihavanana eo amin'ny tanora",
+          "clearwaterandsanitation": "Rano tsara sy fahasalamana",
+          "affordableandcleanenergy": "Asa fifandraisana sy rano maloto tsara",
+          "decentworkandgrowth": "Asa tsara sy fanatanterahana",
+          "industryinnovationandinfrastructure": "Asa, asa fifandraisana sy fahitalavitra",
+          "reduceinequalities": "Fihavanana eo amin'ny tanora",
+          "sustainablecitiesandcommunities": "Fiainana mendrika sy fiainana mendrika",
+          "responsibleconsumptionandproduction": "Fahaiza-manao sy fahaiza-manao tsara",
+          "climateaction": "Asa fifandraisana",
+          "lifebelowwater": "Fiainana eo an-tanety",
+          "lifeonland": "Fiainana eo an-tanety",
+          "peacejustice": "Fiadanana, fandriampahalemana",
+          "partnershipsforothergoals": "Fifandraisana ho an'ny hafa",
+          "innovative": "Vaovao",
+          "attractive": "Mampiavaka",
+          "developsshortcircuitsandresponsiblepurchasing": "Mampivoatra ny loko sy ny fametraka mahavariana",
+          "promotesemploymentintheregion": "Mampiavaka ny asa ao anatin'ny faritra",
+          "developitscompetitiveness": "Manao ny an'ny asa mahavariana",
+          "respectstheenvironmentandbiodiversity": "Manao amin'ny tantara sy ny varavarankely",
+          "promotesequalityanddiversity": "Mampiavaka ny fihavanana sy ny hafanana",
+          "promotessafetyandwell-beingatwork": "Mampiavaka ny fahasamihafa sy ny tsara fahafahana eo amin'ny asa",
+          "contributestotheenergytransition": "Mampiavaka ny fahantrana rano sy ny fialamboly",
+          "promotesthedevelopmentofthecirculareconomy": "Mampiavaka ny fampandrosoana ny toetra mitsikera",
+          "fightagainstcorruption": "Fihavanana amin'ny fanafintohina",
+          "opentodialogueandcollaborative": "Manana ny fahalalana sy ny asa",
+          "developcultureandriskmanagement": "Fitantanana sy Fanabeazam-pitantanana"
+    }
+  },
+  "details": {
+    "name": "Mombamomba",
+    "entreprise": "Fiasana",
+    "association": "Fikambanana",
+    "description": "Sokajy"
+  },
+  "switchAccount": {
+    "name": "Hanova kaonty",
+    "switch": "Hanova"
+  },
+  "langage":{
+    "name":"Fiteny",
+    "english":"Anglisy",
+    "français":"Frantsay",
+    "malagasy":"Malagasy"
+},
+    "authsignin": {
+      "welcome": "Tonga soa! Ampidiro ny mombanao hidirana amin'ny kaonty.",
+      "question": "Tsy manana kaonty ve ianao ?",
+      "signup": "Hisoratra anarana",
+      "signinbutton": "Hiditra",
+      "forgot": "Adino teny miafina?",
+      "successlogin": "Tafiditra tsara amin'ny kaonty",
+      "formik": {
+        "email": "Adiresy mailaka tsy mety",
+        "required": "Ilaina",
+        "emailAddress": "Adiresy mailaka",
+        "password": "Teny miafina"
+      }
+    },
+    "authregister": {
+      "welcome": "Mamorona kaonty avy hatrany!",
+      "question": "Efa manana kaonty ve ianao?",
+      "signin": "Midira amin'ny kaonty",
+      "signupbutton": "Hiditra",
+      "forgot": "Adino teny miafina?",
+      "successregister": "Tafiditra amin'ny kaonty",
+      "formik": {
+        "email": "Adiresy mailaka tsy mety",
+        "required": "Ilaina",
+        "special": "Teny 20 na latsaka no mety",
+        "passwordDetail": "Teny miafina tokany manana litera 8 raha kely indrindra",
+        "emailAddress": "Adiresy mailaka",
+        "password": "Teny miafina",
+        "name": "Anarana",
+        "remember": "Tadidiana aho"
+      }
+    }
+  
+}

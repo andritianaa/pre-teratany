@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import useFetchSearchByQuery from "../../hooks/useFetchSearchByQuery";
 import { ProfileFilter } from "../../types/profile.type";
 import useFetchProfile from "../../hooks/useFetchProfile";
+import { useTranslation } from "react-i18next";
 
 const PageList = () => {
   const [activeBage, setActiveBage] = useState<boolean | null>(null);
@@ -13,6 +14,7 @@ const PageList = () => {
   const profileConnected = useFetchProfile();
 
   const results = useFetchSearchByQuery(query!, "n");
+  const { t } = useTranslation();
 
   const [filterPage, setfilterPage] = useState<ProfileFilter[]>([]);
 
@@ -53,7 +55,7 @@ const PageList = () => {
 
   return (
     <>
-      <TopBar text="Pages" />
+      <TopBar text={t("pages.plural")} />
       <div className="fixed top-0 w-full bg-white p-2  mb-2 mt-14 flex flex-col items-start">
         <SearchBar textFilter="page" />
         <div className="flex mt-4">
@@ -67,7 +69,7 @@ const PageList = () => {
                   : "text-sm px-3 !bg-gray-200 !text-gray-800 rounded-full"
               }
             >
-              All
+              {t("search.all")}
             </div>
             <div
               onClick={filterByFollowedPage}
@@ -78,7 +80,7 @@ const PageList = () => {
                   : "text-sm px-3 !bg-gray-200 !text-gray-800 rounded-full"
               }
             >
-              Followed page
+              {t("followers.followedPage")}
             </div>
           </div>
         </div>

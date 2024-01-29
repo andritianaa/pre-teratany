@@ -20,6 +20,7 @@ import { AxiosError } from "axios";
 import useLoadingButton from "hooks/useLoadingButton";
 import { resetAccountConnected } from "store/reducer/account.reducer";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
+import { useTranslation } from "react-i18next";
 
 interface signupFormValues {
   email: string;
@@ -31,6 +32,7 @@ const RegisterAuth: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
+  const { t } = useTranslation();
 
   const initialValues: signupFormValues = {
     email: "",
@@ -63,7 +65,8 @@ const RegisterAuth: React.FC = () => {
       );
       dispatch(resetAccountConnected());
       navigate("/");
-      toast.success("Account created successfully");
+      const registersuccess = t("authregister.successregister");
+      toast.success(registersuccess);
     }
   };
 
@@ -77,15 +80,15 @@ const RegisterAuth: React.FC = () => {
           <div className="p-4 sm:p-7">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800 white:text-white">
-                Ready to get started? Sign up here!
+                {t("authregister.welcome")}
               </h1>
               <p className="mt-2 text-sm text-gray-600 white:text-gray-400">
-                Already have an account ?
+                {t("authregister.question")}
                 <Link
                   className="text-blue-600 decoration-2 hover:underline font-medium ml-1"
                   to="/signin"
                 >
-                  Sign in here
+                  {t("authregister.signin")}
                 </Link>
               </p>
             </div>
@@ -95,17 +98,17 @@ const RegisterAuth: React.FC = () => {
                 initialValues={initialValues}
                 validationSchema={Yup.object({
                   email: Yup.string()
-                    .email("Invalid email address")
-                    .required("Required"),
+                    .email(t("authregister.formik.email"))
+                    .required(t("authregister.formik.required")),
                   name: Yup.string()
-                    .max(20, "Must be 20 characters or less")
-                    .required("Required"),
+                    .max(20, t("authregister.formik.special"))
+                    .required(t("authregister.formik.required")),
                   password: Yup.string()
                     .matches(
                       /^(?=.*[A-Z])(?=.*\d).{8,}$/,
-                      "Password must contain at least 8 characters with a capital letter and a number"
+                      t("authregister.formik.passwordDetail")
                     )
-                    .required("Required"),
+                    .required(t("authregister.formik.required")),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                   setTimeout(() => {
@@ -117,7 +120,7 @@ const RegisterAuth: React.FC = () => {
                 <Form>
                   <div className="grid text-start gap-y-2">
                     <FormField
-                      label="Email Address"
+                      label={t("authregister.formik.emailAddress")}
                       type="email"
                       mark="email"
                       height="py-3"
@@ -126,7 +129,7 @@ const RegisterAuth: React.FC = () => {
                     />
                     <ErrorMessageForm name="email" />
                     <FormField
-                      label="Name"
+                      label={t("authregister.formik.name")}
                       type="texte"
                       mark="name"
                       height="py-3"
@@ -135,7 +138,7 @@ const RegisterAuth: React.FC = () => {
                     />
                     <ErrorMessageForm name="name" />
                     <FormField
-                      label="Password"
+                      label={t("authregister.formik.password")}
                       type="password"
                       mark="password"
                       height="py-3"
@@ -157,7 +160,7 @@ const RegisterAuth: React.FC = () => {
                           htmlFor="remember-me"
                           className="text-sm white:text-white"
                         >
-                          Remember me
+                          {t("authregister.formik.remember")}
                         </label>
                       </div>
                     </div>
@@ -165,7 +168,7 @@ const RegisterAuth: React.FC = () => {
                       isLoading={isLoading}
                       width="px-4"
                       height="py-3"
-                      name="Sign up"
+                      name={t("authregister.signupbutton")}
                     />
                   </div>
                 </Form>

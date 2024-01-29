@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { CategorieList } from "../../constants/PageCategory";
 import useFetchProfile from "../../hooks/useFetchProfile";
 import { addAccountConnected } from "../../store/reducer/account.reducer";
+import { useTranslation } from "react-i18next";
 
 const AddPageStep3: React.FC = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const AddPageStep3: React.FC = () => {
   const token = useToken();
   const dispatch = useDispatch<AppDispatch>();
   const profile = useFetchProfile();
+  const { t } = useTranslation();
 
   const page: PageInitialState = useSelector<RootState>(
     (state) => state.teratany_page
@@ -85,7 +87,8 @@ const AddPageStep3: React.FC = () => {
         })
       );
       endLoading();
-      toast("Page added successfully");
+      const toastSuccess = t("settings.addPage.step3.success");
+      toast(toastSuccess);
 
       setTimeout(() => {
         navigate(`/profile/${profile?._id}`);
@@ -93,29 +96,35 @@ const AddPageStep3: React.FC = () => {
       }, 2000);
     }
   };
+  const translatedCategories = CategorieList[
+    page.profileType === "association" ? 0 : 1
+  ].map((category) => ({
+    ...category,
+    text: t(
+      `settings.categories.${category.text.toLowerCase().replace(/\s/g, "")}`
+    ),
+  }));
 
   return (
     <>
-      <TopBar text="Select your categories" />
+      <TopBar text={t("settings.addPage.step3.title")} />
 
       <div className=" mt-16 0 flex items-center p-4 w-full flex-col">
         <div className="flex flex-wrap mb-8">
-          {CategorieList[page.profileType === "association" ? 0 : 1].map(
-            (category) => (
-              <CheckboxButton
-                value={category.value}
-                onClick={getCheckValue}
-                text={category.text}
-              />
-            )
-          )}
+          {translatedCategories.map((category) => (
+            <CheckboxButton
+              value={category.value}
+              onClick={getCheckValue}
+              text={category.text}
+            />
+          ))}
         </div>
         <Button
           isLoading={isLoading}
           width="w-[90%]"
           height="py-3"
           className="mb-4"
-          name="Finish"
+          name={t("settings.finish")}
           onClick={addPageLastStep}
         />
       </div>

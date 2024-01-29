@@ -14,15 +14,17 @@ import { FaRegUserCircle } from "@react-icons/all-files/fa/FaRegUserCircle";
 import { MdSecurity, MdMyLocation } from "react-icons/md";
 import { BiPhotoAlbum } from "@react-icons/all-files/bi/BiPhotoAlbum";
 import useFetchProfile from "../../hooks/useFetchProfile";
-import { TbCategory2 } from "react-icons/tb";
 import { useSelector } from "react-redux";
 import { resetAccountConnected } from "../../store/reducer/account.reducer";
+import { useTranslation } from "react-i18next";
+import SwitchLangage from "../../components/SwitchLangage";
 
 const EditProfileMenu: React.FC = () => {
   const [accordionVisible, setVisibility] = useState(false);
   const profile = useFetchProfile();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
 
   let accounts: any = useSelector<RootState>(
     (state) => state.teratany_account.account
@@ -49,41 +51,35 @@ const EditProfileMenu: React.FC = () => {
     <>
       <TopBar
         text={`${
-          profile?.profileType === "user" ? "User settings" : "Page settings"
+          profile?.profileType === "user"
+            ? t("users.setting")
+            : t("pages.setting")
         }`}
       />
 
       <div className="mt-20 mx-4 ">
         <EditType
-          name="General"
+          name={t("settings.general")}
           type="user"
           path="/profile/edit/general"
           icon={userIcon}
         />
         <EditType
-          name="Profile picture"
+          name={t("settings.picture.name")}
           type="user"
           path="/profile/edit/picture"
           icon={profilePicture}
         />
         {profile?.profileType === "user" && (
           <EditType
-            name="Edit Password"
+            name={t("settings.password.name")}
             type="user"
             path="/profile/edit/password"
             icon={passwordIcon}
           />
         )}
-        {profile?.profileType !== "user" && (
-          <EditType
-            name="Edit category"
-            type="page"
-            path="/profile/edit/category"
-            icon={<TbCategory2 size={23} />}
-          />
-        )}
         <EditType
-          name="Location parameter"
+          name={t("settings.location.name")}
           type="user"
           path="/profile/edit/location"
           icon={locationIcon}
@@ -96,7 +92,7 @@ const EditProfileMenu: React.FC = () => {
             onClick={showAccordion}
           >
             <p className="flex items-start mx-1 pb-1 text-xl font-medium">
-              My pages
+              {t("settings.myPages")}
             </p>
             {accordionVisible ? (
               <FiChevronUp
@@ -119,8 +115,12 @@ const EditProfileMenu: React.FC = () => {
                 name={account.name}
                 desc={
                   account.followers > 0
-                    ? account.followers + " Followers"
-                    : account.followers + " Follower"
+                    ? t("followers.number.plural", {
+                        followers: account.followers,
+                      })
+                    : t("followers.number.singular", {
+                        followers: account.followers,
+                      })
                 }
                 image={account.image}
               />
@@ -135,12 +135,20 @@ const EditProfileMenu: React.FC = () => {
             }}
           >
             <GrAddCircle size={28} />
-            <p className="px-3 text-lg">Add page</p>
+            <p className="px-3 text-lg">{t("settings.addPage.name")}</p>
           </div>
         )}
+        <div className="flex flex-col items-start mb-4 mx-1">
+          <p className="text-xl font-semibold mx-1 mt-2 mb-3">
+            {t("langage.name")}
+          </p>
+          <SwitchLangage />
+        </div>
         <div className="flex items-center my-4 mx-1" onClick={logout}>
-          <VscDebugDisconnect size={27} />
-          <p className="px-3 text-lg">Disconnect</p>
+          <VscDebugDisconnect size={27} color="rgb(220, 38, 38, 1)" />
+          <p className="px-3 text-lg text-red-600">
+            {t("settings.disconnect")}
+          </p>
         </div>
       </div>
     </>

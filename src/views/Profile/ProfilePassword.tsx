@@ -11,6 +11,7 @@ import useToken from "../../hooks/useToken";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import useLoadingButton from "../../hooks/useLoadingButton";
+import { useTranslation } from "react-i18next";
 
 interface editPasswordFormValues {
   currentPassword: string;
@@ -27,6 +28,7 @@ const initialValues: editPasswordFormValues = {
 const ProfilePassword: React.FC = () => {
   const token = useToken();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
+  const { t } = useTranslation();
 
   const updateUserPassword = async (values: editPasswordFormValues) => {
     startLoading();
@@ -42,13 +44,14 @@ const ProfilePassword: React.FC = () => {
       toast.error(error_message);
     } else {
       endLoading();
-      toast.success("Password updated!");
+      const successToast = t("settings.password.success");
+      toast.success(successToast);
     }
   };
 
   return (
     <>
-      <TopBar text="Edit Password" />
+      <TopBar text={t("settings.password.name")} />
       <div className="mt-20 flex flex-col items-center mx-4">
         <Formik
           initialValues={initialValues}
@@ -73,7 +76,7 @@ const ProfilePassword: React.FC = () => {
         >
           <Form className="w-[90%]">
             <FormField
-              label="Current password"
+              label={t("settings.password.current")}
               type="text"
               mark="currentPassword"
               height="py-2"
@@ -82,7 +85,7 @@ const ProfilePassword: React.FC = () => {
             <ErrorMessageForm name="currentPassword" />
 
             <FormField
-              label="New password"
+              label={t("settings.password.new")}
               type="password"
               mark="newPassword"
               height="py-2"
@@ -91,7 +94,7 @@ const ProfilePassword: React.FC = () => {
             <ErrorMessageForm name="newPassword" />
 
             <FormField
-              label="Confirm password"
+              label={t("settings.password.confirm")}
               type="password"
               mark="confirmPassword"
               height="py-2"
@@ -103,7 +106,7 @@ const ProfilePassword: React.FC = () => {
               <Button
                 width="w-full"
                 height="py-3"
-                name="Save"
+                name={t("settings.save")}
                 isLoading={isLoading}
               />
             </div>

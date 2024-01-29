@@ -11,6 +11,7 @@ import { FileServerURL } from "api/FileApi";
 import { useDispatch } from "react-redux";
 import { setCoordonates } from "../store/reducer/page.reducer";
 import profileDefault from "../assets/userPics.jpg";
+import { useTranslation } from "react-i18next";
 
 interface ProfileListMapProps {
   profiles: IProfile[];
@@ -22,6 +23,7 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
   onCloseSlideOver,
 }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const setCoordonatesProfile = (lat: number, lng: number) => {
     dispatch(
@@ -35,7 +37,7 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
   };
 
   return (
-    <Card className="w-full shadow-none" placeholder="">
+    <Card placeholder="" className="w-full shadow-none">
       <List placeholder="">
         {profiles?.map((profile) => (
           <ListItem placeholder="">
@@ -81,7 +83,14 @@ export const ProfileListMap: React.FC<ProfileListMapProps> = ({
                 color="gray"
                 className="font-normal"
               >
-                {profile?.followers?.length} followers
+                {profile?.followers?.length !== undefined &&
+                  (profile.followers.length > 1
+                    ? t("followers.number.plural", {
+                        followers: profile.followers.length,
+                      })
+                    : t("followers.number.singular", {
+                        followers: profile.followers.length,
+                      }))}
               </Typography>
             </div>
           </ListItem>

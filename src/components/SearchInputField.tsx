@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 interface SearchInputFieldProps {
   onChange: (value: string) => void;
   searchQuery: string;
@@ -7,6 +9,7 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({
   onChange,
   searchQuery,
 }) => {
+  const {t} = useTranslation()
   return (
     <div className="flex w-full">
       <div className="relative w-full">
@@ -14,8 +17,7 @@ const SearchInputField: React.FC<SearchInputFieldProps> = ({
           type="search"
           id="search-dropdown"
           className="block p-2.5 w-full z-20 text-sm text-gray-900 rounded-lg border border-1"
-          placeholder="Search..."
-          value={searchQuery}
+          placeholder={t("search")}
           onChange={(e) => onChange(e.target.value as string)}
         />
       </div>

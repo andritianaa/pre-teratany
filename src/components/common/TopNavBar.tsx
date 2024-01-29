@@ -1,6 +1,5 @@
 import React from "react";
 import LogoTeratany from "../../assets/Teratany.jpg";
-// import { useNavigate } from "react-router";
 
 interface TopNavBarProps {
   notifCount: number;
