@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 export const SwitchLangage = () => {
   const { i18n } = useTranslation();
+  const { t } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = useState<string>(
     localStorage.getItem("lang") || "en"
   );
@@ -22,9 +23,9 @@ export const SwitchLangage = () => {
   }, [i18n.language]);
   return (
     <select onChange={onClickLanguageChange} value={selectedLanguage} id="">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="mg">Malagasy</option>
+      <option value="en">{t("langage.english")}</option>
+      <option value="fr">{t("langage.français")}</option>
+      <option value="mg">{t("langage.malagasy")}</option>
     </select>
   );
 };

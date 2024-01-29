@@ -24,7 +24,9 @@
       "edit":"Edit",
       "publicationPlaceholder":"Write your thoughts here...",
       "editPub":"Edit publication",
-      "deleted":"Publication deleted"},
+      "deleted":"Publication deleted",
+      "photo":"Picture"
+  },
     "posts":{
       "plural":"Posts",
       "singular":"Post",
@@ -179,7 +181,13 @@
     "switchAccount":{
       "name":"Switch account",
       "switch":"Switch"
-    }
+    },
+    "langage":{
+      "name":"Langages",
+      "english":"English",
+      "français":"French",
+      "malagasy":"Malagasy"
+  }
 
     
 }

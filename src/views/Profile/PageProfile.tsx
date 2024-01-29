@@ -51,7 +51,7 @@ const PageProfile: React.FC<PageProfileProps> = ({
               <p className="">
                 {profile?.followers?.length! > 1
                   ? t("followers.plural")
-                  : "follower.singular"}
+                  : t("followers.singular")}
               </p>
             </div>
             <div className="flex flex-col ">

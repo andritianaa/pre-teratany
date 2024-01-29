@@ -28,12 +28,14 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
   isNewPub,
   btnText,
 }) => {
+  const { t } = useTranslation();
   const [files, setFile] = useState<any>();
-  const [selectedPhoto, setSelectedPhoto] = useState<string>("Photo");
+  const [selectedPhoto, setSelectedPhoto] = useState<string>(
+    t("publications.photo")
+  );
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const [fileViewers, setFileViewers] = useState<string[]>([]);
   const [publicationText, setPublicationText] = useState<string>();
-  const { t } = useTranslation();
   const toastMessage = [t("toast.error"), t("toast.success")];
 
   const token = useToken();

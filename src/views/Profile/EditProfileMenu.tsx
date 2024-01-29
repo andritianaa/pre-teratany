@@ -115,8 +115,12 @@ const EditProfileMenu: React.FC = () => {
                 name={account.name}
                 desc={
                   account.followers > 0
-                    ? account.followers + " Followers"
-                    : account.followers + " Follower"
+                    ? t("followers.number.plural", {
+                        followers: account.followers,
+                      })
+                    : t("followers.number.singular", {
+                        followers: account.followers,
+                      })
                 }
                 image={account.image}
               />
@@ -134,10 +138,17 @@ const EditProfileMenu: React.FC = () => {
             <p className="px-3 text-lg">{t("settings.addPage.name")}</p>
           </div>
         )}
-        <SwitchLangage />
+        <div className="flex flex-col items-start mb-4 mx-1">
+          <p className="text-xl font-semibold mx-1 mt-2 mb-3">
+            {t("langage.name")}
+          </p>
+          <SwitchLangage />
+        </div>
         <div className="flex items-center my-4 mx-1" onClick={logout}>
-          <VscDebugDisconnect size={27} />
-          <p className="px-3 text-lg">{t("settings.disconnect")}</p>
+          <VscDebugDisconnect size={27} color="rgb(220, 38, 38, 1)" />
+          <p className="px-3 text-lg text-red-600">
+            {t("settings.disconnect")}
+          </p>
         </div>
       </div>
     </>

@@ -187,7 +187,7 @@ const Profile: React.FC = () => {
                 wallet={profile?.deviantWalletId}
               />
             }
-            title="Details"
+            title={t("details.name")}
           />
           <SwitchAccountDrawer
             openBottom={openBottom}

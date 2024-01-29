@@ -24,7 +24,8 @@
     "edit": "Modifier",
     "publicationPlaceholder": "Écrivez vos pensées ici...",
     "editPub": "Modifier la publication",
-    "deleted": "Publication supprimée"
+    "deleted": "Publication supprimée",
+    "photo":"Photo"
   },
   "posts": {
     "plural": "Articles",
@@ -181,5 +182,11 @@
   "switchAccount":{
     "name":"Changer de compte",
     "switch":"Changer"
-  }
+  },
+  "langage":{
+    "name":"Langages",
+    "english":"Anglais",
+    "français":"Français",
+    "malagasy":"Malagasy"
+}
 }

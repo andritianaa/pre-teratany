@@ -59,7 +59,7 @@ const ProfileGeneral: React.FC = () => {
 
   return (
     <>
-      <TopBar text="Edit Profile" />
+      <TopBar text={t("settings.general")} />
 
       <div className="mt-20 flex flex-col items-center mx-4">
         <Formik

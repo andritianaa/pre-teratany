@@ -9,7 +9,7 @@
   "users": {
       "plural": "Mpampiasa",
       "singular": "Mpampiasa",
-      "setting": "Fanamboarana mpampiasa"
+      "setting": "Fanamboarana kaonty"
   },
   "publications": {
       "plural": "Fizarana",
@@ -24,7 +24,8 @@
       "edit": "Hanova",
       "publicationPlaceholder": "Tsy maintsy manoratra ny heviny eto...",
       "editPub": "Hanova fizarana",
-      "deleted": "Fizarana voafafa"
+      "deleted": "Fizarana voafafa",
+      "photo":"Sary"
   },
   "posts": {
       "plural": "Fizarana",
@@ -54,9 +55,9 @@
       "ago": "{{time}}"
   },
   "comments": {
-      "name": "Fanazavana",
-      "yourComment": "Ny fanamarihana nataonao",
-      "postComment": "Hanoratra fanamarihana",
+      "name": "Fanamarihana",
+      "yourComment": "Hanoratra fanamarihana",
+      "postComment": "Alefa ny fanamarihana",
       "deleteConfirm": "Tena ho fafana ve ity fanamariahana ity?",
       "delete": "Fafana",
       "deleteValidate": "Eny ho fafana"
@@ -84,17 +85,17 @@
   "settings": {
       "general": "Ankapobeany",
       "location": {
-          "name": "Fanamboarana ny toerana misy anao",
-          "locationDesc": "Manana safidy ianao hampiseo na tsia ny toerana misy anao. Ny toerana misy anao dia ampiasain'ny pejy misys sarintany, ary izahay de tsy hampiasa na amin'ny fomba aona na aona ny mombanao.",
+          "name": "Toerana misy anao",
+          "locationDesc": "Manana safidy ianao hampiseo na tsia ny toerana misy anao. Ny toerana misy anao dia ampiasain'ny pejy misy sarintany, ary izahay de tsy hampiasa na amin'ny fomba aona na aona ny mombanao.",
           "successLocation": "Vita ny fanamboarana ny toerana misy anao!",
-          "switch": "Aseho ny toerana ahy"
+          "switch": "Aseo ny toerana misy ahy"
       },
       "password": {
           "name": "Hanova teny miafina",
           "success": "Vita ny fanovana ny teny miafina!",
           "current": "Teny miafina ankehitriny",
           "new": "Teny miafina vaovao",
-          "confirm": "Ekeko ny fanovana ny teny miafina"
+          "confirm": "Fanamafisana ny teny miafina vaovao"
       },
       "picture": {
           "name": "Sarin'ny mpampiasa",
@@ -102,7 +103,7 @@
       },
       "myPages": "Ny pejiko",
       "addPage": {
-          "name": "Fanampiana pejy",
+          "name": "Hanampy pejy",
           "titleModal": "Fampidirana fikambananana",
           "text": "Tongasoa eto amin'ny pejy ahafahanao misoratra anarana ny fikambanana na orinasanao ho an'ny RSE. Asaina ianao hameno ny fampahalalana ilaina, afa-tsy ireo voamarika ho safidy. Ity fampahalalana ity dia natao ho an'ny mpampiasa fotsiny mba hanampiana azy ireo hamantatra anao haingana ary tsy hampiasaina amin'ny dokam-barotra na inona na inona toe-javatra.",
           "accept": "Eny, manaiky aho",
@@ -131,17 +132,17 @@
       },
       "generalPage": {
           "description": "Takelaka",
-          "website": "Tatitra (fomba tsara kokoa)",
+          "website": "Tranokala (tsy voatery)",
           "next": "Iray aloha",
           "cancel": "Fanelanelanana",
           "country": "Firenena",
           "select": "Miditra firenena"
       },
-      "save": "Ampidino",
+      "save": "Ekena",
       "finish": "Tapitra",
       "categories": {
           "nopoverty": "Tsy misy fahantrana",
-          "zerohunger": "Tsy misy lainga",
+          "zerohunger": "Tsy misy hanoanana",
           "goodhealthandwellbeing": "Fahasalamana sy faharoa",
           "qualityeducation": "Fikarakarana tsara",
           "genderequality": "Fihavanana eo amin'ny tanora",
@@ -173,13 +174,19 @@
     }
   },
   "details": {
-    "name": "Antontan'isa",
-    "entreprise": "Asa",
+    "name": "Mombamomba",
+    "entreprise": "Fiasana",
     "association": "Fikambanana",
-    "description": "Andininy"
+    "description": "Sokajy"
   },
   "switchAccount": {
     "name": "Hanova kaonty",
     "switch": "Hanova"
-  }
+  },
+  "langage":{
+    "name":"Fiteny",
+    "english":"Anglisy",
+    "français":"Frantsay",
+    "malagasy":"Malagasy"
+}
 }
