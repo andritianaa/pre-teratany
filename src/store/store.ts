@@ -9,6 +9,7 @@ import accountReducer from "./reducer/account.reducer";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import historyReducer from "./reducer/history.reducer";
 import publicationReducer from "./reducer/publication.reducer";
+import profileReducer from "./reducer/profile.reducer";
 
 const userPersistConfig = {
     key: "teratany_user",
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     teratany_account: accountPersistedReducer,
     teratany_profile_history: historyReducer,
     teratany_publications: publicationReducer,
+    teratany_profiles: profileReducer,
 });
 
 export const store = configureStore({
