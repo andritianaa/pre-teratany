@@ -188,5 +188,38 @@
     "english":"Anglisy",
     "français":"Frantsay",
     "malagasy":"Malagasy"
-}
+},
+    "authsignin": {
+      "welcome": "Tonga soa! Ampidiro ny mombanao hidirana amin'ny kaonty.",
+      "question": "Tsy manana kaonty ve ianao ?",
+      "signup": "Hisoratra anarana",
+      "signinbutton": "Hiditra",
+      "forgot": "Adino teny miafina?",
+      "successlogin": "Tafiditra tsara amin'ny kaonty",
+      "formik": {
+        "email": "Adiresy mailaka tsy mety",
+        "required": "Ilaina",
+        "emailAddress": "Adiresy mailaka",
+        "password": "Teny miafina"
+      }
+    },
+    "authregister": {
+      "welcome": "Mamorona kaonty avy hatrany!",
+      "question": "Efa manana kaonty ve ianao?",
+      "signin": "Midira amin'ny kaonty",
+      "signupbutton": "Hiditra",
+      "forgot": "Adino teny miafina?",
+      "successregister": "Tafiditra amin'ny kaonty",
+      "formik": {
+        "email": "Adiresy mailaka tsy mety",
+        "required": "Ilaina",
+        "special": "Teny 20 na latsaka no mety",
+        "passwordDetail": "Teny miafina tokany manana litera 8 raha kely indrindra",
+        "emailAddress": "Adiresy mailaka",
+        "password": "Teny miafina",
+        "name": "Anarana",
+        "remember": "Tadidiana aho"
+      }
+    }
+  
 }

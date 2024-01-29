@@ -188,5 +188,38 @@
     "english":"Anglais",
     "français":"Français",
     "malagasy":"Malagasy"
+},
+  "authsignin": {
+    "welcome": "Bienvenue ! Connectez-vous pour accéder.",
+    "question": "Vous n'avez pas encore de compte ?",
+    "signup": "Inscrivez-vous ici",
+    "signinbutton": "Se connecter",
+    "forgot": "Mot de passe oublié ?",
+    "successlogin": "Connexion réussie",
+    "formik": {
+      "email": "Adresse e-mail invalide",
+      "required": "Champ obligatoire",
+      "emailAddress": "Adresse e-mail",
+      "password": "Mot de passe"
+    }
+  },
+  "authregister": {
+    "welcome": "Prêt à commencer ? Inscrivez-vous ici !",
+    "question": "Vous avez déjà un compte ?",
+    "signin": "Connectez-vous ici",
+    "signupbutton": "S'inscrire",
+    "forgot": "Mot de passe oublié ?",
+    "successregister": "Compte créé avec succès",
+    "formik": {
+      "email": "Adresse e-mail invalide",
+      "required": "Champ obligatoire",
+      "special": "Doit contenir 20 caractères ou moins",
+      "passwordDetail": "Le mot de passe doit contenir au moins 8 caractères avec une majuscule et un chiffre",
+      "emailAddress": "Adresse e-mail",
+      "password": "Mot de passe",
+      "name": "Nom",
+      "remember": "Se souvenir de moi"
+    }
+  }
 }
-}
+
