@@ -52,8 +52,9 @@ export const HomeChat: React.FC = () => {
                 <div className="pl-2 pr-2 mb-2 w-full">
                     <SearchBar />
                 </div>
-                {chats.map((chat) => (
+                {chats.map((chat, index) => (
                     <ChatList
+                        key={index}
                         name={chat.name}
                         message={chat.message}
                         newMessage={chat.newMessage}

@@ -40,7 +40,6 @@ const PageTopList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileConnectedUser?._id]);
 
-  console.log(profileFollowed);
 
   return (
     <>

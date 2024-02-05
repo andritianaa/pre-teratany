@@ -4,9 +4,7 @@ import NavBar from "components/common/NavBar";
 import Home from "views/Home";
 import SignInAuth from "views/Authentication/SignInAuth";
 import RegisterAuth from "views/Authentication/RegisterAuth";
-import { Provider } from "react-redux";
-import { store, persistor } from "store/store";
-import { PersistGate } from "redux-persist/integration/react";
+
 import ToastNotification from "components/common/ToastNotification";
 import AddPublication from "./views/Publication/AddPublication";
 import Map from "./views/Map/Map";
@@ -33,6 +31,12 @@ import ForgotPassword from "./views/Authentication/ForgotPassword";
 import ResetPassword from "./views/Authentication/ResetPassword";
 import { App as CapacitorApp } from "@capacitor/app";
 import { useEffect } from "react";
+import socketIO from "socket.io-client";
+
+import { useDispatch } from "react-redux";
+//socket
+import { syncChat } from "./store/reducer/chat.reducer";
+import useFetchProfile from "./hooks/useFetchProfile";
 
 // Désactive le traitement passif pour tous les événements tactiles
 document.addEventListener("touchstart", function () {}, { passive: false });
@@ -40,8 +44,19 @@ document.addEventListener("touchmove", function () {}, { passive: false });
 document.addEventListener("touchend", function () {}, { passive: false });
 document.addEventListener("touchcancel", function () {}, { passive: false });
 
+
+const socket = socketIO("http://localhost:9900").connect();
+console.log("connected, ===> ", socket);
+
+
 const App: React.FC = () => {
+  const profileConnectedUser = useFetchProfile();
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    console.log("zanjy");
+
     const handleBackButton = () => {
       const currentPath = window.location.pathname;
       if (currentPath === "/signin") {
@@ -56,217 +71,224 @@ const App: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+      console.log("profileConnectedUser ===> ", profileConnectedUser);
+      console.log("connected, ===> ", socket);
+
+
+      socket.on("connect", ()=>{
+        console.log("connected, ===> ", socket);
+        
+      })
+  }, []);
+
   return (
     <div className="App">
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <ToastNotification />
-          <BrowserRouter>
-            <Routes>
-              <Route element={<WithoutNav />}>
-                {/* // authentication routes */}
-                <Route path="/signin" element={<SignInAuth />} />
-                <Route path="/register" element={<RegisterAuth />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
+      <ToastNotification />
+      <BrowserRouter>
+        <Routes>
+          <Route element={<WithoutNav />}>
+            {/* // authentication routes */}
+            <Route path="/signin" element={<SignInAuth />} />
+            <Route path="/register" element={<RegisterAuth />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
-                <Route
-                  path="/page/add/step-1"
-                  element={
-                    <ProtectedRoute>
-                      <AddPageStep1 />
-                    </ProtectedRoute>
-                  }
-                />
+            <Route
+              path="/page/add/step-1"
+              element={
+                <ProtectedRoute>
+                  <AddPageStep1 />
+                </ProtectedRoute>
+              }
+            />
 
-                <Route
-                  path="/page/add/step-2"
-                  element={
-                    <ProtectedRoute>
-                      <AddPageStep2 />
-                    </ProtectedRoute>
-                  }
-                />
+            <Route
+              path="/page/add/step-2"
+              element={
+                <ProtectedRoute>
+                  <AddPageStep2 />
+                </ProtectedRoute>
+              }
+            />
 
-                <Route
-                  path="/page/add/step-3"
-                  element={
-                    <ProtectedRoute>
-                      <AddPageStep3 />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/chat/one"
-                  element={
-                    <ProtectedRoute>
-                      <OneChat />
-                    </ProtectedRoute>
-                  }
-                />
-              </Route>
+            <Route
+              path="/page/add/step-3"
+              element={
+                <ProtectedRoute>
+                  <AddPageStep3 />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/chat/one"
+              element={
+                <ProtectedRoute>
+                  <OneChat />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
 
-              <Route element={<WithNav />}>
-                <Route
-                  path="/"
-                  element={
-                    <ProtectedRoute>
-                      <Home />
-                    </ProtectedRoute>
-                  }
-                />
+          <Route element={<WithNav />}>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
 
-                {/* // publication */}
-                <Route
-                  path="/publication"
-                  element={
-                    <ProtectedRoute>
-                      <AddPublication />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/publication/:id"
-                  element={
-                    <ProtectedRoute>
-                      <EditPublication />
-                    </ProtectedRoute>
-                  }
-                />
-                {/* // Map */}
-                <Route
-                  path="/map"
-                  element={
-                    <ProtectedRoute>
-                      <Map />
-                    </ProtectedRoute>
-                  }
-                />
+            {/* // publication */}
+            <Route
+              path="/publication"
+              element={
+                <ProtectedRoute>
+                  <AddPublication />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/publication/:id"
+              element={
+                <ProtectedRoute>
+                  <EditPublication />
+                </ProtectedRoute>
+              }
+            />
+            {/* // Map */}
+            <Route
+              path="/map"
+              element={
+                <ProtectedRoute>
+                  <Map />
+                </ProtectedRoute>
+              }
+            />
 
-                <Route
-                  path="/pages/:query"
-                  element={
-                    <ProtectedRoute>
-                      <PageList />
-                    </ProtectedRoute>
-                  }
-                />
-                {/*CHAT*/}
-                <Route
-                  path="/chat/list"
-                  element={
-                    <ProtectedRoute>
-                      <HomeChat />
-                    </ProtectedRoute>
-                  }
-                />
+            <Route
+              path="/pages/:query"
+              element={
+                <ProtectedRoute>
+                  <PageList />
+                </ProtectedRoute>
+              }
+            />
+            {/*CHAT*/}
+            <Route
+              path="/chat/list"
+              element={
+                <ProtectedRoute>
+                  <HomeChat />
+                </ProtectedRoute>
+              }
+            />
 
-                {/* SEARCH */}
-                <Route
-                  path="/search"
-                  element={
-                    <ProtectedRoute>
-                      <Search />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/search/result/:query"
-                  element={
-                    <ProtectedRoute>
-                      <SearchResult />
-                    </ProtectedRoute>
-                  }
-                />
-                {/* Notifications */}
-                <Route
-                  path="/notifications"
-                  element={
-                    <ProtectedRoute>
-                      <Notification />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/search/result/publication/:query"
-                  element={
-                    <ProtectedRoute>
-                      <SearchFilterResult />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/search/result/user/:query"
-                  element={
-                    <ProtectedRoute>
-                      <SearchFilterResult />
-                    </ProtectedRoute>
-                  }
-                />
+            {/* SEARCH */}
+            <Route
+              path="/search"
+              element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/search/result/:query"
+              element={
+                <ProtectedRoute>
+                  <SearchResult />
+                </ProtectedRoute>
+              }
+            />
+            {/* Notifications */}
+            <Route
+              path="/notifications"
+              element={
+                <ProtectedRoute>
+                  <Notification />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/search/result/publication/:query"
+              element={
+                <ProtectedRoute>
+                  <SearchFilterResult />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/search/result/user/:query"
+              element={
+                <ProtectedRoute>
+                  <SearchFilterResult />
+                </ProtectedRoute>
+              }
+            />
 
-                {/* PROFILE */}
-                <Route
-                  path="/profile/edit/menu"
-                  element={
-                    <ProtectedRoute>
-                      <EditUserMenu />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/profile/edit/general"
-                  element={
-                    <ProtectedRoute>
-                      <ProfileGeneral />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/profile/edit/password"
-                  element={
-                    <ProtectedRoute>
-                      <ProfilePassword />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/profile/edit/picture"
-                  element={
-                    <ProtectedRoute>
-                      <ProfilePicture />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/profile/edit/location"
-                  element={
-                    <ProtectedRoute>
-                      <ProfileLocation />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/profile/edit/category"
-                  element={
-                    <ProtectedRoute>
-                      <ProfileCategory />
-                    </ProtectedRoute>
-                  }
-                />
+            {/* PROFILE */}
+            <Route
+              path="/profile/edit/menu"
+              element={
+                <ProtectedRoute>
+                  <EditUserMenu />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/edit/general"
+              element={
+                <ProtectedRoute>
+                  <ProfileGeneral />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/edit/password"
+              element={
+                <ProtectedRoute>
+                  <ProfilePassword />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/edit/picture"
+              element={
+                <ProtectedRoute>
+                  <ProfilePicture />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/edit/location"
+              element={
+                <ProtectedRoute>
+                  <ProfileLocation />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile/edit/category"
+              element={
+                <ProtectedRoute>
+                  <ProfileCategory />
+                </ProtectedRoute>
+              }
+            />
 
-                <Route
-                  path="/profile/:id"
-                  element={
-                    <ProtectedRoute>
-                      <Profile />
-                    </ProtectedRoute>
-                  }
-                />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
+            <Route
+              path="/profile/:id"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };

@@ -9,11 +9,17 @@ import accountReducer from "./reducer/account.reducer";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import historyReducer from "./reducer/history.reducer";
 import publicationReducer from "./reducer/publication.reducer";
+import chatReducer from "./reducer/chat.reducer";
 
 const userPersistConfig = {
     key: "teratany_user",
     storage,
 };
+
+const chatPersistConfig = {
+    key: "teratany_chat",
+    storage
+}
 const acccountPersistConfig = {
     key: "teratany_account",
     storage,
@@ -22,6 +28,7 @@ const acccountPersistConfig = {
 
 const userPersistedReducer = persistReducer(userPersistConfig, userReducer);
 const accountPersistedReducer = persistReducer(acccountPersistConfig, accountReducer);
+const chatPersistedReducer = persistReducer(chatPersistConfig, chatReducer);
 
 const rootReducer = combineReducers({
     teratany_user: userPersistedReducer,
@@ -29,6 +36,7 @@ const rootReducer = combineReducers({
     teratany_account: accountPersistedReducer,
     teratany_profile_history: historyReducer,
     teratany_publications: publicationReducer,
+    teratany_chat: chatPersistedReducer,
 });
 
 export const store = configureStore({

@@ -1,6 +1,5 @@
 import moment from "moment";
 import { useTranslation } from "react-i18next";
-import "moment/locale/mg";
 import "moment/locale/fr";
 import { useEffect, useState } from "react";
 

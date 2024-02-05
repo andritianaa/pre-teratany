@@ -20,16 +20,16 @@ const Notification = () => {
             <path
               d="M18 6L6 18"
               stroke="#4B5563"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M6 6L18 18"
               stroke="#4B5563"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
