@@ -15,16 +15,16 @@ export const HomeChat: React.FC = () => {
         <>
             <TopBar text="Discussions" />
             <div className="w-full overflow-y-auto flex flex-col items-center mt-16">
-                <div className="pl-2 pr-2 mb-2 w-full">
+                {/* <div className="pl-2 pr-2 mb-2 w-full">
                     <SearchBar />
-                </div>
+                </div> */}
                 {chats.map((chat, index) => (
                     <ChatList
                         key={index}
                         image={chat.participants[0].image}
                         reference={chat.reference}
                         name={chat.participants[0].name}
-                        message={chat.messages[chat.messages.length - 1].text}
+                        message={chat.messages.length > 0 ? chat.messages[chat.messages.length - 1].text : "New discussion"}
                         newMessage={chat.newMessageCount}
                     />
                 ))}

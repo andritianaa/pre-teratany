@@ -8,13 +8,12 @@ import profileDefault from "../../assets/userPics.jpg";
 import { Socket } from "socket.io-client";
 import { useState } from "react";
 
-
 interface Props {
-  socket: Socket
+  socket: Socket;
 }
-export const OneChat: React.FC<Props> = ({socket}) => {
-  const [textMessage, setTextMessage] = useState<string>()
-  
+export const OneChat: React.FC<Props> = ({ socket }) => {
+  const [textMessage, setTextMessage] = useState<string>();
+
   const conversationReference = useSelector<RootState>(
     (state) => state.teratany_chat.activeDiscussionReference
   ) as string;
@@ -25,19 +24,20 @@ export const OneChat: React.FC<Props> = ({socket}) => {
 
   const conversations = useSelector<RootState>(
     (state) => state.teratany_chat.discussions
-  )as IConversation[]
+  ) as IConversation[];
 
-  const actualDiscussion = conversations.find((element: any) => element.reference === conversationReference)
+  const actualDiscussion = conversations.find(
+    (element: any) => element.reference === conversationReference
+  );
 
-  
-  const handdleMessage = ()=>{
-    socket.emit("new-message",{
+  const handdleMessage = () => {
+    socket.emit("new-message", {
       sender: connectedUser,
-      text:textMessage ,
+      text: textMessage,
       conversation: conversationReference,
-    })
-  }
-
+    });
+    setTextMessage("");
+  };
 
   return (
     <>
@@ -53,7 +53,13 @@ export const OneChat: React.FC<Props> = ({socket}) => {
         ))}
       </div>
       <div className="fixed bg-white p-2 w-full bottom-0 ">
-        <div className="w-full">
+        <form
+          className="w-full"
+          onSubmit={(event) => {
+            event.preventDefault(); // Annule le rechargement de la page
+            handdleMessage(); // Appelle la fonction de gestion du message
+          }}
+        >
           <div className="flex">
             <div className="relative w-full">
               <input
@@ -61,23 +67,26 @@ export const OneChat: React.FC<Props> = ({socket}) => {
                 className="block p-2.5 w-full z-20 text-sm text-gray-900 rounded-lg border border-1"
                 placeholder="Message"
                 required
-                onChange={(v)=> setTextMessage(v.target.value)}
+                onChange={(v) => setTextMessage(v.target.value)}
+                value={textMessage}
               />
-              <button onClick={()=> handdleMessage()}>Send</button>
+              <button type="submit">
+                Send
+              </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
 };
 
-const TopBar: React.FC<IProfile> = ({participant}) => {
+const TopBar: React.FC<IProfile> = ({ participant }) => {
   const handleGoBack = () => {
     window.history.back();
   };
   console.log(participant);
-  
+
   return (
     <div className="fixed top-0 z-40 w-full h-14 bg-white border-b border-gray-200">
       <div className="flex items-center h-full mx-auto">

@@ -77,22 +77,18 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (profileConnectedUser) {
-      console.log("profileConnectedUser ===> ", profileConnectedUser);
       syncChatCaller(profileConnectedUser._id || "", profileConnectedUser.conversations || [],undefined)
-
       socket.on("connect", ()=>{
-        console.log("syncChat");
-        
       })
       socket.emit('connect-profile', profileConnectedUser._id)
       socket.on('new-message', ()=>{ 
-        console.log("ato");
+        console.log("new m essage");
         
         syncChatCaller(profileConnectedUser._id || "", profileConnectedUser.conversations || [],undefined)
       })
     }
      
-  },[dispatch]);
+  });
 
   return (
     <div className="App">
@@ -294,7 +290,7 @@ const App: React.FC = () => {
               path="/profile/:id"
               element={
                 <ProtectedRoute>
-                  <Profile />
+                  <Profile socket={socket} />
                 </ProtectedRoute>
               }
             />
