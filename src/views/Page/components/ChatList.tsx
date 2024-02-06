@@ -1,33 +1,51 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import profileDefault from "../../../assets/userPics.jpg";
+import { openDiscussion } from "../../../store/reducer/chat.reducer";
+import { useDispatch } from "react-redux";
 
 interface PageListCardsProps {
   name: string;
   message: string;
   newMessage?: number;
+  reference: number;
+  image: string
 }
 const ChatList: React.FC<PageListCardsProps> = ({
   name,
   message,
   newMessage,
+  reference,
+  image
 }) => {
-  const navigate = useNavigate();
-  const handleOpenChat = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const handleOpenChat = (reference: number) => {
     navigate("/chat/one");
+    console.log("referenced ====> ", reference);
+    
+    dispatch(openDiscussion(reference))
   };
   return (
     <div
       className={`mx-1 w-full p-2 mb-4 ${newMessage ? "bg-gray-100" : ""}`}
-      onClick={() => handleOpenChat()}
+      onClick={() => handleOpenChat(reference)}
     >
       <div className="flex items-center">
         <div className="w-16">
-          <img
+          {image && image.length ? (
+            <img
+            alt="page"
+            className=" !w-10 !h-10 rounded-full shadow-lg flex-2"
+            src={image}
+          />
+          ): (
+            <img
             alt="page"
             className=" !w-10 !h-10 rounded-full shadow-lg flex-2"
             src={profileDefault}
           />
+          )}
         </div>
         <div className="flex flex-col items-start px-4 w-full flex-5 ">
           <p className="font-medium">{name}</p>

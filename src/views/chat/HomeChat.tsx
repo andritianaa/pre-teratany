@@ -1,50 +1,16 @@
+import { useSelector } from "react-redux";
 import SearchBar from "../../components/SearchBar";
 import TopBar from "../../components/common/TopBar"
 import ChatList from "../Page/components/ChatList";
+import { RootState } from "../../store/store";
+import { IConversation } from "../../store/reducer/chat.reducer";
 
 export const HomeChat: React.FC = () => {
-    let chats = [
-        {
-            name: "Teratany",
-            message: "Bonjour",
-            newMessage: 2,
-        },
-        {
-            name: "Ampela Mitsingy",
-            message: "Milay le success",
-            newMessage: 0
-        },
-        {
-            name: "Zanaka Malagasy",
-            message: "Tsy mandeha tsara le internet",
-            newMessage: 0
-        },
-        {
-            name: "Faritsy Menabe",
-            message: "Just trying to dev",
-            newMessage: 1,
-        },
-        {
-            name: "Bongolava Miray",
-            message: "Mba analyseo le data fa mbola sahirana za",
-            newMessage: 0,
-        },
-        {
-            name: "Sakalava ",
-            message: "Vao miketrika an'ilay design aho",
-            newMessage: 0
-        },
-        {
-            name: "Faritsy Analamanga",
-            message: "Vous avez un nouveau client",
-            newMessage: 5,
-        },
-        {
-            name: "Tampoketsa Fitambarana",
-            message: "C'est pour le 6 novembre",
-            newMessage: 0
-        },
-    ];
+
+    const chats = useSelector<RootState>(
+        (state) => state.teratany_chat.discussions
+      ) as IConversation[];
+    
     return (
         <>
             <TopBar text="Discussions" />
@@ -55,9 +21,11 @@ export const HomeChat: React.FC = () => {
                 {chats.map((chat, index) => (
                     <ChatList
                         key={index}
-                        name={chat.name}
-                        message={chat.message}
-                        newMessage={chat.newMessage}
+                        image={chat.participants[0].image}
+                        reference={chat.reference}
+                        name={chat.participants[0].name}
+                        message={chat.messages[chat.messages.length - 1].text}
+                        newMessage={chat.newMessageCount}
                     />
                 ))}
             </div>

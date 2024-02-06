@@ -36,6 +36,7 @@ import socketIO from "socket.io-client";
 import { useDispatch } from "react-redux";
 //socket
 import { syncChat } from "./store/reducer/chat.reducer";
+import { syncChat as syncChatApi } from "./api/chatApi";
 import useFetchProfile from "./hooks/useFetchProfile";
 
 // Désactive le traitement passif pour tous les événements tactiles
@@ -46,17 +47,20 @@ document.addEventListener("touchcancel", function () {}, { passive: false });
 
 
 const socket = socketIO("http://localhost:9900").connect();
-console.log("connected, ===> ", socket);
 
 
 const App: React.FC = () => {
   const profileConnectedUser = useFetchProfile();
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("zanjy");
+   const syncChatCaller = async (profileId: string, conversationReferences: number[], fromDate: Date | undefined)=>{
+    console.log("ato");
+    
+    dispatch(syncChat(await syncChatApi(profileId, conversationReferences,fromDate)))
+   }
 
+
+  useEffect(() => {
     const handleBackButton = () => {
       const currentPath = window.location.pathname;
       if (currentPath === "/signin") {
@@ -72,15 +76,23 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (profileConnectedUser) {
       console.log("profileConnectedUser ===> ", profileConnectedUser);
-      console.log("connected, ===> ", socket);
-
+      syncChatCaller(profileConnectedUser._id || "", profileConnectedUser.conversations || [],undefined)
 
       socket.on("connect", ()=>{
-        console.log("connected, ===> ", socket);
+        console.log("syncChat");
         
       })
-  }, []);
+      socket.emit('connect-profile', profileConnectedUser._id)
+      socket.on('new-message', ()=>{ 
+        console.log("ato");
+        
+        syncChatCaller(profileConnectedUser._id || "", profileConnectedUser.conversations || [],undefined)
+      })
+    }
+     
+  },[dispatch]);
 
   return (
     <div className="App">
@@ -124,7 +136,7 @@ const App: React.FC = () => {
               path="/chat/one"
               element={
                 <ProtectedRoute>
-                  <OneChat />
+                  <OneChat socket={socket} />
                 </ProtectedRoute>
               }
             />

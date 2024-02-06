@@ -1,5 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { syncChat as syncChatRequest } from "../../api/chatApi"
+import { withAsync } from "../../helpers/withAsync"
+import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError"
+import { IHistory } from "../../types/historique.type"
 export interface IMessage {
     _id: string,
     sender: IProfile,
@@ -32,22 +35,40 @@ export interface IProfile {
 }
 
 export interface chatInitialState {
-    discussions: Array<IConversation>
+    discussions: any
+    activeDiscussionReference: number
+    loading: boolean
+    error: string
 }
 
 const initialState: chatInitialState = {
-    discussions: []
+    discussions: [],
+    loading: false,
+    error: "",
+    activeDiscussionReference: 0,
 }
+
+interface ChatSyncProperty {
+    profileId: string,
+    conversationReferences: number[],
+    fromDate: Date | undefined
+}
+
+
 
 export const chatSlice = createSlice({
     name: "teratany_chat",
     initialState,
     reducers: {
-        syncChat: (state, action: PayloadAction<IConversation[]>) => {
+        syncChat: (state, action: PayloadAction<any>) => {
+            // state.discussions = action.payload
             state.discussions = action.payload
+        },
+        openDiscussion: (state, action: PayloadAction<number>) => {
+            state.activeDiscussionReference = action.payload
         }
     }
 })
 
-export const { syncChat } = chatSlice.actions;
+export const { syncChat, openDiscussion } = chatSlice.actions;
 export default chatSlice.reducer;

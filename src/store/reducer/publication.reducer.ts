@@ -54,7 +54,6 @@ export const publicationSlice = createSlice({
             state.loading = false;
             state.error = String(payload);
         });
-
     }
 
 })
