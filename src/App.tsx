@@ -45,20 +45,23 @@ document.addEventListener("touchmove", function () {}, { passive: false });
 document.addEventListener("touchend", function () {}, { passive: false });
 document.addEventListener("touchcancel", function () {}, { passive: false });
 
-
-const socket = socketIO("http://localhost:9900").connect();
-
+const socket = socketIO("https://backend.teratany.org").connect();
 
 const App: React.FC = () => {
   const profileConnectedUser = useFetchProfile();
   const dispatch = useDispatch();
 
-   const syncChatCaller = async (profileId: string, conversationReferences: number[], fromDate: Date | undefined)=>{
+  const syncChatCaller = async (
+    profileId: string,
+    conversationReferences: number[],
+    fromDate: Date | undefined
+  ) => {
     console.log("ato");
-    
-    dispatch(syncChat(await syncChatApi(profileId, conversationReferences,fromDate)))
-   }
 
+    dispatch(
+      syncChat(await syncChatApi(profileId, conversationReferences, fromDate))
+    );
+  };
 
   useEffect(() => {
     const handleBackButton = () => {
@@ -77,17 +80,23 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (profileConnectedUser) {
-      syncChatCaller(profileConnectedUser._id || "", profileConnectedUser.conversations || [],undefined)
-      socket.on("connect", ()=>{
-      })
-      socket.emit('connect-profile', profileConnectedUser._id)
-      socket.on('new-message', ()=>{ 
+      syncChatCaller(
+        profileConnectedUser._id || "",
+        profileConnectedUser.conversations || [],
+        undefined
+      );
+      socket.on("connect", () => {});
+      socket.emit("connect-profile", profileConnectedUser._id);
+      socket.on("new-message", () => {
         console.log("new m essage");
-        
-        syncChatCaller(profileConnectedUser._id || "", profileConnectedUser.conversations || [],undefined)
-      })
+
+        syncChatCaller(
+          profileConnectedUser._id || "",
+          profileConnectedUser.conversations || [],
+          undefined
+        );
+      });
     }
-     
   });
 
   return (
