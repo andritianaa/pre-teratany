@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { IPublication } from "../types/publication.type";
 
-
 //socket
 import { syncChat } from "../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../api/chatApi";
@@ -14,14 +13,13 @@ import { Socket } from "socket.io-client";
 
 import useFetchProfile from "../hooks/useFetchProfile";
 import React, { useEffect } from "react";
+import { notifiate } from "../helpers/Notification";
 
 interface Props {
   socket: Socket;
 }
 
-
-const Home: React.FC<Props> = ({socket}) => {
-
+const Home: React.FC<Props> = ({ socket }) => {
   const profileConnectedUser = useFetchProfile();
   const dispatch = useDispatch();
 
@@ -35,34 +33,37 @@ const Home: React.FC<Props> = ({socket}) => {
     );
   };
 
-  
-const connection = (profileConnectedUser: IProfile) =>{
-  syncChatCaller(
-    profileConnectedUser._id || "",
-    profileConnectedUser.conversations || [],
-    undefined
-  );
-  socket.on("connect", () => {});
-  socket.emit("connect-profile", profileConnectedUser._id);
-  socket.on("new-message", () => {
+  const connection = (profileConnectedUser: IProfile) => {
     syncChatCaller(
       profileConnectedUser._id || "",
       profileConnectedUser.conversations || [],
       undefined
     );
-  });
-}
+    socket.on("connect", () => {});
+    socket.emit("connect-profile", profileConnectedUser._id);
+    socket.on("new-message", (message: any) => {
+      if (profileConnectedUser._id !== message.sender._id) {
+        console.log("Message ===> ", message);
+        notifiate(message.sender.name, "New message on Teratany", message.text);
+      }
+
+      syncChatCaller(
+        profileConnectedUser._id || "",
+        profileConnectedUser.conversations || [],
+        undefined
+      );
+    });
+  };
 
   const publications = useSelector<RootState>(
     (state) => state.teratany_publications.publications
   ) as IPublication[];
 
   useEffect(() => {
-    
     if (profileConnectedUser) {
-      connection(profileConnectedUser)
+      connection(profileConnectedUser);
       socket.on("disconnect", () => {
-        connection(profileConnectedUser)
+        connection(profileConnectedUser);
       });
     }
   });
