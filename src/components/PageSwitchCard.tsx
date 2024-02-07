@@ -8,7 +8,6 @@ import { setAuthentication } from "../store/reducer/user.reducer";
 import useToken from "../hooks/useToken";
 import { FileServerURL } from "../api/FileApi";
 import profileDefault from "../assets/userPics.jpg";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 interface PageCardsProps {
