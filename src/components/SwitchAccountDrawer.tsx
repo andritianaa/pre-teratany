@@ -101,7 +101,7 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
                   id={account.id}
                   name={account.name}
                   desc={
-                    account.followers > 0
+                    account.followers > 1
                       ? t("followers.number.plural", {
                           followers: account.followers,
                         })
