@@ -39,11 +39,9 @@ document.addEventListener("touchmove", function () {}, { passive: false });
 document.addEventListener("touchend", function () {}, { passive: false });
 document.addEventListener("touchcancel", function () {}, { passive: false });
 
-const socket = socketIO("http://localhost:9900").connect();
+const socket = socketIO("https://backend.teratany.org").connect();
 
 const App: React.FC = () => {
- 
-
   useEffect(() => {
     const handleBackButton = () => {
       const currentPath = window.location.pathname;
@@ -58,8 +56,6 @@ const App: React.FC = () => {
       document.removeEventListener("backbutton", handleBackButton);
     };
   }, []);
-
- 
 
   return (
     <div className="App">
@@ -114,7 +110,7 @@ const App: React.FC = () => {
               path="/"
               element={
                 <ProtectedRoute>
-                  <Home  socket={socket}/>
+                  <Home socket={socket} />
                 </ProtectedRoute>
               }
             />
