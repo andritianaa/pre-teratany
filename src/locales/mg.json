@@ -25,11 +25,16 @@
       "publicationPlaceholder": "Tsy maintsy manoratra ny heviny eto...",
       "editPub": "Hanova fizarana",
       "deleted": "Fizarana voafafa",
-      "photo":"Sary"
+      "photo":"Sary",
+      "post":"Zaraina"
   },
   "posts": {
       "plural": "Fizarana",
       "singular": "Fizarana",
+      "number":{
+      "plural":"Fizarana {{post}} ",
+      "singular":"Fizarana {{post}} "
+    },
       "deleted": "Fizarana voafafa"
   },
   "pages": {
@@ -177,7 +182,8 @@
     "name": "Mombamomba",
     "entreprise": "Fiasana",
     "association": "Fikambanana",
-    "description": "Sokajy"
+    "description": "Sokajy",
+    "user":"Mpampiasa"
   },
   "switchAccount": {
     "name": "Hanova kaonty",
@@ -193,14 +199,16 @@
       "welcome": "Tonga soa! Ampidiro ny mombanao hidirana amin'ny kaonty.",
       "question": "Tsy manana kaonty ve ianao ?",
       "signup": "Hisoratra anarana",
+      "cancelforgot":"Tadidy ilay teny miafina ?",
       "signinbutton": "Hiditra",
-      "forgot": "Adino teny miafina?",
+      "forgot": "Adino ny teny miafina?",
       "successlogin": "Tafiditra tsara amin'ny kaonty",
       "formik": {
         "email": "Adiresy mailaka tsy mety",
         "required": "Ilaina",
         "emailAddress": "Adiresy mailaka",
-        "password": "Teny miafina"
+        "password": "Teny miafina",
+        "reset":"Ekena ny fanovana"
       }
     },
     "authregister": {
@@ -208,7 +216,7 @@
       "question": "Efa manana kaonty ve ianao?",
       "signin": "Midira amin'ny kaonty",
       "signupbutton": "Hiditra",
-      "forgot": "Adino teny miafina?",
+      "forgot": "Adino ny teny miafina?",
       "successregister": "Tafiditra amin'ny kaonty",
       "formik": {
         "email": "Adiresy mailaka tsy mety",
@@ -220,6 +228,12 @@
         "name": "Anarana",
         "remember": "Tadidiana aho"
       }
+    },
+    "resetpassword":{
+      "title":"Ovao ny teny miafinanao",
+      "new":"Teny miafina vaovao",
+      "code":"Kaody fanamafisana",
+      "validate":"Ovaina"
     }
   
 }

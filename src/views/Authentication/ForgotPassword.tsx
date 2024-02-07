@@ -6,11 +6,14 @@ import { withAsync } from "helpers/withAsync";
 import { sendEmailRecovery } from "api/ProfileApi";
 import { AxiosError } from "axios";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
+import { useTranslation } from "react-i18next";
+import teratanyLogo from "assets/Teratany_ico/apple-touch-icon-180x180.png";
 
 const ForgotPassword = () => {
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const [email, setEmail] = useState<string>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const sendMail = async () => {
     startLoading();
@@ -27,19 +30,22 @@ const ForgotPassword = () => {
     <div className="flex items-center h-screen">
       <main id="content" role="main" className="w-full max-w-md mx-auto p-6">
         <div className="mt-7 bg-white rounded-xl shadow-xs white:bg-gray-800 white:border-gray-700 border-2 border-gray-100">
+          <div className="flex justify-center">
+            <img src={teratanyLogo} alt="" className=" w-20 h-20" />
+          </div>
           <div className="p-4 sm:p-7">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800 ">
-                Forgot password?
+                {t("authsignin.forgot")}
               </h1>
               <p className="mt-2 text-sm text-gray-600 mb-8">
-                Remember your password?
+                {t("authsignin.cancelforgot")}
                 <span className="mr-1"></span>
                 <Link
                   to="/signin"
                   className="text-blue-600 decoration-2 hover:underline font-medium"
                 >
-                  Login here
+                  {t("authregister.signin")}
                 </Link>
               </p>
             </div>
@@ -51,7 +57,7 @@ const ForgotPassword = () => {
                     htmlFor="email"
                     className="flex text-sm text-gray-600 font-normal ml-1 mb-2"
                   >
-                    Email address
+                    {t("authsignin.formik.emailAddress")}
                   </label>
                   <div className="relative">
                     <input
@@ -65,7 +71,7 @@ const ForgotPassword = () => {
                   </div>
                 </div>
                 <Button
-                  name="Reset password"
+                  name={t("authsignin.formik.reset")}
                   className="!mr-0"
                   isLoading={isLoading}
                   onClick={sendMail}
@@ -77,12 +83,12 @@ const ForgotPassword = () => {
         </div>
 
         <p className="mt-2 text-sm text-gray-600 white:text-gray-400">
-          Don't have an account yet ?
+          {t("authsignin.question")}
           <Link
             className="text-blue-600 decoration-2 hover:underline font-medium ml-1"
             to="/register"
           >
-            Sign up here
+            {t("authsignin.signup")}
           </Link>
         </p>
       </main>

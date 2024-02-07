@@ -11,6 +11,7 @@ import { resetPassword } from "api/ProfileApi";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
+import { useTranslation } from "react-i18next";
 
 interface resetPasswordFormValues {
   email: string;
@@ -21,6 +22,7 @@ interface resetPasswordFormValues {
 const ResetPassword = () => {
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const initialValues: resetPasswordFormValues = {
     email: "",
@@ -53,7 +55,7 @@ const ResetPassword = () => {
           <div className="p-4 sm:p-7">
             <div className="text-center">
               <h1 className="block text-2xl font-bold text-gray-800 ">
-                Reset your password
+                {t("resetpassword.title")}
               </h1>
             </div>
 
@@ -63,15 +65,17 @@ const ResetPassword = () => {
                   initialValues={initialValues}
                   validationSchema={Yup.object({
                     email: Yup.string()
-                      .email("Invalid email address")
-                      .required("Required"),
+                      .email(t("authregister.formik.email"))
+                      .required(t("authregister.formik.required")),
+                    name: Yup.string()
+                      .max(20, t("authregister.formik.special"))
+                      .required(t("authregister.formik.required")),
                     password: Yup.string()
                       .matches(
                         /^(?=.*[A-Z])(?=.*\d).{8,}$/,
-                        "Password must contain at least 8 characters with a capital letter and a number"
+                        t("authregister.formik.passwordDetail")
                       )
-                      .required("Required"),
-                    code: Yup.number().required("Required"),
+                      .required(t("authregister.formik.required")),
                   })}
                   onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
@@ -83,7 +87,7 @@ const ResetPassword = () => {
                   <Form>
                     <div className="grid text-start gap-y-2">
                       <FormField
-                        label="Email Address"
+                        label={t("authregister.formik.emailAddress")}
                         type="email"
                         mark="email"
                         height="py-3"
@@ -91,7 +95,7 @@ const ResetPassword = () => {
                       />
                       <ErrorMessageForm name="email" />
                       <FormField
-                        label="New password"
+                        label={t("resetpassword.new")}
                         type="password"
                         mark="password"
                         height="py-3"
@@ -99,7 +103,7 @@ const ResetPassword = () => {
                       />
                       <ErrorMessageForm name="password" />
                       <FormField
-                        label="Verification code"
+                        label={t("resetpassword.code")}
                         type="text"
                         mark="code"
                         height="py-3"
@@ -108,7 +112,7 @@ const ResetPassword = () => {
                       <ErrorMessageForm name="code" />
 
                       <Button
-                        name="Change password"
+                        name={t("resetpassword.validate")}
                         className=" mt-2 !mr-0"
                         isLoading={isLoading}
                       />
@@ -120,12 +124,12 @@ const ResetPassword = () => {
           </div>
         </div>
         <p className="mt-2 text-sm text-gray-600 white:text-gray-400">
-          Don't have an account yet ?
+          {t("authsignin.cancelforgot")}
           <Link
             className="text-blue-600 decoration-2 hover:underline font-medium ml-1"
-            to="/register"
+            to="/signin"
           >
-            Sign up here
+            {t("authregister.signin")}
           </Link>
         </p>
       </main>

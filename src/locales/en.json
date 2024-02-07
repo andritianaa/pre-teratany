@@ -25,11 +25,16 @@
       "publicationPlaceholder":"Write your thoughts here...",
       "editPub":"Edit publication",
       "deleted":"Publication deleted",
-      "photo":"Picture"
+      "photo":"Picture",
+      "post":"Post"
   },
     "posts":{
       "plural":"Posts",
       "singular":"Post",
+      "number":{
+        "plural":"{{post}} Posts",
+        "singular":"{{post}} Post"
+      },
       "deleted":"Publication deleted"},
     "pages":{
       "plural":"Pages",
@@ -176,7 +181,8 @@
       "name":"Details",
       "entreprise":"Entreprise",
       "association":"Association",
-      "description":"Description"
+      "description":"Description",
+      "user":"User"
     },
     "switchAccount":{
       "name":"Switch account",
@@ -193,13 +199,15 @@
     "question":"Don't have an account yet ?",
     "signup":"Sign up here",
     "signinbutton":"Sign in",
+    "cancelforgot":"Do you remember your password ?",
     "forgot":"Forgot password?",
     "successlogin":"Successfully logged in",
     "formik":{
       "email":"Invalid email address",
       "required":"Required",
       "emailAddress":"Email Address",
-      "password":"Password"
+      "password":"Password",
+      "reset":"Reset password"
     }
   },
   "authregister":{
@@ -219,6 +227,12 @@
       "name":"Name",
       "remember":"Remember me"
     }
+  },
+  "resetpassword":{
+    "title":"Reset your password",
+    "new":"New password",
+    "code":"Verfication code",
+    "validate":"Change password"
   }
 
     

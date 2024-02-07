@@ -197,7 +197,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
       </div>
       <Button
         className="mt-2.5"
-        name={btnText}
+        name={t("publications.post")}
         width="w-[90%] !mr-0"
         isLoading={isLoading}
         onClick={isNewPub ? AddPost : EditPost}
