@@ -8,7 +8,6 @@ interface Props {
   message: string;
   date: string;
   sender: IProfile;
-  
 }
 export const Message: React.FC<Props> = ({ message, date, sender }) => {
   const connectedUser = useSelector<RootState>(
@@ -29,7 +28,7 @@ export const Message: React.FC<Props> = ({ message, date, sender }) => {
         <p className="mb-2"></p>
       )}
 
-      {sender !== connectedUser && (
+      {message !== "###**###" && sender !== connectedUser && (
         <div
           className="chat-message mb-2"
           onClick={() => setShowDate(!showDate)}
@@ -58,7 +57,7 @@ export const Message: React.FC<Props> = ({ message, date, sender }) => {
           </div>
         </div>
       )}
-      {sender === connectedUser && (
+      {message !== "###**###" && sender === connectedUser && (
         <div className="chat-message" onClick={() => setShowDate(!showDate)}>
           <div className="flex items-end justify-end">
             <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 items-end">
