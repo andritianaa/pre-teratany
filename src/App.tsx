@@ -33,35 +33,16 @@ import { App as CapacitorApp } from "@capacitor/app";
 import { useEffect } from "react";
 import socketIO from "socket.io-client";
 
-import { useDispatch } from "react-redux";
-//socket
-import { syncChat } from "./store/reducer/chat.reducer";
-import { syncChat as syncChatApi } from "./api/chatApi";
-import useFetchProfile from "./hooks/useFetchProfile";
-
 // Désactive le traitement passif pour tous les événements tactiles
 document.addEventListener("touchstart", function () {}, { passive: false });
 document.addEventListener("touchmove", function () {}, { passive: false });
 document.addEventListener("touchend", function () {}, { passive: false });
 document.addEventListener("touchcancel", function () {}, { passive: false });
 
-const socket = socketIO("https://backend.teratany.org").connect();
+const socket = socketIO("http://localhost:9900").connect();
 
 const App: React.FC = () => {
-  const profileConnectedUser = useFetchProfile();
-  const dispatch = useDispatch();
-
-  const syncChatCaller = async (
-    profileId: string,
-    conversationReferences: number[],
-    fromDate: Date | undefined
-  ) => {
-    console.log("ato");
-
-    dispatch(
-      syncChat(await syncChatApi(profileId, conversationReferences, fromDate))
-    );
-  };
+ 
 
   useEffect(() => {
     const handleBackButton = () => {
@@ -78,26 +59,7 @@ const App: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (profileConnectedUser) {
-      syncChatCaller(
-        profileConnectedUser._id || "",
-        profileConnectedUser.conversations || [],
-        undefined
-      );
-      socket.on("connect", () => {});
-      socket.emit("connect-profile", profileConnectedUser._id);
-      socket.on("new-message", () => {
-        console.log("new m essage");
-
-        syncChatCaller(
-          profileConnectedUser._id || "",
-          profileConnectedUser.conversations || [],
-          undefined
-        );
-      });
-    }
-  });
+ 
 
   return (
     <div className="App">
@@ -152,7 +114,7 @@ const App: React.FC = () => {
               path="/"
               element={
                 <ProtectedRoute>
-                  <Home />
+                  <Home  socket={socket}/>
                 </ProtectedRoute>
               }
             />

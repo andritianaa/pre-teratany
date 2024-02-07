@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import profileDefault from "../../../assets/userPics.jpg";
 import { openDiscussion } from "../../../store/reducer/chat.reducer";
 import { useDispatch } from "react-redux";
+import { FileServerURL } from "../../../api/FileApi";
 
 interface PageListCardsProps {
   name: string;
@@ -37,7 +38,7 @@ const ChatList: React.FC<PageListCardsProps> = ({
             <img
             alt="page"
             className=" !w-10 !h-10 rounded-full shadow-lg flex-2"
-            src={image}
+            src={image ? FileServerURL + image : profileDefault}
           />
           ): (
             <img

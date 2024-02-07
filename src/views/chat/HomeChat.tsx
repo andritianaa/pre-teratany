@@ -10,6 +10,7 @@ export const HomeChat: React.FC = () => {
     const chats = useSelector<RootState>(
         (state) => state.teratany_chat.discussions
       ) as IConversation[];
+    console.log(chats);
     
     return (
         <>
@@ -21,7 +22,7 @@ export const HomeChat: React.FC = () => {
                 {chats.map((chat, index) => (
                     <ChatList
                         key={index}
-                        image={chat.participants[0].image}
+                        image={""}
                         reference={chat.reference}
                         name={chat.participants[0].name}
                         message={chat.messages.length > 0 ? chat.messages[chat.messages.length - 1].text : "New discussion"}

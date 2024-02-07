@@ -63,6 +63,11 @@ export const chatSlice = createSlice({
         syncChat: (state, action: PayloadAction<any>) => {
             // state.discussions = action.payload
             state.discussions = action.payload
+
+            for (let i = 0; i < state.discussions.length; i++) {
+                console.log(state.discussions[i]);
+                state.discussions[i].messages = state.discussions[i]?.messages.sort((a: any, b: any) => a.date - b.date);
+            }
         },
         openDiscussion: (state, action: PayloadAction<number>) => {
             state.activeDiscussionReference = action.payload

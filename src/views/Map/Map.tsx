@@ -67,7 +67,6 @@ const Map = () => {
 
   const handleChildData = (data: IProfile[]) => {
     // Faites quelque chose avec les données reçues du composant enfant
-    console.log("Données reçues du composant enfant :", data);
     setProfilesSearched(data);
   };
 

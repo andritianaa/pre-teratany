@@ -72,6 +72,7 @@ const SignInAuth: React.FC = () => {
           isAuthenticated: true,
         })
       );
+      
 
       const profile: any = await fetchProfile(token, user.id as string);
 

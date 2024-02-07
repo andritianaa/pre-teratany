@@ -39,7 +39,6 @@ const UserProfile: React.FC<UserProfileProps> = ({
   const handdleMessage = () => {
     
     socket.emit("new-conversation", [connectedUser, idUserViewed], async (response: number) => {
-      console.log("new conv");
       dispatch(  syncChat(await syncChatApi(connectedUser, [], undefined)));
       navigate("/chat/one");
       dispatch(openDiscussion(response));

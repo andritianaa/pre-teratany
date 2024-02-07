@@ -7,12 +7,13 @@ import { IProfile } from "../../types/profile.type";
 import profileDefault from "../../assets/userPics.jpg";
 import { Socket } from "socket.io-client";
 import { useState } from "react";
+import { FileServerURL } from "../../api/FileApi";
 
 interface Props {
   socket: Socket;
 }
 export const OneChat: React.FC<Props> = ({ socket }) => {
-  const [textMessage, setTextMessage] = useState<string>();
+  const [textMessage, setTextMessage] = useState<string>("");
 
   const conversationReference = useSelector<RootState>(
     (state) => state.teratany_chat.activeDiscussionReference
@@ -28,13 +29,19 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
 
   const actualDiscussion = conversations.find(
     (element: any) => element.reference === conversationReference
-  );
+  )
+  console.log(actualDiscussion);
+  
 
   const handdleMessage = () => {
+    const myDate =  Date.now()
+    console.log("Date.now() ===> ", myDate);
+    
     socket.emit("new-message", {
       sender: connectedUser,
       text: textMessage,
       conversation: conversationReference,
+      date: myDate
     });
     setTextMessage("");
   };
@@ -85,16 +92,14 @@ const TopBar: React.FC<IProfile> = ({ participant }) => {
   const handleGoBack = () => {
     window.history.back();
   };
-  console.log(participant);
-
   return (
     <div className="fixed top-0 z-40 w-full h-14 bg-white border-b border-gray-200">
       <div className="flex items-center h-full mx-auto">
         <HiArrowNarrowLeft onClick={handleGoBack} size={26} className="mx-3" />
         {participant.image && participant.image.length ? (
           <img
-            className="w-8  p-0.5 rounded-full ring-2 ring-gray-300 mr-2"
-            src={participant.image}
+            className="w-16 h-16 object-cover p-0.5 rounded-full ring-2 ring-gray-300 mr-2"
+            src={participant.image ? FileServerURL + participant.image : profileDefault}
             alt="Bordered avatar"
           />
         ) : (

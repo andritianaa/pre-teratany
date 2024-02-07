@@ -47,9 +47,9 @@ const PageTopList = () => {
         <>
           {profileFollowed?.length! > 0 ? (
             <div className="flex my-2 overflow-x-scroll no-scrollbar  w-full sm:w-[30%] pt-2 pb-0 pl-4 ">
-              {profileFollowed?.map((profile) => (
-                <div className="flex flex-col items-center mr-4">
-                  <Link to={`/profile/${profile?._id}`}>
+              {profileFollowed?.map((profile, index) => (
+                <div key={index} className="flex flex-col items-center mr-4">
+                  <Link key={index} to={`/profile/${profile?._id}`}>
                     <img
                       className="w-16 h-16 max-w-16 max-h-16 min-w-[3rem] min-h-[3rem] p-0.5 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 object-cover"
                       src={

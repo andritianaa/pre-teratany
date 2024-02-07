@@ -79,7 +79,6 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
         error.message;
       toast.error(error_message);
     } else {
-      console.log("comments ", response?.data);
       setComments(response?.data as Array<IComment>);
     }
   };
