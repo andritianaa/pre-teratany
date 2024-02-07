@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 export const InfoModal: React.FC<Props> = ({ title, text }) => {
   const [showModal, setShowModal] = useState(true);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <>
@@ -36,7 +38,7 @@ export const InfoModal: React.FC<Props> = ({ title, text }) => {
                     className="text-white bg-black font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                     onClick={() => setShowModal(false)}
                   >
-                    I accept
+                    {t("settings.addPage.accept")}
                   </button>
                   <button
                     data-modal-hide="static-modal"
@@ -44,7 +46,7 @@ export const InfoModal: React.FC<Props> = ({ title, text }) => {
                     className="text-gray-500 bg-white  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5"
                     onClick={() => navigate("/")}
                   >
-                    Decline
+                    {t("settings.addPage.decline")}
                   </button>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { AnyAction, combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "store/reducer/user.reducer";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -6,7 +6,9 @@ import thunk from 'redux-thunk';
 import pageReducer from "./reducer/page.reducer";
 import accountReducer from "./reducer/account.reducer";
 
-
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import historyReducer from "./reducer/history.reducer";
+import publicationReducer from "./reducer/publication.reducer";
 
 const userPersistConfig = {
     key: "teratany_user",
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
     teratany_user: userPersistedReducer,
     teratany_page: pageReducer,
     teratany_account: accountPersistedReducer,
+    teratany_profile_history: historyReducer,
+    teratany_publications: publicationReducer,
 });
 
 export const store = configureStore({
@@ -34,4 +38,6 @@ export const store = configureStore({
 })
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+export type AppThunkDispatch = ThunkDispatch<RootState, any, AnyAction>;
+
 export const persistor = persistStore(store)

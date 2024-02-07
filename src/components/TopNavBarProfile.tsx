@@ -1,6 +1,6 @@
 import React from "react";
-import { IoSettingsOutline } from "@react-icons/all-files/io5/IoSettingsOutline";
-import { HiOutlineChevronDown } from "@react-icons/all-files/hi/HiOutlineChevronDown";
+import { IoSettingsOutline } from "react-icons/io5";
+import { HiOutlineChevronDown } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import useFetchUserByToken from "../hooks/useFetchUserByToken";
 

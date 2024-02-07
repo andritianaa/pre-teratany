@@ -33,6 +33,7 @@ export const BottomDrawer: React.FC<DrawerProps> = ({
   return isOpen ? (
     <React.Fragment>
       <Drawer
+        placeholder=""
         open={isOpen}
         onClose={onClose}
         className={`p-4 bg-white rounded-l-2xl rounded-r-2xl !h-[${

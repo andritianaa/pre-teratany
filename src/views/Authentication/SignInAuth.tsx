@@ -21,6 +21,7 @@ import useLoadingButton from "hooks/useLoadingButton";
 import { getById } from "api/ProfileApi";
 import { setAccountConnected } from "store/reducer/account.reducer";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
+import { useTranslation } from "react-i18next";
 
 interface signinFormValues {
   email: string;
@@ -31,6 +32,7 @@ const SignInAuth: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
+  const { t } = useTranslation();
 
   const initialValues: signinFormValues = {
     email: "",
@@ -94,7 +96,8 @@ const SignInAuth: React.FC = () => {
       dispatch(setAccountConnected({ account: accountSwitcher }));
 
       navigate("/");
-      toast.success("Successfully logged in");
+      const successLogin = t("authsignin.successlogin");
+      toast.success(successLogin);
     }
   };
   const isAuthenticated = useSelector<RootState>(
@@ -114,15 +117,15 @@ const SignInAuth: React.FC = () => {
             <div className="p-4 sm:p-7">
               <div className="text-center">
                 <h1 className="block text-2xl font-bold text-gray-800 white:text-white">
-                  Welcome back! Sign in to access.
+                  {t("authsignin.welcome")}
                 </h1>
                 <p className="mt-2 text-sm text-gray-600 white:text-gray-400">
-                  Don't have an account yet ?
+                  {t("authsignin.question")}
                   <Link
                     className="text-blue-600 decoration-2 hover:underline font-medium ml-1"
                     to="/register"
                   >
-                    Sign up here
+                    {t("authsignin.signup")}
                   </Link>
                 </p>
               </div>
@@ -132,9 +135,11 @@ const SignInAuth: React.FC = () => {
                   initialValues={initialValues}
                   validationSchema={Yup.object({
                     email: Yup.string()
-                      .email("Invalid email address")
-                      .required("Required"),
-                    password: Yup.string().min(1).required("Required"),
+                      .email(t("authsignin.formik.email"))
+                      .required(t("authsignin.formik.required")),
+                    password: Yup.string()
+                      .min(1)
+                      .required(t("authsignin.formik.required")),
                   })}
                   onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
@@ -146,7 +151,7 @@ const SignInAuth: React.FC = () => {
                   <Form>
                     <div className="grid text-start gap-y-2">
                       <FormField
-                        label="Email Address"
+                        label={t("authsignin.formik.emailAddress")}
                         type="email"
                         mark="email"
                         height="py-3"
@@ -156,7 +161,7 @@ const SignInAuth: React.FC = () => {
                       <ErrorMessageForm name="email" />
 
                       <FormField
-                        label="Password"
+                        label={t("authsignin.formik.password")}
                         type="password"
                         mark="password"
                         height="py-3"
@@ -171,14 +176,14 @@ const SignInAuth: React.FC = () => {
                           className="text-gray-500 text-sm decoration-2 hover:underline font-normal ml-1"
                           to="/forgot-password"
                         >
-                          forgot password?
+                          {t("authsignin.forgot")}
                         </Link>
                       </div>
                       <Button
                         isLoading={isLoading}
                         width="px-4"
                         height="py-3"
-                        name="Sign in"
+                        name={t("authsignin.signinbutton")}
                       />
                     </div>
                   </Form>

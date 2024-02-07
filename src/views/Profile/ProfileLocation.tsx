@@ -4,7 +4,7 @@ import Button from "../../components/common/Button";
 import TopBar from "../../components/common/TopBar";
 import MapContainerForm from "../../components/MapContainer";
 import { Marker, useMapEvents } from "react-leaflet";
-import { MARKER_ICON } from "../../constants/MarkerIcon";
+import { MARKER_USER } from "../../constants/MarkerIcon";
 import { withAsync } from "../../helpers/withAsync";
 import { updateLocationParameter } from "../../api/ProfileApi";
 import useToken from "../../hooks/useToken";
@@ -12,6 +12,7 @@ import useLoadingButton from "../../hooks/useLoadingButton";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import useFetchProfile from "../../hooks/useFetchProfile";
+import { useTranslation } from "react-i18next";
 
 type PositionMarkerType = {
   lat: number;
@@ -29,7 +30,7 @@ const LocationMarker = () => {
   });
 
   return position === null ? null : (
-    <Marker position={position} icon={MARKER_ICON}></Marker>
+    <Marker position={position} icon={MARKER_USER}></Marker>
   );
 };
 
@@ -39,6 +40,7 @@ const ProfileLocation: React.FC = () => {
 
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const [locationStatus, setLocationStatus] = useState<boolean>();
+  const { t } = useTranslation();
 
   const changeLocationStatus = (status: any) => {
     setLocationStatus(status.target.checked);
@@ -60,7 +62,8 @@ const ProfileLocation: React.FC = () => {
       toast.error(error_message);
     } else {
       endLoading();
-      toast.success("Location information updated!");
+      const successToast = t("settings.location.successLocation");
+      toast.success(successToast);
       localStorage.removeItem("lat");
       localStorage.removeItem("lng");
     }
@@ -68,7 +71,7 @@ const ProfileLocation: React.FC = () => {
 
   return (
     <>
-      <TopBar text="Location parameter" />
+      <TopBar text={t("settings.location.name")} />
       {profile && (
         <MapContainerForm
           lat={profile?.localisation?.coordonates?.latitude! as number}
@@ -80,21 +83,17 @@ const ProfileLocation: React.FC = () => {
               profile?.localisation?.coordonates?.latitude!,
               profile?.localisation?.coordonates?.longitude!,
             ]}
-            icon={MARKER_ICON}
+            icon={MARKER_USER}
           ></Marker>
           <LocationMarker />
         </MapContainerForm>
       )}
 
       <div className="mt-4 flex flex-col items-center mx-4">
-        <p className="font-medium">
-          You have the choice to make your location public or private. The
-          location data is only utilized within the "map" page, and we
-          absolutely do not make any use of your personal data in any way.
-        </p>
+        <p className="font-medium">{t("settings.location.locationDesc")}</p>
         <div className="flex items-start mt-4">
           <SwitchToggle
-            label="Show Location"
+            label={t("settings.location.switch")}
             isChecked={profile?.localisation?.coordonates?.isPublic}
             onClick={changeLocationStatus}
           />
@@ -103,7 +102,7 @@ const ProfileLocation: React.FC = () => {
           <Button
             width="w-full"
             height="py-3"
-            name="Save"
+            name={t("settings.save")}
             isLoading={isLoading}
             onClick={updateLocation}
           />

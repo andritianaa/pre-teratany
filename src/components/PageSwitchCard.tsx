@@ -8,6 +8,8 @@ import { setAuthentication } from "../store/reducer/user.reducer";
 import useToken from "../hooks/useToken";
 import { FileServerURL } from "../api/FileApi";
 import profileDefault from "../assets/userPics.jpg";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface PageCardsProps {
   name: string;
@@ -30,6 +32,7 @@ const PageSwitchCard: React.FC<PageCardsProps> = ({
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const token = useToken();
+  const { t } = useTranslation();
 
   const switchAccount = () => {
     startLoading();
@@ -65,7 +68,7 @@ const PageSwitchCard: React.FC<PageCardsProps> = ({
           <div className="flex-3">
             <Button
               width="!w-[85%]"
-              name="Switch"
+              name={t("switchAccount.switch")}
               onClick={switchAccount}
               isLoading={isLoading}
               showLoadingText={false}

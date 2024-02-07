@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import useFetchUserByToken from "../hooks/useFetchUserByToken";
 import useFetchProfile from "../hooks/useFetchProfile";
+import { useTranslation } from "react-i18next";
 
 interface DrawerProps {
   openBottom: any;
@@ -31,6 +32,7 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
   );
 
   const profileConnectedUser = useFetchProfile();
+  const { t } = useTranslation();
 
   accounts = accounts.filter(
     (account: any) => account.id !== profileConnectedUser?._id
@@ -57,6 +59,7 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
       {userConnected?.administratedProfiles?.length! > 0 ? (
         <React.Fragment>
           <Drawer
+            placeholder=""
             placement="bottom"
             open={openBottom}
             onClose={closeBottom}
@@ -64,12 +67,14 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
           >
             <div className="flex items-center justify-between w-full">
               <Typography
+                placeholder=""
                 className="text-lg font-semibold border-b border-b-1 border-gray-300"
                 color="black"
               >
-                Switch account
+                {t("switchAccount.name")}
               </Typography>
               <IconButton
+                placeholder=""
                 variant="text"
                 color="blue-gray"
                 onClick={handleClickClose}
@@ -97,8 +102,12 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
                   name={account.name}
                   desc={
                     account.followers > 0
-                      ? account.followers + " Followers"
-                      : account.followers + " Follower"
+                      ? t("followers.number.plural", {
+                          followers: account.followers,
+                        })
+                      : t("followers.number.singular", {
+                          followers: account.followers,
+                        })
                   }
                   image={account.image}
                 />

@@ -15,6 +15,7 @@ import UserProfile from "./UserProfile";
 import PageProfile from "./PageProfile";
 import DetailsPage from "./DetailsPage";
 import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
+import { useTranslation } from "react-i18next";
 
 const Profile: React.FC = () => {
   const token = useToken();
@@ -27,6 +28,7 @@ const Profile: React.FC = () => {
   const [publications, setPublications] = React.useState<IPublication[]>();
   const [isProfileFetched, setIsProfileFetched] =
     React.useState<Boolean>(false);
+  const { t } = useTranslation();
 
   const openDrawerBottom = () => {
     window.history.pushState({ page: "" }, "", "?isModal2=true");
@@ -60,7 +62,11 @@ const Profile: React.FC = () => {
         setProfile(response?.data as IProfile);
         console.log("profile ", response?.data);
         const isProfileFollowed = response?.data as IProfile;
-        setFollowText(isProfileFollowed?.isFollowed ? "UnFollow" : "Follow");
+        setFollowText(
+          isProfileFollowed?.isFollowed
+            ? t("followers.unfollow")
+            : t("followers.follow")
+        );
         setIsProfileFetched(true);
       }
     }
@@ -80,7 +86,11 @@ const Profile: React.FC = () => {
   };
 
   const follow = async () => {
-    setFollowText(followText === "Follow" ? "UnFollow" : "Follow");
+    setFollowText(
+      followText === t("followers.follow")
+        ? t("followers.unfollow")
+        : t("followers.follow")
+    );
     const { error } = await withAsync(() =>
       followProfile(token, profileConnectedUser?._id, id)
     );
@@ -177,7 +187,7 @@ const Profile: React.FC = () => {
                 wallet={profile?.deviantWalletId}
               />
             }
-            title="Details"
+            title={t("details.name")}
           />
           <SwitchAccountDrawer
             openBottom={openBottom}

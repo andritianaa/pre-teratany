@@ -7,6 +7,7 @@ import useFetchSearchByQuery from "../../hooks/useFetchSearchByQuery";
 import { useParams } from "react-router-dom";
 import useFetchProfile from "../../hooks/useFetchProfile";
 import SearchBar from "../../components/SearchBar";
+import { useTranslation } from "react-i18next";
 
 const SearchFilterResult: React.FC = () => {
   const currentPath = window.location.pathname;
@@ -14,6 +15,7 @@ const SearchFilterResult: React.FC = () => {
   const profileConnectedUser = useFetchProfile();
 
   const results = useFetchSearchByQuery(query!);
+  const { t } = useTranslation();
 
   const pathSegments = currentPath.split("/");
   const textFilter = pathSegments[pathSegments.length - 2];
@@ -30,7 +32,13 @@ const SearchFilterResult: React.FC = () => {
   };
   return (
     <>
-      <TopBar text={textFilter === "publication" ? "Publications" : "Users"} />
+      <TopBar
+        text={
+          textFilter === "publication"
+            ? t("publications.plural")
+            : t("users.plural")
+        }
+      />
 
       <div className="fixed top-12 p-4 z-40 w-full flex items-center justify-center h-16 bg-white border-b border-gray-200">
         <SearchBar textFilter={renderQueryFilterNavigation()} />

@@ -7,6 +7,7 @@ import useToken from "../../hooks/useToken";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import useFetchProfile from "../../hooks/useFetchProfile";
+import { useTranslation } from "react-i18next";
 
 const EditPublication = () => {
   const profileConnectedUser = useFetchProfile();
@@ -15,6 +16,7 @@ const EditPublication = () => {
   const token = useToken();
 
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const fetchPublication = async () => {
     if (profileConnectedUser?._id) {
@@ -48,7 +50,7 @@ const EditPublication = () => {
       _id={id}
       content={content}
       isNewPub={false}
-      btnText="Save"
+      btnText={t("settings.save")}
     />
   );
 };

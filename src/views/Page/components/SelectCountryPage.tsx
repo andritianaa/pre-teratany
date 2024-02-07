@@ -1,14 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface SelectCountryProps {
   onChange: (e: any) => void;
 }
 
 const SelectCountryPage: React.FC<SelectCountryProps> = ({ onChange }) => {
+  const { t } = useTranslation();
   return (
     <div>
       <label htmlFor="default" className="flex my-2 text-sm white:text-white">
-        Country
+        {t("settings.generalPage.country")}
       </label>
       <select
         id="country"
@@ -16,7 +18,7 @@ const SelectCountryPage: React.FC<SelectCountryProps> = ({ onChange }) => {
         onChange={onChange}
       >
         <option value="none" selected>
-          select country
+          {t("settings.generalPage.select")}
         </option>
         <option value="AF">Afghanistan</option>
         <option value="AX">Aland Islands</option>

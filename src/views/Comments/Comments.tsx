@@ -16,6 +16,7 @@ import {
   PopoverContent,
 } from "@material-tailwind/react";
 import profileDefault from "../../assets/userPics.jpg";
+import { useTranslation } from "react-i18next";
 
 interface CommentProps {
   publicationId: string;
@@ -82,6 +83,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
       setComments(response?.data as Array<IComment>);
     }
   };
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchComments();
@@ -90,7 +92,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
 
   return (
     <div className="w-full bg-white rounded-lg -mt-6 my-4 mx-6 z-50">
-      <h3 className="font-bold -mt-6 pb-2">Commentaires</h3>
+      <h3 className="font-bold -mt-6 pb-2">{t("comments.name")}</h3>
       <div className="flex flex-col overflow-y-auto custom-height-comment">
         <div className="flex flex-col">
           {comments?.map((comment) => (
@@ -131,17 +133,20 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
                   >
                     <PopoverHandler>
                       <p className="text-left text-xs hover:underline font-normal text-red-500 cursor-pointer">
-                        delete
+                        {t("comments.delete")}
                       </p>
                     </PopoverHandler>
-                    <PopoverContent className="ml-4 z-1000 shadow-2xl">
-                      Are you sure to delete this comment ?
+                    <PopoverContent
+                      placeholder=""
+                      className="ml-4 z-1000 shadow-2xl"
+                    >
+                      {t("comments.deleteConfirm")}
                       <div className="flex">
                         <p
                           className="text-left text-xs hover:underline font-normal text-red-500 cursor-pointer"
                           onClick={() => removeComment(comment._id!)}
                         >
-                          Yes I'm sure
+                          {t("comments.deleteValidate")}
                         </p>
                       </div>
                     </PopoverContent>
@@ -156,13 +161,13 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
           <textarea
             className="bg-gray-100 rounded  border leading-normal resize-none w-full h-20 py-2 pl-3 font-normal placeholder-gray-700 focus:outline-none focus:bg-white"
             name="body"
-            placeholder="Your comment..."
+            placeholder={t("comments.yourComment")}
             onChange={(e) => setContent(e.target.value)}
             value={content}
           ></textarea>
 
           <Button
-            name="Post comment"
+            name={t("comments.postComment")}
             className="w-full flex justify-end px-3 mt-2"
             onClick={addComment}
             isDisabled={!content ? true : false}

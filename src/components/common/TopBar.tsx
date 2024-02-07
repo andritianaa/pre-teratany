@@ -1,5 +1,5 @@
 import React from "react";
-import { HiArrowNarrowLeft } from "@react-icons/all-files/hi/HiArrowNarrowLeft";
+import { HiArrowNarrowLeft } from "react-icons/hi";
 
 interface TopBarProps {
   text: string;

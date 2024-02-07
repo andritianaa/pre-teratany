@@ -3,13 +3,14 @@ import { InfoModal } from "../../components/common/InfoModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Marker, useMapEvents } from "react-leaflet";
-import { MARKER_ICON } from "../../constants/MarkerIcon";
+import { MARKER_USER } from "../../constants/MarkerIcon";
 import Button from "../../components/common/Button";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { setPageCoordonates } from "../../store/reducer/page.reducer";
+import { useTranslation } from "react-i18next";
 
 type PositionMarkerType = {
   lat: number;
@@ -27,7 +28,7 @@ const LocationMarker = () => {
   });
 
   return position === null ? null : (
-    <Marker position={position} icon={MARKER_ICON}></Marker>
+    <Marker position={position} icon={MARKER_USER}></Marker>
   );
 };
 
@@ -35,6 +36,7 @@ const AddPageStep2: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, startLoading] = useLoadingButton();
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation();
 
   const addPageSecondStep = () => {
     const lat: number = Number(localStorage.getItem("lat"));
@@ -56,7 +58,8 @@ const AddPageStep2: React.FC = () => {
         navigate("/page/add/step-3");
       }, 2000);
     } else {
-      toast.error("Coordonates information required!!!");
+      const toastMessageError = t("settings.addPage.error");
+      toast.error(toastMessageError);
     }
   };
 
@@ -74,13 +77,13 @@ const AddPageStep2: React.FC = () => {
           isLoading={isLoading}
           width="w-[90%]"
           height="py-3"
-          name="Save my position"
+          name={t("settings.addPage.savePosition")}
           onClick={addPageSecondStep}
         />
       </div>
       <InfoModal
-        title="Select you position"
-        text=" Enter the location of your organization by selecting it on the following interactive map. Organizations registering on our platform are required to be transparent. Your data will be used solely to inform users interested in your organization about your location and will not be used for advertising purposes."
+        title={t("settings.addPage.titleStep2")}
+        text={t("settings.addPage.step2Notice")}
       />
     </>
   );

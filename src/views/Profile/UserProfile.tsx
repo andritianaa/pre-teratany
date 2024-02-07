@@ -3,6 +3,7 @@ import { IProfile } from "../../types/profile.type";
 import { FileServerURL } from "../../api/FileApi";
 import Button from "../../components/common/Button";
 import profileDefault from "../../assets/userPics.jpg";
+import { useTranslation } from "react-i18next";
 
 interface UserProfileProps {
   profile: IProfile;
@@ -19,6 +20,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   onClick,
   followText,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="mt-16 pb-3 flex w-full justify-evenly items-center border-b border-gray-200">
       <img
@@ -30,7 +32,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
       <div className="flex flex-col">
         <div className="flex flex-col items-start">
           <h2 className="text-xl font-normal mb-1">
-            {profile?.name ?? "User"}
+            {profile?.name ?? t("users.singular")}
           </h2>
 
           <ul className="flex space-x-8 mb-2">
@@ -38,14 +40,18 @@ const UserProfile: React.FC<UserProfileProps> = ({
               <span className="font-semibold">
                 {profile?.publications?.length!}{" "}
               </span>
-              {profile?.publications?.length! > 1 ? "Posts" : "Post"}
+              {profile?.publications?.length! > 1
+                ? t("posts.plural")
+                : t("posts.singular")}
             </li>
 
             <li>
               <span className="font-semibold">
                 {profile?.followers?.length!}{" "}
               </span>
-              {profile?.followers?.length! > 1 ? "Followers" : "Follower"}
+              {profile?.followers?.length! > 1
+                ? t("followers.plural")
+                : t("followers.singular")}
             </li>
           </ul>
         </div>
@@ -57,7 +63,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
               name={followText}
               onClick={onClick}
             />
-            <Button width="w-1/3" height="h-7" name="Message" />
+            <Button width="w-1/3" height="h-7" name={t("profile.message")} />
           </div>
         )}
       </div>

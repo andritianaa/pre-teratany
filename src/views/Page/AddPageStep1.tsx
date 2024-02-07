@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { resetPageInfo, setPageInfo } from "../../store/reducer/page.reducer";
 import SelectCountryPage from "./components/SelectCountryPage";
+import { useTranslation } from "react-i18next";
 
 interface addNewPageField {
   name: string;
@@ -38,6 +39,7 @@ const AddPageStep1: React.FC = () => {
   const [profileType, setProfileType] = useState<string>("association");
   const [country, setCountry] = useState<string>("Madagascar");
   const [description, setDescription] = useState<string>();
+  const { t } = useTranslation();
 
   const handleChangePageType = (e: any) => {
     setProfileType(e.target.value);
@@ -69,10 +71,10 @@ const AddPageStep1: React.FC = () => {
 
   return (
     <>
-      <TopBar text="Add new page" />
+      <TopBar text={t("settings.addPage.name")} />
       <InfoModal
-        title="Register your organization"
-        text="Welcome to the page where you can register your association or business for CSR. You are invited to fill in the required information, except for those marked as optional. This information will only be made available to users to help them recognize you quickly and will not be used for advertising purposes under any circumstances."
+        title={t("settings.addPage.titleModal")}
+        text={t("settings.addPage.text")}
       />
 
       <div className="mt-16 overflow-y-scroll flex flex-col items-center mx-4">
@@ -97,7 +99,7 @@ const AddPageStep1: React.FC = () => {
               htmlFor="pageType"
               className="text-left block text-sm white:text-white my-2"
             >
-              Your organization type
+              {t("settings.addPage.typeChoice.name")}
             </label>
             <select
               name="pageType"
@@ -105,11 +107,15 @@ const AddPageStep1: React.FC = () => {
               id="pageType"
               onChange={handleChangePageType}
             >
-              <option value="association">Association</option>
-              <option value="entreprise">Entreprise</option>
+              <option value="association">
+                {t("settings.addPage.typeChoice.assoc")}
+              </option>
+              <option value="entreprise">
+                {t("settings.addPage.typeChoice.entreprise")}
+              </option>
             </select>
             <FormField
-              label="Name"
+              label={t("settings.generalUser.name")}
               type="name"
               mark="name"
               height="py-2"
@@ -118,7 +124,7 @@ const AddPageStep1: React.FC = () => {
             <ErrorMessageForm name="name" />
 
             <FormField
-              label="Email"
+              label={t("settings.generalUser.email")}
               type="email"
               mark="email"
               height="py-2"
@@ -127,7 +133,7 @@ const AddPageStep1: React.FC = () => {
             <ErrorMessageForm name="email" />
 
             <FormField
-              label="Address"
+              label={t("settings.generalUser.address")}
               type="text"
               mark="address"
               height="py-2"
@@ -135,7 +141,7 @@ const AddPageStep1: React.FC = () => {
             />
             <ErrorMessageForm name="address" />
             <FormField
-              label="Phone number"
+              label={t("settings.generalUser.phone")}
               type="phone"
               mark="phone"
               height="py-2"
@@ -145,7 +151,7 @@ const AddPageStep1: React.FC = () => {
             <SelectCountryPage onChange={selectCountry} />
 
             <FormField
-              label="website (optional)"
+              label={t("settings.generalPage.website")}
               type="url"
               mark="website"
               height="py-2"
@@ -156,7 +162,7 @@ const AddPageStep1: React.FC = () => {
               htmlFor="description"
               className="text-left block text-sm white:text-white my-2"
             >
-              Description
+              {t("settings.generalPage.description")}
             </label>
             <textarea
               name="description"
@@ -170,13 +176,13 @@ const AddPageStep1: React.FC = () => {
                 isLoading={isLoading}
                 width="w-full"
                 height="py-3"
-                name="Next step"
+                name={t("settings.generalPage.next")}
               />
               <button
                 className="w-full text-gray-500 bg-white  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 mt-4"
                 onClick={() => navigate("/")}
               >
-                Cancel
+                {t("settings.generalPage.cancel")}
               </button>
             </div>
           </Form>
