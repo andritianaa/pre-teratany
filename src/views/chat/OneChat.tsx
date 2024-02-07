@@ -30,7 +30,7 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
   const actualDiscussion = conversations.find(
     (element: any) => element.reference === conversationReference
   )
-  console.log(actualDiscussion);
+  console.log("conversationReference ==> ", conversationReference);
   
 
   const handdleMessage = () => {
