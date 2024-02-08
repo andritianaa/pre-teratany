@@ -119,6 +119,7 @@ const Profile: React.FC<IProps> = ({socket}) => {
       } else {
         return (
           <PageProfile
+            socket={socket}
             profile={profile!}
             followText={followText!}
             follow={follow}
