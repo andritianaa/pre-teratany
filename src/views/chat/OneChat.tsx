@@ -6,13 +6,14 @@ import { IConversation } from "../../store/reducer/chat.reducer";
 import { IProfile } from "../../types/profile.type";
 import profileDefault from "../../assets/userPics.jpg";
 import { Socket } from "socket.io-client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FileServerURL } from "../../api/FileApi";
 
 interface Props {
   socket: Socket;
 }
 export const OneChat: React.FC<Props> = ({ socket }) => {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const [textMessage, setTextMessage] = useState<string>("");
 
   const conversationReference = useSelector<RootState>(
@@ -45,6 +46,12 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
     }
   };
 
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView();
+    }
+  }, []);
+
   return (
     <>
       <TopBar participant={actualDiscussion?.participants[0]} name={""} />
@@ -57,6 +64,7 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
             message={message.text}
           />
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <div className="fixed bg-white p-2 w-full bottom-0 ">
         <form
@@ -97,7 +105,7 @@ const TopBar: React.FC<IProfile> = ({ participant }) => {
         <HiArrowNarrowLeft onClick={handleGoBack} size={26} className="mx-3" />
         {participant.image && participant.image.length ? (
           <img
-            className="w-16 h-16 object-cover p-0.5 rounded-full ring-2 ring-gray-300 mr-2"
+            className="w-8 h-8 object-cover p-0.5 rounded-full ring-2 ring-gray-300 mr-2"
             src={
               participant.image
                 ? FileServerURL + participant.image

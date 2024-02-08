@@ -37,18 +37,18 @@ const ChatList: React.FC<PageListCardsProps> = ({
           {image && image.length ? (
             <img
             alt="page"
-            className=" !w-10 !h-10 rounded-full shadow-lg flex-2"
+            className=" !w-10 !h-10 rounded-full flex-2 object-cover ring-2 ring-gray-300"
             src={image ? FileServerURL + image : profileDefault}
           />
           ): (
             <img
             alt="page"
-            className=" !w-10 !h-10 rounded-full shadow-lg flex-2"
+            className=" !w-10 !h-10 rounded-full flex-2 object-cover ring-2 ring-gray-300"
             src={profileDefault}
           />
           )}
         </div>
-        <div className="flex flex-col items-start px-4 w-full flex-5 ">
+        <div className="flex flex-col items-start pr-4 w-full flex-5 ">
           <p className="font-medium">{name}</p>
           <p className={`text-sm text-gray-500 mb-1 `}>{message}</p>
         </div>
