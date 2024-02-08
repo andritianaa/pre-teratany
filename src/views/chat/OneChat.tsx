@@ -29,21 +29,20 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
 
   const actualDiscussion = conversations.find(
     (element: any) => element.reference === conversationReference
-  )
+  );
   console.log("conversationReference ==> ", conversationReference);
-  
 
   const handdleMessage = () => {
-    const myDate =  Date.now()
-    console.log("Date.now() ===> ", myDate);
-    
-    socket.emit("new-message", {
-      sender: connectedUser,
-      text: textMessage,
-      conversation: conversationReference,
-      date: myDate
-    });
-    setTextMessage("");
+    if (textMessage) {
+      const myDate = Date.now();
+      socket.emit("new-message", {
+        sender: connectedUser,
+        text: textMessage,
+        conversation: conversationReference,
+        date: myDate,
+      });
+      setTextMessage("");
+    }
   };
 
   return (
@@ -68,7 +67,7 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
           }}
         >
           <div className="flex">
-            <div className="relative w-full">
+            <div className="relative w-full flex">
               <input
                 type="text"
                 className="block p-2.5 w-full z-20 text-sm text-gray-900 rounded-lg border border-1"
@@ -77,7 +76,7 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
                 onChange={(v) => setTextMessage(v.target.value)}
                 value={textMessage}
               />
-              <button type="submit">
+              <button className="hidden" type="submit">
                 Send
               </button>
             </div>
@@ -99,7 +98,11 @@ const TopBar: React.FC<IProfile> = ({ participant }) => {
         {participant.image && participant.image.length ? (
           <img
             className="w-16 h-16 object-cover p-0.5 rounded-full ring-2 ring-gray-300 mr-2"
-            src={participant.image ? FileServerURL + participant.image : profileDefault}
+            src={
+              participant.image
+                ? FileServerURL + participant.image
+                : profileDefault
+            }
             alt="Bordered avatar"
           />
         ) : (
