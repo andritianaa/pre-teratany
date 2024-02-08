@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 // Default config for the axios instance
 const axiosParams = {
   // Set different base URL based on the environment
-  baseURL: "http://localhost:9900",
+  baseURL: "https://backend.teratany.org",
   // baseURL: 'http://localhost:9900',
 };
 // Create axios instance with default params
