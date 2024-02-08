@@ -35,6 +35,9 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
 
   const handdleMessage = () => {
     if (textMessage) {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView();
+      }
       const myDate = Date.now();
       socket.emit("new-message", {
         sender: connectedUser,
@@ -43,6 +46,10 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
         date: myDate,
       });
       setTextMessage("");
+      const inputElement = document.querySelector('input[type="text"]') as HTMLInputElement;
+      if (inputElement) {
+        inputElement.blur();
+      }
     }
   };
 

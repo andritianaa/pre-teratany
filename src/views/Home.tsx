@@ -22,7 +22,6 @@ interface Props {
 const Home: React.FC<Props> = ({ socket }) => {
   const profileConnectedUser = useFetchProfile();
   const dispatch = useDispatch();
-
   const syncChatCaller = async (
     profileId: string,
     conversationReferences: number[],

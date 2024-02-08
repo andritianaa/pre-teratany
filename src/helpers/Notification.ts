@@ -1,28 +1,27 @@
-import { LocalNotifications, PendingLocalNotificationSchema } from '@capacitor/local-notifications';
+import { LocalNotificationSchema, LocalNotifications } from '@capacitor/local-notifications';
 
 export const notifiate = async (title: string, body: string, largeBody: string) => {
     try {
-        const notificationOptions = {
-            notifications: [
-                {
-                    title: title,
-                    body: body,
-                    largeBody: largeBody,
-                    id: Math.floor(Math.random() * 1000) + 1,
-                },
-            ],
+        const notification: LocalNotificationSchema = {
+            title: title,
+            body: body,
+            largeBody: largeBody,
+            id: Math.floor(Math.random() * 1000) + 1,
         };
 
         const pendingNotifications = await LocalNotifications.getPending();
 
-        const existingNotification = pendingNotifications.notifications.find((notification: PendingLocalNotificationSchema) => {
-            return notification.body === body
+        const existingNotifications = pendingNotifications.notifications.filter((notification: any) => {
+            return notification.title === title;
         });
 
-        if (existingNotification) {
-            await LocalNotifications.cancel({ notifications: [existingNotification] });
+        if (existingNotifications.length > 0) {
+            await LocalNotifications.cancel({ notifications: existingNotifications });
+            console.log('Notifications précédentes supprimées avec succès :', existingNotifications);
         }
-        const scheduleResult = await LocalNotifications.schedule(notificationOptions);
+
+        const scheduleResult = await LocalNotifications.schedule({ notifications: [notification] });
+
         if (scheduleResult.notifications) {
             console.log('Notification planifiée avec succès :', scheduleResult.notifications);
         } else {
