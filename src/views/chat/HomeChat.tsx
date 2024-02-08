@@ -24,7 +24,7 @@ export const HomeChat: React.FC = () => {
                         image={chat.participants[0].image}
                         reference={chat.reference}
                         name={chat.participants[0].name}
-                        message={chat.messages.length > 0 ? chat.messages[chat.messages.length - 1].text : "New discussion"}
+                        message={chat.messages[0].text !== "###**###" ? chat.messages[chat.messages.length - 1].text : "New discussion"}
                         newMessage={chat.newMessageCount}
                     />
                 ))}
