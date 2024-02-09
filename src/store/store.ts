@@ -10,6 +10,7 @@ import historyReducer from "./reducer/history.reducer";
 import publicationReducer from "./reducer/publication.reducer";
 import chatReducer from "./reducer/chat.reducer";
 import socketReducer from "./reducer/socket.reducer";
+import profileReducer from "./reducer/profile.reducer";
 
 const userPersistConfig = {
   key: "teratany_user",
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   teratany_publications: publicationReducer,
   teratany_chat: chatPersistedReducer,
   teratany_socket: socketReducer,
+  teratany_profiles: profileReducer,
 });
 
 export const store = configureStore({
