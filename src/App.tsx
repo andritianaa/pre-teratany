@@ -31,7 +31,7 @@ import ForgotPassword from "./views/Authentication/ForgotPassword";
 import ResetPassword from "./views/Authentication/ResetPassword";
 import { App as CapacitorApp } from "@capacitor/app";
 import { useEffect } from "react";
-import socketIO from "socket.io-client";
+// import socketIO from "socket.io-client";
 
 // Désactive le traitement passif pour tous les événements tactiles
 document.addEventListener("touchstart", function () {}, { passive: false });
@@ -39,7 +39,8 @@ document.addEventListener("touchmove", function () {}, { passive: false });
 document.addEventListener("touchend", function () {}, { passive: false });
 document.addEventListener("touchcancel", function () {}, { passive: false });
 
-const socket = socketIO("https://backend.teratany.org").connect();
+// const socket = socketIO("https://backend.teratany.org").connect();
+// const socket = socketIO("http://localhost:9900").connect();
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -99,7 +100,7 @@ const App: React.FC = () => {
               path="/chat/one"
               element={
                 <ProtectedRoute>
-                  <OneChat socket={socket} />
+                  <OneChat />
                 </ProtectedRoute>
               }
             />
@@ -110,7 +111,7 @@ const App: React.FC = () => {
               path="/"
               element={
                 <ProtectedRoute>
-                  <Home socket={socket} />
+                  <Home />
                 </ProtectedRoute>
               }
             />
@@ -257,7 +258,7 @@ const App: React.FC = () => {
               path="/profile/:id"
               element={
                 <ProtectedRoute>
-                  <Profile socket={socket} />
+                  <Profile />
                 </ProtectedRoute>
               }
             />

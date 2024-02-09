@@ -17,7 +17,6 @@ interface PageProfileProps {
   followText: string;
   follow: () => void;
   changeDrawerStatus: () => void;
-  socket: Socket
 }
 
 export const PageProfile: React.FC<PageProfileProps> = ({
@@ -25,23 +24,29 @@ export const PageProfile: React.FC<PageProfileProps> = ({
   followText,
   follow,
   changeDrawerStatus,
-  socket
 }) => {
+  const socket = useSelector<RootState>(
+    (state) => state.teratany_socket.socket
+  ) as Socket;
+
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const connectedUser = useSelector<RootState>(
     (state) => state.teratany_user.id
   ) as string;
 
   const handdleMessage = () => {
-    
-    socket.emit("new-conversation", [connectedUser, profile._id], async (response: number) => {
-      dispatch(  syncChat(await syncChatApi(connectedUser, [], undefined)));
-      navigate("/chat/one");
-      dispatch(openDiscussion(response));
-    });
+    socket.emit(
+      "new-conversation",
+      [connectedUser, profile._id],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
   };
   return (
     <div className="mt-16 pb-6 border-b border-gray-200">
@@ -111,7 +116,12 @@ export const PageProfile: React.FC<PageProfileProps> = ({
 
       <div className="flex items-center mx-2">
         <Button width="w-1/2" height="h-7" name={followText} onClick={follow} />
-        <Button width="w-1/2" height="h-7" name={t("profile.message")} onClick={handdleMessage}/>
+        <Button
+          width="w-1/2"
+          height="h-7"
+          name={t("profile.message")}
+          onClick={handdleMessage}
+        />
         <Button
           width=""
           height="h-7"
@@ -123,4 +133,4 @@ export const PageProfile: React.FC<PageProfileProps> = ({
   );
 };
 
-export default PageProfile
+export default PageProfile;

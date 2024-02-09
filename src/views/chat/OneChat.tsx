@@ -9,10 +9,11 @@ import { Socket } from "socket.io-client";
 import { useEffect, useRef, useState } from "react";
 import { FileServerURL } from "../../api/FileApi";
 
-interface Props {
-  socket: Socket;
-}
-export const OneChat: React.FC<Props> = ({ socket }) => {
+export const OneChat: React.FC = () => {
+  const socket = useSelector<RootState>(
+    (state) => state.teratany_socket.socket
+  ) as Socket;
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [textMessage, setTextMessage] = useState<string>("");
 
@@ -46,7 +47,9 @@ export const OneChat: React.FC<Props> = ({ socket }) => {
         date: myDate,
       });
       setTextMessage("");
-      const inputElement = document.querySelector('input[type="text"]') as HTMLInputElement;
+      const inputElement = document.querySelector(
+        'input[type="text"]'
+      ) as HTMLInputElement;
       if (inputElement) {
         inputElement.blur();
       }

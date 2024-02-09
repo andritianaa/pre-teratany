@@ -16,14 +16,8 @@ import PageProfile from "./PageProfile";
 import DetailsPage from "./DetailsPage";
 import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
 import { useTranslation } from "react-i18next";
-import { Socket } from "socket.io-client";
 
-
-interface IProps{
-  socket : Socket
-}
-
-const Profile: React.FC<IProps> = ({socket}) => {
+const Profile: React.FC = () => {
   const token = useToken();
   const profileConnectedUser = useFetchProfile();
 
@@ -108,7 +102,7 @@ const Profile: React.FC<IProps> = ({socket}) => {
     if (isProfileFetched) {
       if (profile?.profileType === "user") {
         return (
-          <UserProfile socket={socket}
+          <UserProfile
             profileConnectedUser={profileConnectedUser!}
             profile={profile}
             idUserViewed={id!}
@@ -119,7 +113,6 @@ const Profile: React.FC<IProps> = ({socket}) => {
       } else {
         return (
           <PageProfile
-            socket={socket}
             profile={profile!}
             followText={followText!}
             follow={follow}

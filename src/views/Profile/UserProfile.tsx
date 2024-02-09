@@ -4,7 +4,6 @@ import { FileServerURL } from "../../api/FileApi";
 import Button from "../../components/common/Button";
 import profileDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
-import { Socket } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
@@ -12,13 +11,13 @@ import { useDispatch } from "react-redux";
 import { syncChat } from "../../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../../api/chatApi";
 import { openDiscussion } from "../../store/reducer/chat.reducer";
+import { Socket } from "socket.io-client";
 interface UserProfileProps {
   profile: IProfile;
   idUserViewed: string;
   profileConnectedUser: IProfile;
   onClick: () => void;
   followText: string;
-  socket: Socket;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({
@@ -27,24 +26,29 @@ const UserProfile: React.FC<UserProfileProps> = ({
   idUserViewed,
   onClick,
   followText,
-  socket,
 }) => {
+  const socket = useSelector<RootState>(
+    (state) => state.teratany_socket.socket
+  ) as Socket;
+
   const dispatch = useDispatch();
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const connectedUser = useSelector<RootState>(
     (state) => state.teratany_user.id
   ) as string;
 
   const handdleMessage = () => {
-    
-    socket.emit("new-conversation", [connectedUser, idUserViewed], async (response: number) => {
-      dispatch(  syncChat(await syncChatApi(connectedUser, [], undefined)));
-      navigate("/chat/one");
-      dispatch(openDiscussion(response));
-    });
+    socket.emit(
+      "new-conversation",
+      [connectedUser, idUserViewed],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
   };
-
 
   const { t } = useTranslation();
   return (

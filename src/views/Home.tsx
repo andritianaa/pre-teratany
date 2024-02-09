@@ -9,17 +9,17 @@ import { IPublication } from "../types/publication.type";
 import { syncChat } from "../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../api/chatApi";
 import { IProfile } from "../types/profile.type";
-import { Socket } from "socket.io-client";
 
 import useFetchProfile from "../hooks/useFetchProfile";
 import React, { useEffect } from "react";
 import { notifiate } from "../helpers/Notification";
+import { Socket } from "socket.io-client";
 
-interface Props {
-  socket: Socket;
-}
+const Home: React.FC = () => {
+  const socket = useSelector<RootState>(
+    (state) => state.teratany_socket.socket
+  ) as Socket;
 
-const Home: React.FC<Props> = ({ socket }) => {
   const profileConnectedUser = useFetchProfile();
   const dispatch = useDispatch();
   const syncChatCaller = async (
