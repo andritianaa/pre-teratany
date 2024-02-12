@@ -72,7 +72,6 @@ const SignInAuth: React.FC = () => {
           isAuthenticated: true,
         })
       );
-      
 
       const profile: any = await fetchProfile(token, user.id as string);
 
@@ -199,3 +198,9 @@ const SignInAuth: React.FC = () => {
 };
 
 export default SignInAuth;
+
+// const SignInAuth = () => {
+//   return <h1>Sign in </h1>;
+// };
+
+// export default SignInAuth;
