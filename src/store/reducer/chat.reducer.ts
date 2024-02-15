@@ -1,8 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { syncChat as syncChatRequest } from "../../api/chatApi";
-import { withAsync } from "../../helpers/withAsync";
-import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
-import { IHistory } from "../../types/historique.type";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface IMessage {
   _id: string;
   sender: IProfile;
@@ -48,19 +44,11 @@ const initialState: chatInitialState = {
   activeDiscussionReference: 0,
 };
 
-interface ChatSyncProperty {
-  profileId: string;
-  conversationReferences: number[];
-  fromDate: Date | undefined;
-}
-
 export const chatSlice = createSlice({
   name: "teratany_chat",
   initialState,
   reducers: {
     syncChat: (state, action: PayloadAction<any>) => {
-      console.log("sync chat reducer ==>> ", action.payload);
-
       // state.discussions = action.payload
       state.discussions = action.payload;
 

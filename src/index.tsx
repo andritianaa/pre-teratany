@@ -8,7 +8,7 @@ import { store, persistor } from "store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
-import ToastNotification from "./components/common/ToastNotification";
+import ToastNotification from "components/common/ToastNotification";
 
 // Désactive le traitement passif pour tous les événements tactiles
 document.addEventListener("touchstart", function () {}, { passive: false });

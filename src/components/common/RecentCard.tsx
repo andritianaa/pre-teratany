@@ -1,16 +1,16 @@
 import React from "react";
 import { MdClose } from "react-icons/md";
 import { RiSearchLine } from "react-icons/ri";
-import { IHistory } from "../types/historique.type";
-import { FileServerURL } from "../api/FileApi";
+import { IHistory } from "types/historique.type";
+import { FileServerURL } from "api/FileApi";
 import { Link } from "react-router-dom";
-import { withAsync } from "../helpers/withAsync";
-import { deleteSearchHistory } from "../api/SearchApi";
-import useToken from "../hooks/useToken";
-import { ErrorData, ThrowErrorHandler } from "../helpers/HandleError";
-import profileDefault from "../assets/userPics.jpg";
+import { withAsync } from "helpers/withAsync";
+import { deleteSearchHistory } from "api/SearchApi";
+import useToken from "hooks/useToken";
+import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
+import profileDefault from "../../assets/userPics.jpg";
 import { useDispatch } from "react-redux";
-import { removeHistoryData } from "../store/reducer/history.reducer";
+import { removeHistoryData } from "store/reducer/history.reducer";
 
 interface recentProps {
   historique: IHistory[];

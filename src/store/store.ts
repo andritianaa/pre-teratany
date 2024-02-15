@@ -1,16 +1,16 @@
-import { AnyAction, combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userReducer from "store/reducer/user.reducer";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
-import thunk from "redux-thunk";
 import pageReducer from "./reducer/page.reducer";
 import accountReducer from "./reducer/account.reducer";
-import { ThunkDispatch } from "@reduxjs/toolkit";
 import historyReducer from "./reducer/history.reducer";
 import publicationReducer from "./reducer/publication.reducer";
 import chatReducer from "./reducer/chat.reducer";
 import socketReducer from "./reducer/socket.reducer";
 import profileReducer from "./reducer/profile.reducer";
+import publicationsApi from "../services/api-services/publication/publication.base";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 const userPersistConfig = {
   key: "teratany_user",
@@ -42,15 +42,16 @@ const rootReducer = combineReducers({
   teratany_chat: chatPersistedReducer,
   teratany_socket: socketReducer,
   teratany_profiles: profileReducer,
+  [publicationsApi.reducerPath]: publicationsApi.reducer,
 });
 
 export const store = configureStore({
   reducer: rootReducer,
-  devTools: process.env.NODE_ENV !== "production",
-  middleware: [thunk],
+  devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(publicationsApi.middleware),
 });
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type AppThunkDispatch = ThunkDispatch<RootState, any, AnyAction>;
+
+setupListeners(store.dispatch);
 
 export const persistor = persistStore(store);

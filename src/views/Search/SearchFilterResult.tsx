@@ -1,18 +1,19 @@
 import React from "react";
 // import EditHeader from "../../components/common/HeaderEdit";
-import Publication from "../../components/Publication/Publication";
-import HorizontalCards from "../../components/HorizontalCards";
-import TopBar from "../../components/common/TopBar";
+import Publication from "../../components/publication/Publication";
+import HorizontalCards from "../../components/common/HorizontalCards";
+import TopBar from "../../components/layouts/TopBar";
 import useFetchSearchByQuery from "../../hooks/useFetchSearchByQuery";
 import { useParams } from "react-router-dom";
-import useFetchProfile from "../../hooks/useFetchProfile";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "../../components/common/SearchBar";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 const SearchFilterResult: React.FC = () => {
   const currentPath = window.location.pathname;
   const { query } = useParams();
-  const profileConnectedUser = useFetchProfile();
+
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const results = useFetchSearchByQuery(query!);
   const { t } = useTranslation();
@@ -70,18 +71,19 @@ const SearchFilterResult: React.FC = () => {
         )
       ) : (
         <div className={`flex flex-col items-start mt-28`}>
-          {results?.profiles?.map((user) => (
-            <HorizontalCards
-              _id={user._id}
-              name={user.name}
-              image={user.image!}
-              isFollowed={user.isFollowed}
-              desc={`${user?.numberOfFollowers} Followers`}
-              isButtonShowed={
-                profileConnectedUser?._id !== user._id ? true : false
-              }
-            />
-          ))}
+          {results?.profiles?.map((user) => {
+            const isButtonShowed = profile?._id !== user._id;
+            return (
+              <HorizontalCards
+                _id={user._id}
+                name={user.name}
+                image={user.image!}
+                isFollowed={user.isFollowed}
+                desc={`${user?.numberOfFollowers} Followers`}
+                isButtonShowed={isButtonShowed}
+              />
+            );
+          })}
         </div>
       )}
     </>

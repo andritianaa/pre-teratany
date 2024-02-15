@@ -1,26 +1,22 @@
-import TopNavBar from "../components/common/TopNavBar";
-import Publication from "../components/Publication/Publication";
+import TopNavBar from "../components/layouts/TopNavBar";
+import Publication from "../components/publication/Publication";
 import PageTopList from "../views/Page/PageTopList";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { IPublication } from "../types/publication.type";
+import { useDispatch } from "react-redux";
 
 //socket
 import { syncChat } from "../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../api/chatApi";
 import { IProfile } from "../types/profile.type";
 
-import useFetchProfile from "../hooks/useFetchProfile";
 import React, { useEffect } from "react";
 import { notifiate } from "../helpers/Notification";
-import { Socket } from "socket.io-client";
+import { useAppSelector } from "../store/hooks";
 
 const Home: React.FC = () => {
-  const socket = useSelector<RootState>(
-    (state) => state.teratany_socket.socket
-  ) as Socket;
+  const { socket } = useAppSelector((state) => state.teratany_socket);
 
-  const profileConnectedUser = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
   const dispatch = useDispatch();
   const syncChatCaller = async (
     profileId: string,
@@ -54,15 +50,15 @@ const Home: React.FC = () => {
     });
   };
 
-  const publications = useSelector<RootState>(
+  const publications = useAppSelector(
     (state) => state.teratany_publications.publications
-  ) as IPublication[];
+  );
 
   useEffect(() => {
-    if (profileConnectedUser) {
-      connection(profileConnectedUser);
+    if (profile) {
+      connection(profile);
       socket.on("disconnect", () => {
-        connection(profileConnectedUser);
+        connection(profile);
       });
     }
   });

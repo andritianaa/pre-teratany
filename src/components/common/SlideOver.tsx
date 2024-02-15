@@ -4,8 +4,7 @@ import { HiOutlineXMark } from "react-icons/hi2";
 import { ProfileListMap } from "./ProfileListMap";
 import { IProfile } from "types/profile.type";
 import SearchInputField from "./SearchInputField";
-import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/hooks";
 
 type SlideOverProps = {
   isOpen?: boolean;
@@ -19,9 +18,8 @@ export const SlideOver: React.FC<SlideOverProps> = ({
   onChildData,
 }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const profiles = useSelector<RootState>(
-    (state) => state.teratany_page.profiles!
-  ) as IProfile[];
+
+  const profiles = useAppSelector((state) => state.teratany_page.profiles!);
 
   const [searchedProfile, setSearchedProfile] = useState<IProfile[]>(profiles);
 

@@ -1,38 +1,30 @@
 import { HiArrowNarrowLeft } from "react-icons/hi";
-import { Message } from "../../components/chat/Message";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { IConversation } from "../../store/reducer/chat.reducer";
 import { IProfile } from "../../types/profile.type";
 import profileDefault from "../../assets/userPics.jpg";
-import { Socket } from "socket.io-client";
 import { useEffect, useRef, useState } from "react";
 import { FileServerURL } from "../../api/FileApi";
+import { Message } from "./components/Message";
+import { useAppSelector } from "../../store/hooks";
 
 export const OneChat: React.FC = () => {
-  const socket = useSelector<RootState>(
-    (state) => state.teratany_socket.socket
-  ) as Socket;
+  const socket = useAppSelector((state) => state.teratany_socket.socket);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [textMessage, setTextMessage] = useState<string>("");
 
-  const conversationReference = useSelector<RootState>(
+  const conversationReference = useAppSelector(
     (state) => state.teratany_chat.activeDiscussionReference
-  ) as string;
-
-  const connectedUser = useSelector<RootState>(
-    (state) => state.teratany_user.id
   );
 
-  const conversations = useSelector<RootState>(
+  const connectedUser = useAppSelector((state) => state.teratany_user.id);
+
+  const conversations = useAppSelector(
     (state) => state.teratany_chat.discussions
-  ) as IConversation[];
+  );
 
   const actualDiscussion = conversations.find(
     (element: any) => element.reference === conversationReference
   );
-  console.log("conversationReference ==> ", conversationReference);
 
   const handdleMessage = () => {
     if (textMessage) {
@@ -66,7 +58,7 @@ export const OneChat: React.FC = () => {
     <>
       <TopBar participant={actualDiscussion?.participants[0]} name={""} />
       <div id="nessages" className="flex flex-col my-16 justify-end">
-        {actualDiscussion?.messages.map((message, index) => (
+        {actualDiscussion?.messages.map((message: any, index: number) => (
           <Message
             key={index}
             date={message.date?.toString() || ""}

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import TopBar from "components/common/TopBar";
+import TopBar from "components/layouts/TopBar";
 import Button from "components/common/Button";
 import useLoadingButton from "hooks/useLoadingButton";
 import { BiPhotoAlbum } from "@react-icons/all-files/bi/BiPhotoAlbum";
-import useFetchProfile from "hooks/useFetchProfile";
 import { FileServerURL, uploadFile } from "api/FileApi";
 import { withAsync } from "helpers/withAsync";
 import { AxiosError } from "axios";
@@ -14,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import InputEmoji from "react-input-emoji";
 import profileDefault from "../../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../../store/hooks";
 
 interface PublicationFormProps {
   _id?: string;
@@ -41,7 +41,7 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
   const token = useToken();
   const navigate = useNavigate();
 
-  const profile = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const handleFileChange = (e: any) => {
     setFileViewers([]);

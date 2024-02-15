@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { withAsync } from "../helpers/withAsync";
-import { addSearchHistory } from "../api/SearchApi";
-import useToken from "../hooks/useToken";
-import useFetchProfile from "../hooks/useFetchProfile";
-import { ErrorData, ThrowErrorHandler } from "../helpers/HandleError";
+import { withAsync } from "../../helpers/withAsync";
+import { addSearchHistory } from "../../api/SearchApi";
+import useToken from "../../hooks/useToken";
+import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { addHistoryData } from "../store/reducer/history.reducer";
-import { IHistory } from "../types/historique.type";
+import { addHistoryData } from "../../store/reducer/history.reducer";
+import { IHistory } from "../../types/historique.type";
+import { useAppSelector } from "../../store/hooks";
 
 interface SearchBarProps {
   textFilter?: string;
@@ -19,13 +19,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ textFilter }) => {
   const [query, setQuery] = useState<string>(queryText!);
   const navigate = useNavigate();
   const token = useToken();
-  const profileConnected = useFetchProfile();
+
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
   const dispatch = useDispatch();
 
   const addSearchResult = async (query: string) => {
     if (query.length > 4 && query.length < 20) {
       const { error, response } = await withAsync(() =>
-        addSearchHistory(token, profileConnected?._id!, query)
+        addSearchHistory(token, profile?._id!, query)
       );
       if (error) {
         ThrowErrorHandler(error as ErrorData);

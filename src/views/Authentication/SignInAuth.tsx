@@ -1,9 +1,7 @@
 import React from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { withAsync } from "helpers/withAsync";
 import { signinAuth } from "api/AuthenticationApi";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "store/store";
 import { toast } from "react-toastify";
 import TeratanyLogo from "assets/Teratany_ico/apple-touch-icon-180x180.png";
 import FormField from "components/common/FormField";
@@ -22,6 +20,8 @@ import { getById } from "api/ProfileApi";
 import { setAccountConnected } from "store/reducer/account.reducer";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
 import { useTranslation } from "react-i18next";
+import { fetchConnectedProfile } from "store/reducer/user.reducer";
+import { useAppDispatch } from "../../store/hooks";
 
 interface signinFormValues {
   email: string;
@@ -30,7 +30,7 @@ interface signinFormValues {
 
 const SignInAuth: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const { t } = useTranslation();
 
@@ -66,12 +66,12 @@ const SignInAuth: React.FC = () => {
       dispatch(
         setAuthentication({
           id: user.id,
-          name: user.name,
-          email: user.email,
           token,
           isAuthenticated: true,
         })
       );
+
+      dispatch(fetchConnectedProfile({ token, profileId: user.id! }));
 
       const profile: any = await fetchProfile(token, user.id as string);
 
@@ -100,12 +100,7 @@ const SignInAuth: React.FC = () => {
       toast.success(successLogin);
     }
   };
-  const isAuthenticated = useSelector<RootState>(
-    (state) => state.teratany_user.isAuthenticated
-  ) as boolean;
-  if (isAuthenticated) {
-    return <Navigate to={"/"} replace />;
-  }
+
   return (
     <>
       <div className="h-screen w-full flex flex-col items-center justify-center">

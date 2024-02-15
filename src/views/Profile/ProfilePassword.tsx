@@ -3,7 +3,7 @@ import FormField from "../../components/common/FormField";
 import Button from "../../components/common/Button";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import TopBar from "../../components/common/TopBar";
+import TopBar from "../../components/layouts/TopBar";
 import ErrorMessageForm from "../../components/common/ErrorMessageForm";
 import { withAsync } from "../../helpers/withAsync";
 import { updatePassword } from "../../api/ProfileApi";

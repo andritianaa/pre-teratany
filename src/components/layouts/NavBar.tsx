@@ -11,21 +11,19 @@ import ProfilePicture from "../../assets/userPics.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FileServerURL } from "../../api/FileApi";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { useDispatch } from "react-redux";
 import { fetchProfileHistory } from "../../store/reducer/history.reducer";
-import { AppThunkDispatch } from "../../store/store";
 import useToken from "../../hooks/useToken";
-import { IProfile } from "../../types/profile.type";
 import { fetchFeedPublications } from "../../store/reducer/publication.reducer";
 import { fetchFollowedProfiles } from "../../store/reducer/profile.reducer";
+import { AppThunkDispatch, useAppSelector } from "../../store/hooks";
 
 const NavBar: React.FC = () => {
   const token = useToken();
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState("home");
 
-  const profile = useFetchProfile() as IProfile;
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const dispatch = useDispatch<AppThunkDispatch>();
 

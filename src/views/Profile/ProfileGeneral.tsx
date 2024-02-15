@@ -3,7 +3,7 @@ import FormField from "../../components/common/FormField";
 import Button from "../../components/common/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import TopBar from "../../components/common/TopBar";
+import TopBar from "../../components/layouts/TopBar";
 import ErrorMessageForm from "../../components/common/ErrorMessageForm";
 import { withAsync } from "../../helpers/withAsync";
 import { updateGeneralInfo } from "../../api/ProfileApi";
@@ -11,8 +11,8 @@ import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import useToken from "../../hooks/useToken";
 import useLoadingButton from "../../hooks/useLoadingButton";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 interface GeneralUserInfo {
   name: string | undefined;
@@ -22,7 +22,7 @@ interface GeneralUserInfo {
 
 const ProfileGeneral: React.FC = () => {
   const token = useToken();
-  const profile = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const { t } = useTranslation();
 
