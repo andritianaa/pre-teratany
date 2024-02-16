@@ -70,7 +70,7 @@ const DrawerSettings: React.FC<DrawerProps> = ({
           placement="bottom"
           open={openBottom}
           onClose={closeBottom}
-          className="p-4 rounded-3xl z-1000 !h-[30%]"
+          className="drawer p-4 z-1000 w-[560px] rounded-3xl !h-[40%]"
         >
           <div className="flex items-center justify-between w-full mb-2">
             <Typography

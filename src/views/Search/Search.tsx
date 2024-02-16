@@ -12,14 +12,15 @@ const Search: React.FC = () => {
   ) as IHistory[];
   const { t } = useTranslation();
   return (
-    <>
-      <div className="mx-3 mt-4 flex flex-col items-start">
+    <div className="bg-gray-100 flex flex-col items-center w-full h-screen">
+      <div className="mx-3 mt-4 flex flex-col justify-center items-start w-full max-w-[600px]">
         <SearchBar />
-        <p className="pt-1 pb-3 text-ms font-medium">{t("search.recent")}</p>
+        <p className="pt-1 pb-3 px-2 text-ms font-medium">
+          {t("search.recent")}
+        </p>
       </div>
-
       <RecentCard historique={profileSearchHistory!} />
-    </>
+    </div>
   );
 };
 export default Search;

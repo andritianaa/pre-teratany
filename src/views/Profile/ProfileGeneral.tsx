@@ -58,10 +58,11 @@ const ProfileGeneral: React.FC = () => {
   };
 
   return (
-    <>
-      <TopBar text={t("settings.general")} />
-
-      <div className="mt-20 flex flex-col items-center mx-4">
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="fixed top-0 z-20 pt-4 bg-white flex items-center w-full max-w-[500px]">
+        <TopBar text={t("settings.general")} />
+      </div>
+      <div className="mt-20 flex flex-col items-center mx-4 w-full max-w-[500px]">
         <Formik
           enableReinitialize
           initialValues={initialValues}
@@ -134,7 +135,7 @@ const ProfileGeneral: React.FC = () => {
           )}
         </Formik>
       </div>
-    </>
+    </div>
   );
 };
 export default ProfileGeneral;

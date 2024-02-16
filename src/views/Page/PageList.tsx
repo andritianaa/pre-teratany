@@ -54,9 +54,11 @@ const PageList = () => {
   }, [results]);
 
   return (
-    <>
-      <TopBar text={t("pages.plural")} />
-      <div className="fixed top-0 w-full bg-white p-2  mb-2 mt-14 flex flex-col items-start">
+    <div className="flex flex-col items-center w-full">
+      <div className="fixed z-40 pt-4 flex justify-center items-center w-full max-w-[600px]">
+        <TopBar text={t("pages.plural")} />
+      </div>
+      <div className="fixed z-30 w-full bg-white p-2  mb-2 mt-14 flex flex-col items-start max-w-[600px]">
         <SearchBar textFilter="page" />
         <div className="flex mt-4">
           <div className="flex space-x-2">
@@ -86,10 +88,10 @@ const PageList = () => {
         </div>
       </div>
 
-      <div className="w-full overflow-y-auto flex flex-col items-center mt-40">
+      <div className="w-full overflow-y-auto flex flex-col items-center mt-40 max-w-[600px]">
         {renderPageList()}
       </div>
-    </>
+    </div>
   );
 };
 

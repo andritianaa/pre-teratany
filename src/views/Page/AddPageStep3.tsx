@@ -106,10 +106,12 @@ const AddPageStep3: React.FC = () => {
   }));
 
   return (
-    <>
-      <TopBar text={t("settings.addPage.step3.title")} />
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="fixed top-0 z-20 pt-4 bg-white flex items-center w-full max-w-[500px]">
+        <TopBar text={t("settings.addPage.step3.title")} />
+      </div>
 
-      <div className=" mt-16 0 flex items-center p-4 w-full flex-col">
+      <div className=" mt-16 0 flex items-center p-4 w-full flex-col max-w-[450px]">
         <div className="flex flex-wrap mb-8">
           {translatedCategories.map((category) => (
             <CheckboxButton
@@ -128,7 +130,7 @@ const AddPageStep3: React.FC = () => {
           onClick={addPageLastStep}
         />
       </div>
-    </>
+    </div>
   );
 };
 

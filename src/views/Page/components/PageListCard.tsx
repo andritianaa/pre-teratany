@@ -6,6 +6,7 @@ import useFetchProfile from "hooks/useFetchProfile";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
 import { FileServerURL } from "../../../api/FileApi";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 interface PageListCardsProps {
   _id: string;
   name: string;
@@ -25,14 +26,18 @@ const PageListCard: React.FC<PageListCardsProps> = ({
   profileType,
 }) => {
   const token = useToken();
+  const { t } = useTranslation();
 
   const [followText, setFollowText] = useState<string>("...");
 
-  console.log("follow text ", name, isFollowed);
   const profileConnectedUser = useFetchProfile();
 
   const follow = async () => {
-    setFollowText(followText === "Follow" ? "UnFollow" : "Follow");
+    setFollowText(
+      followText === t("followers.follow")
+        ? t("followers.unfollow")
+        : t("followers.follow")
+    );
     const { error } = await withAsync(() =>
       followProfile(token, profileConnectedUser?._id, _id)
     );
@@ -42,15 +47,15 @@ const PageListCard: React.FC<PageListCardsProps> = ({
   };
 
   useEffect(() => {
-    setFollowText(isFollowed ? "UnFollow" : "Follow");
+    setFollowText(isFollowed ? t("followers.unfollow") : t("followers.follow"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFollowed]);
 
   return (
     <>
       {profileType !== "user" && (
-        <div className="mx-1 w-full p-2 mb-4">
-          <div className="flex items-center">
+        <div className="w-full p-2 mb-4 mt-4">
+          <div className="flex w-full items-center">
             <div className="w-16">
               <Link to={`/profile/${_id}`}>
                 <img
@@ -69,16 +74,16 @@ const PageListCard: React.FC<PageListCardsProps> = ({
                 <p className="font-medium">{name}</p>
               </Link>
               <p className="text-sm text-gray-500 mb-1">
-                {followers} Followers
+                {followers > 1
+                  ? t("followers.number.plural", { followers: followers })
+                  : t("followers.number.singular", { followers: followers })}
               </p>
             </div>
             {!isOwner && (
-              <div className="mr-4 flex-3">
+              <div className="mr-8 w-[28%]">
                 <p
                   className={
-                    isFollowed
-                      ? "font-normal text-sm text-gray-400"
-                      : "font-bold text-sm "
+                    isFollowed ? "font-bold text-sm " : "font-bold text-sm mr-8"
                   }
                   onClick={follow}
                 >

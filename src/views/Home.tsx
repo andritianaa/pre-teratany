@@ -4,6 +4,7 @@ import PageTopList from "../views/Page/PageTopList";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { IPublication } from "../types/publication.type";
+import "../styles/webResponsive.css";
 
 const Home = () => {
   const publications = useSelector<RootState>(
@@ -14,7 +15,7 @@ const Home = () => {
     <div className="bg-gray-100 flex flex-col items-center justify-center h-full w-full mt-12">
       <TopNavBar notifCount={9} messageCount={8} />
       <PageTopList />
-      <div className="flex flex-col-reverse w-full">
+      <div className="feed flex flex-col-reverse max-w-[600px]">
         {publications?.map((pub) => (
           <Publication
             key={pub?._id}

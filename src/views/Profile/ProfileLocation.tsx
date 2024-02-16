@@ -70,13 +70,16 @@ const ProfileLocation: React.FC = () => {
   };
 
   return (
-    <>
-      <TopBar text={t("settings.location.name")} />
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="bg-white pt-4 flex items-center w-full max-w-[500px]">
+        <TopBar text={t("settings.location.name")} />
+      </div>
+
       {profile && (
         <MapContainerForm
           lat={profile?.localisation?.coordonates?.latitude! as number}
           lng={profile?.localisation?.coordonates?.longitude! as number}
-          className="w-[90%] h-96 mx-auto mt-16 flex justify-center items-center"
+          className="w-[90%] h-96 mx-auto mt-2 flex justify-center items-center"
         >
           <Marker
             position={[
@@ -89,7 +92,7 @@ const ProfileLocation: React.FC = () => {
         </MapContainerForm>
       )}
 
-      <div className="mt-4 flex flex-col items-center mx-4">
+      <div className="mt-4 flex flex-col items-center mx-4 w-full max-w-[450px]">
         <p className="font-medium">{t("settings.location.locationDesc")}</p>
         <div className="flex items-start mt-4">
           <SwitchToggle
@@ -108,7 +111,7 @@ const ProfileLocation: React.FC = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default ProfileLocation;

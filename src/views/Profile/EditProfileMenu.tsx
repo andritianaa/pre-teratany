@@ -48,16 +48,18 @@ const EditProfileMenu: React.FC = () => {
     navigate("/signin");
   };
   return (
-    <>
-      <TopBar
-        text={`${
-          profile?.profileType === "user"
-            ? t("users.setting")
-            : t("pages.setting")
-        }`}
-      />
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="fixed top-0 z-20 pt-4 bg-white flex items-center w-full max-w-[500px]">
+        <TopBar
+          text={`${
+            profile?.profileType === "user"
+              ? t("users.setting")
+              : t("pages.setting")
+          }`}
+        />
+      </div>
 
-      <div className="mt-20 mx-4 ">
+      <div className="flex flex-col items-start justify-center w-full max-w-[500px] mt-20 ml-10">
         <EditType
           name={t("settings.general")}
           type="user"
@@ -85,10 +87,10 @@ const EditProfileMenu: React.FC = () => {
           icon={locationIcon}
         />
       </div>
-      <div className="mx-2 my-4">
+      <div className="flex flex-col items-start justify-center w-full max-w-[500px] ml-10 my-4">
         {profile?.profileType === "user" && (
           <div
-            className="flex items-center justify-between mr-4 mb-2"
+            className="flex items-center justify-between mr-4 mb-2 w-[50%]"
             onClick={showAccordion}
           >
             <p className="flex items-start mx-1 pb-1 text-xl font-medium">
@@ -151,7 +153,7 @@ const EditProfileMenu: React.FC = () => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

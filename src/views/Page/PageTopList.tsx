@@ -10,6 +10,7 @@ import { FileServerURL } from "../../api/FileApi";
 import { Link } from "react-router-dom";
 import FeedNoPage from "../NoPage/FeedNoPage";
 import profileDefault from "../../assets/userPics.jpg";
+import "../../styles/webResponsive.css";
 
 const PageTopList = () => {
   const profileConnectedUser = useFetchProfile();
@@ -47,7 +48,7 @@ const PageTopList = () => {
       {isProfileFetched && (
         <>
           {profileFollowed?.length! > 0 ? (
-            <div className="flex my-2 overflow-x-scroll no-scrollbar  w-full sm:w-[30%] pt-2 pb-0 pl-4 ">
+            <div className="flex my-2 overflow-x-scroll no-scrollbar w-full max-w-[600px] pt-2 pb-0 pl-4 ">
               {profileFollowed?.map((profile) => (
                 <div className="flex flex-col items-center mr-4">
                   <Link to={`/profile/${profile?._id}`}>

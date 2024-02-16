@@ -61,7 +61,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
         error.message;
       toast.error(error_message);
     } else {
-      window.location.replace("/");
+      window.location.reload();
       setTimeout(() => {
         toast.success("Comment removed");
       }, 1000);
@@ -91,10 +91,10 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
   }, [publicationId]);
 
   return (
-    <div className="w-full bg-white rounded-lg -mt-6 my-4 mx-6 z-50">
+    <div className="w-full max-w-[600px] bg-white rounded-lg -mt-6 my-4 mx-6 z-50">
       <h3 className="font-bold -mt-6 pb-2">{t("comments.name")}</h3>
-      <div className="flex flex-col overflow-y-auto custom-height-comment">
-        <div className="flex flex-col">
+      <div className="flex flex-col h-full custom-height-comment">
+        <div className="flex flex-col h-[40%] pb-8 overflow-y-scroll">
           {comments?.map((comment) => (
             <div className=" rounded-md p-3 border my-1 ">
               <div className="flex gap-3 items-center">
@@ -157,7 +157,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
           ))}
         </div>
 
-        <div className="bg-white w-full custom-form-comment">
+        <div className="bg-white w-full custom-form-comment max-w-[600px]">
           <textarea
             className="bg-gray-100 rounded  border leading-normal resize-none w-full h-20 py-2 pl-3 font-normal placeholder-gray-700 focus:outline-none focus:bg-white"
             name="body"

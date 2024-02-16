@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { addHistoryData } from "../store/reducer/history.reducer";
 import { IHistory } from "../types/historique.type";
+import "../styles/webResponsive.css";
 
 interface SearchBarProps {
   textFilter?: string;
@@ -62,8 +63,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ textFilter }) => {
   };
 
   return (
-    <div className="flex w-full">
-      <div className="relative w-full">
+    <div className="flex w-full mx-1 ">
+      <div className="relative w-full searchBar">
         <input
           type="search"
           id="search-dropdown"

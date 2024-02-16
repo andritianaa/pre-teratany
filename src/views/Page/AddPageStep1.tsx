@@ -70,14 +70,17 @@ const AddPageStep1: React.FC = () => {
   };
 
   return (
-    <>
-      <TopBar text={t("settings.addPage.name")} />
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="fixed top-0 z-20 pt-4 bg-white flex items-center w-full max-w-[500px]">
+        <TopBar text={t("settings.addPage.name")} />
+      </div>
+
       <InfoModal
         title={t("settings.addPage.titleModal")}
         text={t("settings.addPage.text")}
       />
 
-      <div className="mt-16 overflow-y-scroll flex flex-col items-center mx-4">
+      <div className="mt-16 flex flex-col items-center mx-4 w-full max-w-[450px]">
         <Formik
           initialValues={initialValues}
           validationSchema={Yup.object({
@@ -188,7 +191,7 @@ const AddPageStep1: React.FC = () => {
           </Form>
         </Formik>
       </div>
-    </>
+    </div>
   );
 };
 
