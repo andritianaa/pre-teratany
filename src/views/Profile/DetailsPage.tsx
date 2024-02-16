@@ -39,8 +39,8 @@ const DetailsPage: React.FC<DetailsProps> = ({
   const websiteIcon = <GiWorld size={23} />;
   const { t } = useTranslation();
   return (
-    <>
-      <div className="mt-2">
+    <div className="flex flex-col items-center w-full">
+      <div className="mt-2 w-full max-w-[600px]">
         <EditType
           name={
             profileType === "association"
@@ -105,7 +105,7 @@ const DetailsPage: React.FC<DetailsProps> = ({
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 
