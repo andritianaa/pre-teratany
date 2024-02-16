@@ -1,8 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { syncChat as syncChatRequest } from "../../api/chatApi";
-import { withAsync } from "../../helpers/withAsync";
-import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
-import { IHistory } from "../../types/historique.type";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface IMessage {
   _id: string;
   sender: IProfile;
