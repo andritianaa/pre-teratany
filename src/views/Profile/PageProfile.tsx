@@ -4,6 +4,13 @@ import Button from "../../components/common/Button";
 import { IProfile } from "../../types/profile.type";
 import pictureDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "../../store/store";
+import { Socket } from "socket.io-client";
+import { syncChat as syncChatApi } from "../../api/chatApi";
+
+import { openDiscussion, syncChat } from "../../store/reducer/chat.reducer";
 
 interface PageProfileProps {
   profile: IProfile;
@@ -12,13 +19,35 @@ interface PageProfileProps {
   changeDrawerStatus: () => void;
 }
 
-const PageProfile: React.FC<PageProfileProps> = ({
+export const PageProfile: React.FC<PageProfileProps> = ({
   profile,
   followText,
   follow,
   changeDrawerStatus,
 }) => {
+  const socket = useSelector<RootState>(
+    (state) => state.teratany_socket.socket
+  ) as Socket;
+
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const connectedUser = useSelector<RootState>(
+    (state) => state.teratany_user.id
+  ) as string;
+
+  const handdleMessage = () => {
+    socket.emit(
+      "new-conversation",
+      [connectedUser, profile._id],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
+  };
   return (
     <div className="flex flex-col w-full max-w-[600px] mt-16 pb-6 border-b border-gray-200">
       <div className="flex items-start w-full justify-around mx-2">
@@ -87,7 +116,12 @@ const PageProfile: React.FC<PageProfileProps> = ({
 
       <div className="flex items-center justify-center w-full mx-2">
         <Button width="w-1/2" height="h-7" name={followText} onClick={follow} />
-        <Button width="w-1/5" height="h-7" name={t("profile.message")} />
+        <Button
+          width="w-1/5"
+          height="h-7"
+          name={t("profile.message")}
+          onClick={handdleMessage}
+        />
         <Button
           width=""
           height="h-7"

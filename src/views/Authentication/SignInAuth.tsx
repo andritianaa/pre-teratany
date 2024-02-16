@@ -198,3 +198,9 @@ const SignInAuth: React.FC = () => {
 };
 
 export default SignInAuth;
+
+// const SignInAuth = () => {
+//   return <h1>Sign in </h1>;
+// };
+
+// export default SignInAuth;

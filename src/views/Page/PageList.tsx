@@ -49,8 +49,6 @@ const PageList = () => {
 
   useEffect(() => {
     setfilterPage(results?.profiles);
-
-    console.log(results?.profiles);
   }, [results]);
 
   return (

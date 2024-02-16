@@ -72,7 +72,7 @@ const AddPageStep2: React.FC = () => {
       >
         <LocationMarker />
       </MapContainerForm>
-      <div className="fixed bottom-0 z-1000 flex items-center justify-center p-4 w-full">
+      <div className="fixed bottom-12 z-1000 flex items-center justify-center p-4 w-full">
         <Button
           isLoading={isLoading}
           width="w-[90%]"

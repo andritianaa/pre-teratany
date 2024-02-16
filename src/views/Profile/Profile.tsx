@@ -60,7 +60,6 @@ const Profile: React.FC = () => {
         ThrowErrorHandler(error as ErrorData);
       } else {
         setProfile(response?.data as IProfile);
-        console.log("profile ", response?.data);
         const isProfileFollowed = response?.data as IProfile;
         setFollowText(
           isProfileFollowed?.isFollowed

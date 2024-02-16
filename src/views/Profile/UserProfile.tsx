@@ -4,7 +4,14 @@ import { FileServerURL } from "../../api/FileApi";
 import Button from "../../components/common/Button";
 import profileDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { syncChat } from "../../store/reducer/chat.reducer";
+import { syncChat as syncChatApi } from "../../api/chatApi";
+import { openDiscussion } from "../../store/reducer/chat.reducer";
+import { Socket } from "socket.io-client";
 interface UserProfileProps {
   profile: IProfile;
   idUserViewed: string;
@@ -20,6 +27,29 @@ const UserProfile: React.FC<UserProfileProps> = ({
   onClick,
   followText,
 }) => {
+  const socket = useSelector<RootState>(
+    (state) => state.teratany_socket.socket
+  ) as Socket;
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const connectedUser = useSelector<RootState>(
+    (state) => state.teratany_user.id
+  ) as string;
+
+  const handdleMessage = () => {
+    socket.emit(
+      "new-conversation",
+      [connectedUser, idUserViewed],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
+  };
+
   const { t } = useTranslation();
   return (
     <div className="mt-16 pb-3 flex w-full max-w-[600px] justify-around items-center border-b border-gray-200">
@@ -63,7 +93,12 @@ const UserProfile: React.FC<UserProfileProps> = ({
               name={followText}
               onClick={onClick}
             />
-            <Button width="w-1/3" height="h-7" name={t("profile.message")} />
+            <Button
+              width="w-1/3"
+              height="h-7"
+              name={t("profile.message")}
+              onClick={handdleMessage}
+            />
           </div>
         )}
       </div>

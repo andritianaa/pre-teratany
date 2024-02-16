@@ -22,8 +22,7 @@ const useFetchUserByToken = () => {
                 const { error, response } = await withAsync(() => getUserByToken(token));
                 if (error instanceof AxiosError) {
                     console.log(error)
-                    const error_message: string =
-                        error?.response?.data?.error?.description || error?.response?.data || error.message;
+                    const error_message: string = error?.response?.data?.error?.description || error?.response?.data || error.message;
                     toast.error(error_message);
                 } else {
                     setUser(response?.data as IProfile);

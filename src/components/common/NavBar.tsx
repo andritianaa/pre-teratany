@@ -18,6 +18,7 @@ import { AppThunkDispatch } from "../../store/store";
 import useToken from "../../hooks/useToken";
 import { IProfile } from "../../types/profile.type";
 import { fetchFeedPublications } from "../../store/reducer/publication.reducer";
+import { fetchFollowedProfiles } from "../../store/reducer/profile.reducer";
 
 const NavBar: React.FC = () => {
   const token = useToken();
@@ -28,8 +29,9 @@ const NavBar: React.FC = () => {
 
   const dispatch = useDispatch<AppThunkDispatch>();
 
-  const initHistoryAndPublication = async () => {
+  const initProfileData = async () => {
     if (profile) {
+      dispatch(fetchFollowedProfiles({ token, profileId: profile._id! }));
       dispatch(fetchProfileHistory({ token, profile: profile }));
       dispatch(fetchFeedPublications({ token, ownId: profile._id! }));
     }
@@ -44,7 +46,7 @@ const NavBar: React.FC = () => {
   };
 
   useEffect(() => {
-    initHistoryAndPublication();
+    initProfileData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile?._id]);
 
