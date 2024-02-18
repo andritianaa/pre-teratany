@@ -34,6 +34,17 @@ export const PageProfile: React.FC<PageProfileProps> = ({
 
   const handdleMessage = () => {
     socket.emit(
+      "new-canal",
+      [connectedUser, profile._id],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
+  };
+  const handdleChannel = () => {
+    socket.emit(
       "new-conversation",
       [connectedUser, profile._id],
       async (response: number) => {
@@ -110,7 +121,9 @@ export const PageProfile: React.FC<PageProfileProps> = ({
       </div>
 
       <div className="flex items-center mx-2">
-        <Button width="w-1/2" height="h-7" name={followText} onClick={follow} />
+        <Button width="w-full mb-2 " height="h-7" name={followText} onClick={follow} />
+      </div>
+      <div className="flex items-center mx-2">
         <Button
           width="w-1/2"
           height="h-7"
@@ -120,21 +133,10 @@ export const PageProfile: React.FC<PageProfileProps> = ({
         <Button
           width="w-1/2"
           height="h-7"
-          name={t("profile.message")}
-          onClick={handdleMessage}
+          name={t("chat.channel")}
+          onClick={handdleChannel}
         />
-        <Button
-          width="w-1/2"
-          height="h-7"
-          name={t("profile.message")}
-          onClick={handdleMessage}
-        />
-        <Button
-          width=""
-          height="h-7"
-          name={t("profile.details")}
-          onClick={changeDrawerStatus}
-        />
+        <Button width="" height="h-7" name="•••" onClick={changeDrawerStatus} />
       </div>
     </div>
   );
