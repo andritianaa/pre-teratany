@@ -8,17 +8,19 @@ import { syncChat } from "../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../api/chatApi";
 import { IProfile } from "../types/profile.type";
 
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { notifiate } from "../helpers/Notification";
 import { useAppSelector } from "../store/hooks";
 import { useGetFeedPublicationQuery } from "../services/api-services/publication/publication.endpoints";
+import SocketContext from "../services/socket/socketContext";
 
 const Home: React.FC = () => {
-  const { socket } = useAppSelector((state) => state.teratany_socket);
-
   const { profile } = useAppSelector((state) => state.teratany_user);
 
   const dispatch = useDispatch();
+
+  const { socket } = useContext(SocketContext);
+
   const syncChatCaller = async (
     profileId: string,
     conversationReferences: number[],
@@ -30,25 +32,31 @@ const Home: React.FC = () => {
   };
 
   const connection = (profileConnectedUser: IProfile) => {
-    syncChatCaller(
-      profileConnectedUser._id || "",
-      profileConnectedUser.conversations || [],
-      undefined
-    );
-    socket.on("connect", () => {});
-    socket.emit("connect-profile", profileConnectedUser._id);
-    socket.on("new-message", (message: any) => {
-      if (profileConnectedUser._id !== message.sender._id) {
-        console.log("Message ===> ", message);
-        notifiate(message.sender.name, "New message on Teratany", message.text);
-      }
-
+    if (socket) {
       syncChatCaller(
         profileConnectedUser._id || "",
         profileConnectedUser.conversations || [],
         undefined
       );
-    });
+      socket.on("connect", () => {});
+      socket.emit("connect-profile", profileConnectedUser._id);
+      socket.on("new-message", (message: any) => {
+        if (profileConnectedUser._id !== message.sender._id) {
+          console.log("Message ===> ", message);
+          notifiate(
+            message.sender.name,
+            "New message on Teratany",
+            message.text
+          );
+        }
+
+        syncChatCaller(
+          profileConnectedUser._id || "",
+          profileConnectedUser.conversations || [],
+          undefined
+        );
+      });
+    }
   };
 
   const { data: publications } = useGetFeedPublicationQuery(profile?._id!, {
@@ -59,18 +67,15 @@ const Home: React.FC = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  // const publications = useAppSelector(
-  //   (state) => state.teratany_publications.publications
-  // );
-
   useEffect(() => {
-    if (profile) {
+    if (profile && socket) {
       connection(profile);
       socket.on("disconnect", () => {
         connection(profile);
       });
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="bg-gray-100 flex flex-col items-center justify-center h-full w-full mt-12">
