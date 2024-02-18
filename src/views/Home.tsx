@@ -52,7 +52,11 @@ const Home: React.FC = () => {
   };
 
   const { data: publications } = useGetFeedPublicationQuery(profile?._id!, {
+    // skip the request if parameter is not exist (i.e: the request is not passing)
     skip: !profile?._id,
+    //refetch on mount or arg change but not re-rendering the component if there is no new data, he
+    // gives the existing cached data or gives the new data if there is an update
+    refetchOnMountOrArgChange: true,
   });
 
   // const publications = useAppSelector(

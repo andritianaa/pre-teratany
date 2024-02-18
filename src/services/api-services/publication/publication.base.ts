@@ -20,7 +20,12 @@ export const publicationsApi = createApi({
       return headers;
     },
   }),
-  endpoints: () => ({}),
+  //  try to refetch all subscribed queries after regaining a network connection.
+  // this will not be evaluated until skip is false.
+  refetchOnReconnect: true,
+  endpoints: () => ({
+    
+  }),
 });
 
 export default publicationsApi;
