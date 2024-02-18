@@ -1,6 +1,6 @@
 // import SearchBar from "../../components/common/SearchBar";
 import TopBar from "../../components/layouts/TopBar";
-import ChatList from "./components/ChatList";
+import ChatList from "../../components/Chat/ChatList";
 import { useAppSelector } from "../../store/hooks";
 
 export const HomeChat: React.FC = () => {

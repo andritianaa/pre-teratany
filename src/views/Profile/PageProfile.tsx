@@ -118,6 +118,18 @@ export const PageProfile: React.FC<PageProfileProps> = ({
           onClick={handdleMessage}
         />
         <Button
+          width="w-1/2"
+          height="h-7"
+          name={t("profile.message")}
+          onClick={handdleMessage}
+        />
+        <Button
+          width="w-1/2"
+          height="h-7"
+          name={t("profile.message")}
+          onClick={handdleMessage}
+        />
+        <Button
           width=""
           height="h-7"
           name={t("profile.details")}

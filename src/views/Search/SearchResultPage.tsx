@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "components/common/SearchBar";
 import SearchFilterBar from "components/common/SearchFilterBar";
 import { HiArrowNarrowLeft } from "react-icons/hi";
-import Publication from "components/publication/Publication";
+import Publication from "components/Publication/Publication";
 import HorizontalCards from "components/common/HorizontalCards";
 import { useParams } from "react-router-dom";
 import useFetchSearchByQuery from "hooks/useFetchSearchByQuery";

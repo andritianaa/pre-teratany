@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import TopNavBarProfile from "components/layouts/TopNavBarProfile";
-import Publication from "components/publication/Publication";
+import Publication from "components/Publication/Publication";
 import SwitchAccountDrawer from "components/drawer/SwitchAccountDrawer";
 import { IProfile } from "types/profile.type";
 import { BottomDrawer } from "components/drawer/BottomDrawer";

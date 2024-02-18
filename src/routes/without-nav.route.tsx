@@ -4,7 +4,7 @@ import RegisterAuth from "../views/Authentication/RegisterAuth";
 import ForgotPassword from "../views/Authentication/ForgotPassword";
 import ResetPassword from "../views/Authentication/ResetPassword";
 import { routes } from "../constants/route.contant";
-import { OneChat } from "../views/Chat/OneChat";
+import { OneChat } from "../views/chat/OneChat";
 
 const withoutNavRouter: RouteObject[] = [
   {

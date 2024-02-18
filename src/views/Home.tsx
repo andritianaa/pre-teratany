@@ -1,5 +1,5 @@
 import TopNavBar from "../components/layouts/TopNavBar";
-import Publication from "../components/publication/Publication";
+import Publication from "../components/Publication/Publication";
 import PageTopList from "../views/Page/PageTopList";
 import { useDispatch } from "react-redux";
 

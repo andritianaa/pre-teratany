@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import profileDefault from "../../../assets/userPics.jpg";
-import { openDiscussion } from "../../../store/reducer/chat.reducer";
+import profileDefault from "../../assets/userPics.jpg";
+import { openDiscussion } from "../../store/reducer/chat.reducer";
 import { useDispatch } from "react-redux";
-import { FileServerURL } from "../../../api/FileApi";
+import { FileServerURL } from "../../api/FileApi";
 
 interface PageListCardsProps {
   name: string;

@@ -3,7 +3,7 @@ import { IProfile } from "../../types/profile.type";
 import profileDefault from "../../assets/userPics.jpg";
 import { useEffect, useRef, useState } from "react";
 import { FileServerURL } from "../../api/FileApi";
-import { Message } from "./components/Message";
+import { Message } from "../../components/Chat/Message";
 import { useAppSelector } from "../../store/hooks";
 
 export const OneChat: React.FC = () => {
