@@ -16,7 +16,6 @@ import DetailsPage from "./DetailsPage";
 import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
-
 const Profile: React.FC = () => {
   const token = useToken();
 
@@ -29,7 +28,7 @@ const Profile: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false);
   const [followText, setFollowText] = React.useState<string>();
   const [publications, setPublications] = React.useState<IPublication[]>();
-  
+
   const [isProfileFetched, setIsProfileFetched] =
     React.useState<Boolean>(false);
   const { t } = useTranslation();
@@ -133,7 +132,7 @@ const Profile: React.FC = () => {
     fetchProfile();
     fetchPublications();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, profileConnectedUser?._id]);
+  }, []);
 
   return (
     <>

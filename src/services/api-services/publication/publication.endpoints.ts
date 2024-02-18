@@ -5,6 +5,7 @@ import { publicationUrls } from "./publication.url";
 const publicationsEndpointApi = publicationsApi.injectEndpoints({
   endpoints: (builder) => ({
     getFeedPublication: builder.query<IPublication[], string>({
+      keepUnusedDataFor: 300,
       query: (ownId) => ({
         url: `${publicationUrls.getFeedPublication}/${ownId}`,
         method: "GET",

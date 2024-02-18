@@ -11,6 +11,7 @@ import { IProfile } from "../types/profile.type";
 import React, { useEffect } from "react";
 import { notifiate } from "../helpers/Notification";
 import { useAppSelector } from "../store/hooks";
+import { useGetFeedPublicationQuery } from "../services/api-services/publication/publication.endpoints";
 
 const Home: React.FC = () => {
   const { socket } = useAppSelector((state) => state.teratany_socket);
@@ -50,9 +51,13 @@ const Home: React.FC = () => {
     });
   };
 
-  const publications = useAppSelector(
-    (state) => state.teratany_publications.publications
-  );
+  const { data: publications } = useGetFeedPublicationQuery(profile?._id!, {
+    skip: !profile?._id,
+  });
+
+  // const publications = useAppSelector(
+  //   (state) => state.teratany_publications.publications
+  // );
 
   useEffect(() => {
     if (profile) {
