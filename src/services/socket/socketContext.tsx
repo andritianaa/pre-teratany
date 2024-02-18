@@ -6,7 +6,7 @@ type SocketContextType = {
 };
 
 const SocketContext = React.createContext<SocketContextType>({
-  socket: io("http://localhost:9900"),
+  socket: io(process.env.REACT_APP_BASE_URL!),
 });
 
 export default SocketContext;

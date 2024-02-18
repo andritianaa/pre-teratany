@@ -8,7 +8,9 @@ interface SocketContextProps {
 
 const SocketProvider: React.FC<SocketContextProps> = ({ children }) => {
   return (
-    <SocketContext.Provider value={{ socket: io("http://localhost:9900") }}>
+    <SocketContext.Provider
+      value={{ socket: io(process.env.REACT_APP_BASE_URL!) }}
+    >
       {children}
     </SocketContext.Provider>
   );
