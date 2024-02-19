@@ -3,7 +3,7 @@ import { Drawer } from "@material-tailwind/react";
 import { HiOutlineXMark } from "react-icons/hi2";
 import Comments from "../../views/Comments/Comments";
 import { useState, useEffect } from "react";
-import "../styles/webResponsive.css";
+import "../../styles/webResponsive.css";
 
 type DrawerProps = {
   isOpen?: boolean;
