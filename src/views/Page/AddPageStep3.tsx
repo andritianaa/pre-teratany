@@ -1,11 +1,9 @@
 import { CheckboxButton } from "../../components/page/CategoryCheckbox";
 import Button from "../../components/common/Button";
-import TopBar from "../../components/common/TopBar";
+import TopBar from "../../components/layouts/TopBar";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
 import { withAsync } from "../../helpers/withAsync";
 import { addPage } from "../../api/PageApi";
 import useToken from "../../hooks/useToken";
@@ -14,23 +12,20 @@ import {
   resetPageInfo,
 } from "../../store/reducer/page.reducer";
 import { AxiosError } from "axios";
-import { useDispatch } from "react-redux";
 import { CategorieList } from "../../constants/PageCategory";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { addAccountConnected } from "../../store/reducer/account.reducer";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const AddPageStep3: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const token = useToken();
-  const dispatch = useDispatch<AppDispatch>();
-  const profile = useFetchProfile();
+  const dispatch = useAppDispatch();
+  const { profile } = useAppSelector((state) => state.teratany_user);
   const { t } = useTranslation();
 
-  const page: PageInitialState = useSelector<RootState>(
-    (state) => state.teratany_page
-  ) as PageInitialState;
+  const page: PageInitialState = useAppSelector((state) => state.teratany_page);
 
   let categories: Array<string> = [];
 

@@ -3,7 +3,6 @@ import Button from "../../components/common/Button";
 import { withAsync } from "../../helpers/withAsync";
 import useToken from "../../hooks/useToken";
 import { deleteComment, getComments, postComment } from "../../api/CommentApi";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { IComment } from "../../types/comment.type";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -17,6 +16,7 @@ import {
 } from "@material-tailwind/react";
 import profileDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 interface CommentProps {
   publicationId: string;
@@ -26,7 +26,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
   const token = useToken();
   const [content, setContent] = React.useState<string>();
   const [comments, setComments] = React.useState<IComment[]>();
-  const profile = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const addComment = async () => {
     const { error } = await withAsync(() =>

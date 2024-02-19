@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { followProfile } from "api/ProfileApi";
 import useToken from "hooks/useToken";
 import { withAsync } from "helpers/withAsync";
-import useFetchProfile from "hooks/useFetchProfile";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
 import { FileServerURL } from "../../../api/FileApi";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../../store/hooks";
 interface PageListCardsProps {
   _id: string;
   name: string;
@@ -29,8 +29,7 @@ const PageListCard: React.FC<PageListCardsProps> = ({
   const { t } = useTranslation();
 
   const [followText, setFollowText] = useState<string>("...");
-
-  const profileConnectedUser = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const follow = async () => {
     setFollowText(
@@ -39,7 +38,7 @@ const PageListCard: React.FC<PageListCardsProps> = ({
         : t("followers.follow")
     );
     const { error } = await withAsync(() =>
-      followProfile(token, profileConnectedUser?._id, _id)
+      followProfile(token, profile?._id, _id)
     );
     if (error) {
       ThrowErrorHandler(error as ErrorData);

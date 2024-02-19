@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Button from "./common/Button";
-import { FileServerURL } from "../api/FileApi";
-import { withAsync } from "../helpers/withAsync";
-import { followProfile } from "../api/ProfileApi";
-import useFetchProfile from "../hooks/useFetchProfile";
-import useToken from "../hooks/useToken";
+import Button from "./Button";
+import { FileServerURL } from "../../api/FileApi";
+import { withAsync } from "../../helpers/withAsync";
+import { followProfile } from "../../api/ProfileApi";
+import useToken from "../../hooks/useToken";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { addSearchHistory } from "../api/SearchApi";
-import { ErrorData, ThrowErrorHandler } from "../helpers/HandleError";
-import profileDefault from "../assets/userPics.jpg";
+import { addSearchHistory } from "../../api/SearchApi";
+import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
+import profileDefault from "../../assets/userPics.jpg";
 import { useDispatch } from "react-redux";
-import { addHistoryData } from "../store/reducer/history.reducer";
-import { IHistory } from "../types/historique.type";
+import { addHistoryData } from "../../store/reducer/history.reducer";
+import { IHistory } from "../../types/historique.type";
+import { useAppSelector } from "../../store/hooks";
 import { useTranslation } from "react-i18next";
 
 interface horizontalCardsProps {
@@ -35,7 +35,8 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
 }) => {
   const token = useToken();
   const { t } = useTranslation();
-  const profileConnectedUser = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
   const [followText, setFollowText] = useState<string>(
     isFollowed! === true ? t("followers.unfollow") : t("followers.follow")
   );
@@ -48,7 +49,7 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
         : t("followers.follow")
     );
     const { error } = await withAsync(() =>
-      followProfile(token, profileConnectedUser?._id, _id)
+      followProfile(token, profile?._id, _id)
     );
     if (error instanceof AxiosError) {
       const error_message: string =
@@ -66,13 +67,7 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
   ) => {
     if (query.length > 4 && query.length < 20) {
       const { error, response } = await withAsync(() =>
-        addSearchHistory(
-          token,
-          profileConnectedUser?._id!,
-          query,
-          profileId,
-          pictureUrl
-        )
+        addSearchHistory(token, profile?._id!, query, profileId, pictureUrl)
       );
       if (error) {
         ThrowErrorHandler(error as ErrorData);
@@ -80,7 +75,7 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
         const historyData = response?.data as IHistory;
         dispatch(
           addHistoryData({
-            owner: profileConnectedUser?._id!,
+            owner: profile?._id!,
             text: query,
             profileId,
             pictureUrl,
@@ -91,7 +86,7 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
     }
   };
 
-  useEffect(() => {}, [profileConnectedUser?._id, _id]);
+  useEffect(() => {}, [profile?._id, _id]);
 
   return (
     <div className="mx-1 w-full p-2 ">

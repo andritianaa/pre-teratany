@@ -9,10 +9,9 @@ import ErrorMessageForm from "components/common/ErrorMessageForm";
 import { withAsync } from "helpers/withAsync";
 import { registerAuth } from "api/AuthenticationApi";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "store/store";
 import {
   UserInitialState,
+  fetchConnectedProfile,
   setAuthentication,
 } from "store/reducer/user.reducer";
 import jwtDecode from "jwt-decode";
@@ -21,6 +20,7 @@ import useLoadingButton from "hooks/useLoadingButton";
 import { resetAccountConnected } from "store/reducer/account.reducer";
 import { ErrorData, ThrowErrorHandler } from "helpers/HandleError";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../store/hooks";
 
 interface signupFormValues {
   email: string;
@@ -30,7 +30,7 @@ interface signupFormValues {
 
 const RegisterAuth: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const { t } = useTranslation();
 
@@ -57,12 +57,12 @@ const RegisterAuth: React.FC = () => {
       dispatch(
         setAuthentication({
           id: user.id,
-          name: user.name,
-          email: user.email,
           token,
           isAuthenticated: true,
         })
       );
+
+      dispatch(fetchConnectedProfile({ token, profileId: user.id! }));
       dispatch(resetAccountConnected());
       navigate("/");
       const registersuccess = t("authregister.successregister");

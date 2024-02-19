@@ -1,13 +1,10 @@
-import { useSelector } from "react-redux";
-import TopBar from "../../components/common/TopBar";
-import ChatList from "../Page/components/ChatList";
-import { RootState } from "../../store/store";
-import { IConversation } from "../../store/reducer/chat.reducer";
+// import SearchBar from "../../components/common/SearchBar";
+import TopBar from "../../components/layouts/TopBar";
+import ChatList from "../../components/Chat/ChatList";
+import { useAppSelector } from "../../store/hooks";
 
 export const HomeChat: React.FC = () => {
-  const chats = useSelector<RootState>(
-    (state) => state.teratany_chat.discussions
-  ) as IConversation[];
+  const { discussions: chats } = useAppSelector((state) => state.teratany_chat);
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -19,7 +16,7 @@ export const HomeChat: React.FC = () => {
         {/* <div className="pl-2 pr-2 mb-2 w-full">
                     <SearchBar />
                 </div> */}
-        {chats.map((chat, index) => (
+        {chats.map((chat: any, index: number) => (
           <ChatList
             key={index}
             image={chat.participants[0].image}

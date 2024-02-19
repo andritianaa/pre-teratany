@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import defaultProfilePicture from "../../assets/userPics.jpg";
 import Button from "../../components/common/Button";
-import TopBar from "../../components/common/TopBar";
+import TopBar from "../../components/layouts/TopBar";
 import { withAsync } from "../../helpers/withAsync";
 import { updateProfileImage } from "../../api/ProfileApi";
 import useToken from "../../hooks/useToken";
@@ -9,9 +9,9 @@ import { AxiosError } from "axios";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import { toast } from "react-toastify";
 import { FileServerURL, uploadFile } from "../../api/FileApi";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import profileDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 const ProfilePicture: React.FC = () => {
   const token = useToken();
@@ -20,6 +20,9 @@ const ProfilePicture: React.FC = () => {
   const [fileViewer, setFileViewer] = useState<string>(defaultProfilePicture);
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const { t } = useTranslation();
+
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
 
   const handleChange = (e: any) => {
     setFileViewer(URL.createObjectURL(e.target.files[0]));
@@ -70,7 +73,6 @@ const ProfilePicture: React.FC = () => {
     }
   };
 
-  const profile = useFetchProfile();
 
   useEffect(() => {
     if (profile?.image) {

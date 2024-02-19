@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SwitchToggle from "../../components/common/switchToggle";
 import Button from "../../components/common/Button";
-import TopBar from "../../components/common/TopBar";
-import MapContainerForm from "../../components/MapContainer";
+import TopBar from "../../components/layouts/TopBar";
+import MapContainerForm from "../../components/common/MapContainer";
 import { Marker, useMapEvents } from "react-leaflet";
 import { MARKER_USER } from "../../constants/MarkerIcon";
 import { withAsync } from "../../helpers/withAsync";
@@ -11,8 +11,8 @@ import useToken from "../../hooks/useToken";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 type PositionMarkerType = {
   lat: number;
@@ -36,7 +36,7 @@ const LocationMarker = () => {
 
 const ProfileLocation: React.FC = () => {
   const token = useToken();
-  const profile = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const [locationStatus, setLocationStatus] = useState<boolean>();

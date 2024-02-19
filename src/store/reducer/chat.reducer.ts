@@ -44,19 +44,11 @@ const initialState: chatInitialState = {
   activeDiscussionReference: 0,
 };
 
-interface ChatSyncProperty {
-  profileId: string;
-  conversationReferences: number[];
-  fromDate: Date | undefined;
-}
-
 export const chatSlice = createSlice({
   name: "teratany_chat",
   initialState,
   reducers: {
     syncChat: (state, action: PayloadAction<any>) => {
-      console.log("sync chat reducer ==>> ", action.payload);
-
       // state.discussions = action.payload
       state.discussions = action.payload;
 

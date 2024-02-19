@@ -4,13 +4,12 @@ import Button from "../../components/common/Button";
 import { IProfile } from "../../types/profile.type";
 import pictureDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../store/store";
-import { Socket } from "socket.io-client";
 import { syncChat as syncChatApi } from "../../api/chatApi";
 
 import { openDiscussion, syncChat } from "../../store/reducer/chat.reducer";
+import { useAppSelector } from "../../store/hooks";
 
 interface PageProfileProps {
   profile: IProfile;
@@ -25,24 +24,31 @@ export const PageProfile: React.FC<PageProfileProps> = ({
   follow,
   changeDrawerStatus,
 }) => {
-  const socket = useSelector<RootState>(
-    (state) => state.teratany_socket.socket
-  ) as Socket;
+  const socket = useAppSelector((state) => state.teratany_socket.socket);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const connectedUser = useSelector<RootState>(
-    (state) => state.teratany_user.id
-  ) as string;
+  const connectedUser = useAppSelector((state) => state.teratany_user.id);
 
   const handdleMessage = () => {
+    socket.emit(
+      "new-canal",
+      [connectedUser, profile._id],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
+  };
+  const handdleChannel = () => {
     socket.emit(
       "new-conversation",
       [connectedUser, profile._id],
       async (response: number) => {
-        dispatch(syncChat(await syncChatApi(connectedUser, [], undefined)));
+        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
         navigate("/chat/one");
         dispatch(openDiscussion(response));
       }
@@ -123,11 +129,12 @@ export const PageProfile: React.FC<PageProfileProps> = ({
           onClick={handdleMessage}
         />
         <Button
-          width=""
+          width="w-1/2"
           height="h-7"
-          name={t("profile.details")}
-          onClick={changeDrawerStatus}
+          name={t("chat.channel")}
+          onClick={handdleChannel}
         />
+        <Button width="" height="h-7" name="•••" onClick={changeDrawerStatus} />
       </div>
     </div>
   );

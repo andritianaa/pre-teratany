@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TopBar from "../../components/common/TopBar";
+import TopBar from "../../components/layouts/TopBar";
 import FormField from "../../components/common/FormField";
 import Button from "../../components/common/Button";
 import { Formik, Form } from "formik";
@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { InfoModal } from "../../components/common/InfoModal";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import ErrorMessageForm from "../../components/common/ErrorMessageForm";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
 import { resetPageInfo, setPageInfo } from "../../store/reducer/page.reducer";
 import SelectCountryPage from "./components/SelectCountryPage";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../store/hooks";
 
 interface addNewPageField {
   name: string;
@@ -34,7 +33,7 @@ const initialValues: addNewPageField = {
 
 const AddPageStep1: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const [isLoading, startLoading] = useLoadingButton();
   const [profileType, setProfileType] = useState<string>("association");
   const [country, setCountry] = useState<string>("Madagascar");

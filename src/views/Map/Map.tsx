@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import MapContainerForm from "../../components/MapContainer";
-import { SlideOver } from "../../components/SlideOver";
+import MapContainerForm from "../../components/common/MapContainer";
+import { SlideOver } from "../../components/common/SlideOver";
 import { Marker, Popup, useMap } from "react-leaflet";
 import { MARKER_USER } from "../../constants/MarkerIcon";
 import { MARKER_ASSOCIATION } from "../../constants/MarkerIcon";
@@ -11,8 +11,6 @@ import useToken from "../../hooks/useToken";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { IProfile } from "../../types/profile.type";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
 import { Link } from "react-router-dom";
 import { FileServerURL } from "../../api/FileApi";
 import ProfilePicture from "../../assets/userPics.jpg";
@@ -20,29 +18,28 @@ import {
   setCoordonates,
   setProfilesWithCoordonates,
 } from "../../store/reducer/page.reducer";
-import { useDispatch } from "react-redux";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
-type profileCoordonatesType = {
-  latitude: number;
-  longitude: number;
-};
 const MapCoordonatesProfileSelected = () => {
-  const profileCoordonates = useSelector<RootState>(
+  const profileCoordonates = useAppSelector(
     (state) => state.teratany_page.profileCoordonates
-  ) as profileCoordonatesType;
+  );
   const map = useMap();
 
   useEffect(() => {
     map.flyTo(
-      { lat: profileCoordonates.latitude, lng: profileCoordonates.longitude },
+      {
+        lat: profileCoordonates?.latitude!,
+        lng: profileCoordonates?.longitude!,
+      },
       map.getZoom(),
       { animate: true }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profileCoordonates.latitude, profileCoordonates.longitude]);
+  }, [profileCoordonates?.latitude!, profileCoordonates?.longitude!]);
 
   return null;
 };
@@ -52,7 +49,7 @@ const Map = () => {
   const token = useToken();
   const [profiles, setProfiles] = useState<IProfile[]>();
   const [profilesSearched, setProfilesSearched] = useState<IProfile[]>();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const initialiseMapCoordonates = () => {
     dispatch(

@@ -2,15 +2,12 @@ import { FileServerURL } from "../../api/FileApi";
 import { Link } from "react-router-dom";
 import FeedNoPage from "../NoPage/FeedNoPage";
 import profileDefault from "../../assets/userPics.jpg";
-import "../../styles/webResponsive.css";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { IProfile } from "../../types/profile.type";
+import { useAppSelector } from "../../store/hooks";
 
 const PageTopList = () => {
-  const profileFollowed = useSelector<RootState>(
+  const profileFollowed = useAppSelector(
     (state) => state.teratany_profiles.followed_profiles
-  ) as IProfile[];
+  );
 
   return (
     <>

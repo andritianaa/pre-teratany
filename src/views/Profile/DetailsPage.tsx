@@ -6,7 +6,7 @@ import { GiWorld } from "react-icons/gi";
 import { IoMailUnreadOutline } from "react-icons/io5";
 import { MdLocationCity } from "react-icons/md";
 import React from "react";
-import EditType from "../../components/EditType";
+import EditType from "../../components/common/EditType";
 import { useTranslation } from "react-i18next";
 
 interface DetailsProps {

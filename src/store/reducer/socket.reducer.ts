@@ -6,7 +6,8 @@ interface SocketInitialState {
 }
 
 const initialState: SocketInitialState = {
-  socket: io("https://backend.teratany.org").connect(),
+  socket: io("http://localhost:9900").connect(),
+  // socket: io("https://backend.teratany.org").connect(),
 };
 
 export const socketIOSlice = createSlice({

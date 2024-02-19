@@ -1,5 +1,5 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import NavBar from "../components/common/NavBar";
+import NavBar from "../components/layouts/NavBar";
 import ProtectedRoute from "../services/ProtectedRoute";
 import withoutNavRouter from "./without-nav.route";
 import withNavRouter from "./with-nav.route";

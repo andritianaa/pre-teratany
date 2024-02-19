@@ -1,15 +1,13 @@
 import React from "react";
-import SearchBar from "../../components/SearchBar";
-import RecentCard from "../../components/RecentCard";
-import { IHistory } from "../../types/historique.type";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import SearchBar from "../../components/common/SearchBar";
+import RecentCard from "../../components/common/RecentCard";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 const Search: React.FC = () => {
-  const profileSearchHistory = useSelector<RootState>(
+  const profileSearchHistory = useAppSelector(
     (state) => state.teratany_profile_history.history
-  ) as IHistory[];
+  );
   const { t } = useTranslation();
   return (
     <div className="bg-gray-100 flex flex-col items-center w-full h-screen">

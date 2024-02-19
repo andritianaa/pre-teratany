@@ -3,13 +3,12 @@ import { AiFillHeart } from "@react-icons/all-files/ai/AiFillHeart";
 import { FaRegComment } from "@react-icons/all-files/fa/FaRegComment";
 import { FiSend } from "@react-icons/all-files/fi/FiSend";
 import { useState } from "react";
-import { DrawerContainer } from "../DrawerContainer";
+import { DrawerContainer } from "../drawer/DrawerContainer";
 import { FileServerURL } from "../../api/FileApi";
 import { ConvertDate } from "../../helpers/DateConverter";
 import { withAsync } from "../../helpers/withAsync";
 import { toggleReactPublication } from "../../api/PublicationApi";
 import useToken from "../../hooks/useToken";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import moment from "moment";
@@ -22,6 +21,7 @@ import "swiper/css/pagination";
 import "../../styles/SwiperPublication.css";
 import { Pagination } from "swiper/modules";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 interface PublicationProps {
   _id?: string;
@@ -53,7 +53,7 @@ const Publication: React.FC<PublicationProps> = ({
   const [isFullContent, setIsFullContent] = useState<boolean>(false);
   const [react, setReact] = useState<number>(reactions!);
   const token = useToken();
-  const profile = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
   const { t } = useTranslation();
 
   const handleClickLikePost = async (_id: string) => {

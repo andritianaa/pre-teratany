@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { IProfile } from "../../types/profile.type";
+import { IProfile } from "types/profile.type";
+import { RootState } from "../../store/hooks";
 
 interface Props {
   message: string;
