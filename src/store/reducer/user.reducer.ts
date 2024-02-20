@@ -49,6 +49,13 @@ export const userSlice = createSlice({
     setAuthentication: (state, action: PayloadAction<UserInitialState>) => {
       state.id = action.payload.id;
       state.token = action.payload.token;
+      state.isAuthenticated = action.payload.isAuthenticated;
+      state.profile = action.payload.profile;
+    },
+    syncAuthProfile: (state) => {
+      state.id = undefined;
+      state.token = undefined;
+      state.profile = undefined;
       state.isAuthenticated = true;
     },
     resetUserAuthentication: () => initialState,
@@ -60,5 +67,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setAuthentication, resetUserAuthentication } = userSlice.actions;
+export const { setAuthentication, resetUserAuthentication, syncAuthProfile } =
+  userSlice.actions;
 export default userSlice.reducer;
