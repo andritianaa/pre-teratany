@@ -234,6 +234,9 @@
       "new":"Teny miafina vaovao",
       "code":"Kaody fanamafisana",
       "validate":"Ovaina"
+    },
+    "chat":{
+      "channel":"Channel"
     }
   
 }

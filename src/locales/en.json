@@ -233,6 +233,9 @@
     "new":"New password",
     "code":"Verfication code",
     "validate":"Change password"
+  },
+  "chat":{
+    "channel":"Channel"
   }
 
     

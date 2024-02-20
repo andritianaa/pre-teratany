@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import TopNavBarProfile from "components/TopNavBarProfile";
+import TopNavBarProfile from "components/layouts/TopNavBarProfile";
 import Publication from "components/Publication/Publication";
-import SwitchAccountDrawer from "components/SwitchAccountDrawer";
+import SwitchAccountDrawer from "components/drawer/SwitchAccountDrawer";
 import { IProfile } from "types/profile.type";
-import { BottomDrawer } from "components/common/BottomDrawer";
+import { BottomDrawer } from "components/drawer/BottomDrawer";
 import { withAsync } from "helpers/withAsync";
 import { followProfile, getById } from "api/ProfileApi";
 import { useParams } from "react-router-dom";
 import useToken from "hooks/useToken";
-import useFetchProfile from "hooks/useFetchProfile";
 import { getPublicationByProfile } from "../../api/PublicationApi";
 import { IPublication } from "../../types/publication.type";
 import UserProfile from "./UserProfile";
@@ -16,16 +15,20 @@ import PageProfile from "./PageProfile";
 import DetailsPage from "./DetailsPage";
 import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
 import { useTranslation } from "react-i18next";
-
+import { useAppSelector } from "../../store/hooks";
 const Profile: React.FC = () => {
   const token = useToken();
-  const profileConnectedUser = useFetchProfile();
+
+  const { profile: profileConnectedUser } = useAppSelector(
+    (state) => state.teratany_user
+  );
 
   const [profile, setProfile] = React.useState<IProfile>();
   const [openBottom, setOpenBottom] = React.useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false);
   const [followText, setFollowText] = React.useState<string>();
   const [publications, setPublications] = React.useState<IPublication[]>();
+
   const [isProfileFetched, setIsProfileFetched] =
     React.useState<Boolean>(false);
   const { t } = useTranslation();
@@ -60,7 +63,6 @@ const Profile: React.FC = () => {
         ThrowErrorHandler(error as ErrorData);
       } else {
         setProfile(response?.data as IProfile);
-        console.log("profile ", response?.data);
         const isProfileFollowed = response?.data as IProfile;
         setFollowText(
           isProfileFollowed?.isFollowed
@@ -130,7 +132,7 @@ const Profile: React.FC = () => {
     fetchProfile();
     fetchPublications();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, profileConnectedUser?._id]);
+  }, []);
 
   return (
     <>
@@ -200,16 +202,3 @@ const Profile: React.FC = () => {
 };
 
 export default Profile;
-
-interface IODD {
-  text: string;
-}
-export const ODD: React.FC<IODD> = ({ text }) => {
-  return (
-    <label className="inline-flex items-center mt-1">
-      <span className="text-gray-500 bg-white rounded-full border border-gray-200 text-sm font-medium px-5 py-2.5 mr-3">
-        {text}
-      </span>
-    </label>
-  );
-};

@@ -9,8 +9,8 @@ import {
 import { IProfile } from "types/profile.type";
 import { FileServerURL } from "api/FileApi";
 import { useDispatch } from "react-redux";
-import { setCoordonates } from "../store/reducer/page.reducer";
-import profileDefault from "../assets/userPics.jpg";
+import { setCoordonates } from "store/reducer/page.reducer";
+import profileDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
 
 interface ProfileListMapProps {

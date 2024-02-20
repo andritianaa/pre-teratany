@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
-import SearchBar from "../../components/SearchBar";
-import TopBar from "../../components/common/TopBar";
+import SearchBar from "../../components/common/SearchBar";
+import TopBar from "../../components/layouts/TopBar";
 import PageListCard from "./components/PageListCard";
 import { useParams } from "react-router-dom";
 import useFetchSearchByQuery from "../../hooks/useFetchSearchByQuery";
 import { ProfileFilter } from "../../types/profile.type";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 const PageList = () => {
   const [activeBage, setActiveBage] = useState<boolean | null>(null);
   const { query } = useParams();
-  const profileConnected = useFetchProfile();
+
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const results = useFetchSearchByQuery(query!, "n");
   const { t } = useTranslation();
@@ -40,7 +41,7 @@ const PageList = () => {
         name={page?.name}
         followers={page?.numberOfFollowers}
         isFollowed={page?.isFollowed}
-        isOwner={page?._id === profileConnected?._id}
+        isOwner={page?._id === profile?._id}
         image={page?.image}
         profileType={page?.profileType}
       />
@@ -49,8 +50,6 @@ const PageList = () => {
 
   useEffect(() => {
     setfilterPage(results?.profiles);
-
-    console.log(results?.profiles);
   }, [results]);
 
   return (

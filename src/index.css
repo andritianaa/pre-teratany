@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -63,4 +68,35 @@
 }
 .react-emoji-picker {
   top: 8rem !important;
+}
+
+.text-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.truncated-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.truncated-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  max-width: 4rem;
+  min-width: 4rem;
+}
+
+.bg-opacity-60 {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: "red" !important;
 }

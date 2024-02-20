@@ -1,12 +1,9 @@
 import React from "react";
 import { Drawer, Typography, IconButton } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
-import PageSwitchCard from "./PageSwitchCard";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import useFetchUserByToken from "../hooks/useFetchUserByToken";
-import useFetchProfile from "../hooks/useFetchProfile";
+import PageSwitchCard from "../common/PageSwitchCard";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 interface DrawerProps {
   openBottom: any;
@@ -25,18 +22,14 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
   };
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const userConnected = useFetchUserByToken();
 
-  let accounts: any = useSelector<RootState>(
-    (state) => state.teratany_account.account
-  );
+  let accounts = useAppSelector((state) => state.teratany_account.account);
 
-  const profileConnectedUser = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
   const { t } = useTranslation();
 
-  accounts = accounts.filter(
-    (account: any) => account.id !== profileConnectedUser?._id
-  );
+  accounts = accounts.filter((account: any) => account.id !== profile?._id);
 
   useEffect(() => {
     setIsDrawerOpen(openBottom);
@@ -56,7 +49,7 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
 
   return (
     <>
-      {userConnected?.administratedProfiles?.length! > 0 ? (
+      {profile?.administratedProfiles?.length! > 0 ? (
         <React.Fragment>
           <Drawer
             placeholder=""

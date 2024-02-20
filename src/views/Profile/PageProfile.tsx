@@ -4,6 +4,12 @@ import Button from "../../components/common/Button";
 import { IProfile } from "../../types/profile.type";
 import pictureDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { syncChat as syncChatApi } from "../../api/chatApi";
+
+import { openDiscussion, syncChat } from "../../store/reducer/chat.reducer";
+import { useAppSelector } from "../../store/hooks";
 
 interface PageProfileProps {
   profile: IProfile;
@@ -12,13 +18,42 @@ interface PageProfileProps {
   changeDrawerStatus: () => void;
 }
 
-const PageProfile: React.FC<PageProfileProps> = ({
+export const PageProfile: React.FC<PageProfileProps> = ({
   profile,
   followText,
   follow,
   changeDrawerStatus,
 }) => {
+  const socket = useAppSelector((state) => state.teratany_socket.socket);
+
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const connectedUser = useAppSelector((state) => state.teratany_user.id);
+
+  const handdleMessage = () => {
+    socket.emit(
+      "new-canal",
+      [connectedUser, profile._id],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
+  };
+  const handdleChannel = () => {
+    socket.emit(
+      "new-conversation",
+      [connectedUser, profile._id],
+      async (response: number) => {
+        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+        navigate("/chat/one");
+        dispatch(openDiscussion(response));
+      }
+    );
+  };
   return (
     <div className="mt-16 pb-6 border-b border-gray-200">
       <div className="flex items-start justify-evenly">
@@ -86,14 +121,22 @@ const PageProfile: React.FC<PageProfileProps> = ({
       </div>
 
       <div className="flex items-center mx-2">
-        <Button width="w-1/2" height="h-7" name={followText} onClick={follow} />
-        <Button width="w-1/2" height="h-7" name={t("profile.message")} />
+        <Button width="w-full mb-2 " height="h-7" name={followText} onClick={follow} />
+      </div>
+      <div className="flex items-center mx-2">
         <Button
-          width=""
+          width="w-1/2"
           height="h-7"
-          name={t("profile.details")}
-          onClick={changeDrawerStatus}
+          name={t("profile.message")}
+          onClick={handdleMessage}
         />
+        <Button
+          width="w-1/2"
+          height="h-7"
+          name={t("chat.channel")}
+          onClick={handdleChannel}
+        />
+        <Button width="" height="h-7" name="•••" onClick={changeDrawerStatus} />
       </div>
     </div>
   );

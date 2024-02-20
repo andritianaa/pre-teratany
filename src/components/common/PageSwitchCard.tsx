@@ -1,14 +1,13 @@
 import React from "react";
-import Button from "./common/Button";
-import useLoadingButton from "../hooks/useLoadingButton";
+import Button from "./Button";
+import useLoadingButton from "hooks/useLoadingButton";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store/store";
-import { setAuthentication } from "../store/reducer/user.reducer";
-import useToken from "../hooks/useToken";
-import { FileServerURL } from "../api/FileApi";
-import profileDefault from "../assets/userPics.jpg";
+import { setAuthentication } from "store/reducer/user.reducer";
+import useToken from "hooks/useToken";
+import { FileServerURL } from "api/FileApi";
+import profileDefault from "assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../../store/hooks";
 
 interface PageCardsProps {
   name: string;
@@ -29,7 +28,7 @@ const PageSwitchCard: React.FC<PageCardsProps> = ({
   const isEditUser = lastSegment === "edit-user";
 
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const token = useToken();
   const { t } = useTranslation();
 
@@ -38,7 +37,6 @@ const PageSwitchCard: React.FC<PageCardsProps> = ({
     dispatch(
       setAuthentication({
         id: id,
-        name: name,
         token,
         isAuthenticated: true,
       })

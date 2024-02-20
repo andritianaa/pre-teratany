@@ -1,7 +1,7 @@
 import React from "react";
 import { Drawer } from "@material-tailwind/react";
 import { HiOutlineXMark } from "react-icons/hi2";
-import Comments from "../views/Comments/Comments";
+import Comments from "../../views/Comments/Comments";
 import { useState, useEffect } from "react";
 
 type DrawerProps = {

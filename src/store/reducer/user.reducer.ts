@@ -1,42 +1,64 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
+import { IProfile } from "../../types/profile.type";
+import { withAsync } from "../../helpers/withAsync";
+import { getById } from "../../api/ProfileApi";
 
 export interface UserInitialState {
-    id: string | null | undefined;
-    name: string | null | undefined;
-    email?: string | null | undefined;
-    token?: string | null | undefined;
-    isAuthenticated?: boolean;
+  id: string | null | undefined;
+  token?: string | null | undefined;
+  isAuthenticated?: boolean;
+  profile?: IProfile | undefined;
+}
+
+export interface ProfileProperty {
+  token: string;
+  profileId: string;
 }
 
 const initialState: UserInitialState = {
-    id: '',
-    name: '',
-    email: '',
-    token: '',
-    isAuthenticated: false
-}
+  id: "",
+  token: "",
+  isAuthenticated: false,
+  profile: undefined,
+};
+
+export const fetchConnectedProfile = createAsyncThunk(
+  "connected_profile/fetch",
+  async (profile_property: ProfileProperty, { rejectWithValue }) => {
+    const { error, response } = await withAsync(() =>
+      getById(
+        profile_property.token,
+        profile_property.profileId,
+        profile_property.profileId
+      )
+    );
+    if (error) {
+      ThrowErrorHandler(error as ErrorData);
+      return rejectWithValue(error);
+    } else {
+      return response?.data as IProfile;
+    }
+  }
+);
 
 export const userSlice = createSlice({
-    name: "teratany_user",
-    initialState,
-    reducers: {
-        setAuthentication: (state, action: PayloadAction<UserInitialState>) => {
-            state.id = action.payload.id;
-            state.name = action.payload.name;
-            state.email = action.payload.email;
-            state.token = action.payload.token;
-            state.isAuthenticated = true;
-        },
-        resetUserAuthentication: (state) => {
-            state.id = null;
-            state.name = null;
-            state.email = null;
-            state.token = null;
-            state.isAuthenticated = false;
-        }
-
-    }
-})
+  name: "teratany_user",
+  initialState,
+  reducers: {
+    setAuthentication: (state, action: PayloadAction<UserInitialState>) => {
+      state.id = action.payload.id;
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
+    },
+    resetUserAuthentication: () => initialState,
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchConnectedProfile.fulfilled, (state, { payload }) => {
+      state.profile = payload;
+    });
+  },
+});
 
 export const { setAuthentication, resetUserAuthentication } = userSlice.actions;
 export default userSlice.reducer;

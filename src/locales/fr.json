@@ -234,6 +234,9 @@
     "new":"Nouveau mot de passe",
     "code":"Code de vérification",
     "validate":"Changer"
+  },
+  "chat":{
+    "channel":"Canal"
   }
-}
+  }
 

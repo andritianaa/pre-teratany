@@ -1,38 +1,31 @@
 import React, { useState } from "react";
-import EditType from "../../components/EditType";
+import EditType from "../../components/common/EditType";
 import { FiChevronDown } from "@react-icons/all-files/fi/FiChevronDown";
 import { FiChevronUp } from "@react-icons/all-files/fi/FiChevronUp";
 import { GrAddCircle } from "react-icons/gr";
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
-import TopBar from "../../components/common/TopBar";
-import PageSwitchCard from "../../components/PageSwitchCard";
-import { useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
+import TopBar from "../../components/layouts/TopBar";
+import PageSwitchCard from "../../components/common/PageSwitchCard";
 import { resetUserAuthentication } from "../../store/reducer/user.reducer";
 import { FaRegUserCircle } from "@react-icons/all-files/fa/FaRegUserCircle";
 import { MdSecurity, MdMyLocation } from "react-icons/md";
 import { BiPhotoAlbum } from "@react-icons/all-files/bi/BiPhotoAlbum";
-import useFetchProfile from "../../hooks/useFetchProfile";
-import { useSelector } from "react-redux";
 import { resetAccountConnected } from "../../store/reducer/account.reducer";
 import { useTranslation } from "react-i18next";
-import SwitchLangage from "../../components/SwitchLangage";
+import SwitchLangage from "../../components/common/SwitchLangage";
+import { useAppSelector, useAppDispatch } from "../../store/hooks";
 
 const EditProfileMenu: React.FC = () => {
   const [accordionVisible, setVisibility] = useState(false);
-  const profile = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  let accounts: any = useSelector<RootState>(
-    (state) => state.teratany_account.account
-  );
+  let accounts = useAppSelector((state) => state.teratany_account.account);
 
-  const id = useFetchProfile()?._id;
-
-  accounts = accounts.filter((account: any) => account.id !== id);
+  accounts = accounts.filter((account: any) => account.id !== profile?._id);
 
   const userIcon = <FaRegUserCircle size={23} />;
   const profilePicture = <BiPhotoAlbum size={23} />;

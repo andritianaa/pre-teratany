@@ -6,11 +6,12 @@ import { getOnePublication } from "../../api/PublicationApi";
 import useToken from "../../hooks/useToken";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 const EditPublication = () => {
-  const profileConnectedUser = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
   const [content, setContent] = useState<any | unknown | string>();
 
   const token = useToken();
@@ -19,9 +20,9 @@ const EditPublication = () => {
   const { t } = useTranslation();
 
   const fetchPublication = async () => {
-    if (profileConnectedUser?._id) {
+    if (profile?._id) {
       const { error, response } = await withAsync(() =>
-        getOnePublication(token, id!, profileConnectedUser?._id!)
+        getOnePublication(token, id!, profile?._id!)
       );
       if (error instanceof AxiosError) {
         const error_message: string =
@@ -43,7 +44,7 @@ const EditPublication = () => {
   useEffect(() => {
     fetchOnePub();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profileConnectedUser?._id]);
+  }, [profile?._id]);
 
   return (
     <PublicationForm
