@@ -5,4 +5,4 @@ export const uploadFile = (images: any) => {
 };
 
 // export const FileServerURL = "https://backend.teratany.org/public/";
-export const FileServerURL = "http://localhost:9900/public/";
+export const FileServerURL = process.env.REACT_APP_BASE_URL + "/public/";

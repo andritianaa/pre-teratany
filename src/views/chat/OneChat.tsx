@@ -1,13 +1,14 @@
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import { IProfile } from "../../types/profile.type";
 import profileDefault from "../../assets/userPics.jpg";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FileServerURL } from "../../api/FileApi";
 import { Message } from "../../components/Chat/Message";
 import { useAppSelector } from "../../store/hooks";
+import SocketContext from "../../services/socket/socketContext";
 
 export const OneChat: React.FC = () => {
-  const socket = useAppSelector((state) => state.teratany_socket.socket);
+  const { socket } = useContext(SocketContext);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [textMessage, setTextMessage] = useState<string>("");
@@ -27,23 +28,25 @@ export const OneChat: React.FC = () => {
   );
 
   const handdleMessage = () => {
-    if (textMessage) {
-      if (messagesEndRef.current) {
-        messagesEndRef.current.scrollIntoView();
-      }
-      const myDate = Date.now();
-      socket.emit("new-message", {
-        sender: connectedUser,
-        text: textMessage,
-        conversation: conversationReference,
-        date: myDate,
-      });
-      setTextMessage("");
-      const inputElement = document.querySelector(
-        'input[type="text"]'
-      ) as HTMLInputElement;
-      if (inputElement) {
-        inputElement.blur();
+    if (socket) {
+      if (textMessage) {
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView();
+        }
+        const myDate = Date.now();
+        socket.emit("new-message", {
+          sender: connectedUser,
+          text: textMessage,
+          conversation: conversationReference,
+          date: myDate,
+        });
+        setTextMessage("");
+        const inputElement = document.querySelector(
+          'input[type="text"]'
+        ) as HTMLInputElement;
+        if (inputElement) {
+          inputElement.blur();
+        }
       }
     }
   };
@@ -53,7 +56,6 @@ export const OneChat: React.FC = () => {
       messagesEndRef.current.scrollIntoView();
     }
   }, []);
-
   return (
     <>
       <TopBar participant={actualDiscussion?.participants[0]} name={""} />

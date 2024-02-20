@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FileServerURL } from "../../api/FileApi";
 import Button from "../../components/common/Button";
 import { IProfile } from "../../types/profile.type";
@@ -7,9 +7,9 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { syncChat as syncChatApi } from "../../api/chatApi";
-
 import { openDiscussion, syncChat } from "../../store/reducer/chat.reducer";
 import { useAppSelector } from "../../store/hooks";
+import SocketContext from "../../services/socket/socketContext";
 
 interface PageProfileProps {
   profile: IProfile;
@@ -24,7 +24,9 @@ export const PageProfile: React.FC<PageProfileProps> = ({
   follow,
   changeDrawerStatus,
 }) => {
-  const socket = useAppSelector((state) => state.teratany_socket.socket);
+  // const socket = useAppSelector((state) => state.teratany_socket.socket);
+
+  const { socket } = useContext(SocketContext);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -33,26 +35,31 @@ export const PageProfile: React.FC<PageProfileProps> = ({
   const connectedUser = useAppSelector((state) => state.teratany_user.id);
 
   const handdleMessage = () => {
-    socket.emit(
-      "new-canal",
-      [connectedUser, profile._id],
-      async (response: number) => {
-        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
-        navigate("/chat/one");
-        dispatch(openDiscussion(response));
-      }
-    );
+    if (socket) {
+      socket.emit(
+        "new-conversation",
+        [connectedUser, profile._id],
+        async (response: number) => {
+          dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+          navigate("/chat/one");
+          dispatch(openDiscussion(response));
+        }
+      );
+    }
   };
+
   const handdleChannel = () => {
-    socket.emit(
-      "new-conversation",
-      [connectedUser, profile._id],
-      async (response: number) => {
-        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
-        navigate("/chat/one");
-        dispatch(openDiscussion(response));
-      }
-    );
+    if (socket) {
+      socket.emit(
+        "new-conversation",
+        [connectedUser, profile._id],
+        async (response: number) => {
+          dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+          navigate("/chat/one");
+          dispatch(openDiscussion(response));
+        }
+      );
+    }
   };
   return (
     <div className="mt-16 pb-6 border-b border-gray-200">

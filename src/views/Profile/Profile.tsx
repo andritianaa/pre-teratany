@@ -1,21 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TopNavBarProfile from "components/layouts/TopNavBarProfile";
 import Publication from "components/Publication/Publication";
 import SwitchAccountDrawer from "components/drawer/SwitchAccountDrawer";
-import { IProfile } from "types/profile.type";
 import { BottomDrawer } from "components/drawer/BottomDrawer";
 import { withAsync } from "helpers/withAsync";
-import { followProfile, getById } from "api/ProfileApi";
+import { followProfile } from "api/ProfileApi";
 import { useParams } from "react-router-dom";
 import useToken from "hooks/useToken";
-import { getPublicationByProfile } from "../../api/PublicationApi";
-import { IPublication } from "../../types/publication.type";
 import UserProfile from "./UserProfile";
 import PageProfile from "./PageProfile";
 import DetailsPage from "./DetailsPage";
 import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
+import { useGetProfileByIdQuery } from "../../services/api-services/profile/profile.endpoints";
+import { useGetPublicationByProfileQuery } from "../../services/api-services/publication/publication.endpoints";
 const Profile: React.FC = () => {
   const token = useToken();
 
@@ -23,15 +22,32 @@ const Profile: React.FC = () => {
     (state) => state.teratany_user
   );
 
-  const [profile, setProfile] = React.useState<IProfile>();
   const [openBottom, setOpenBottom] = React.useState<boolean>(false);
   const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false);
-  const [followText, setFollowText] = React.useState<string>();
-  const [publications, setPublications] = React.useState<IPublication[]>();
 
-  const [isProfileFetched, setIsProfileFetched] =
-    React.useState<Boolean>(false);
   const { t } = useTranslation();
+
+  const { id } = useParams();
+
+  const { data: profile, isSuccess } = useGetProfileByIdQuery(
+    { id: id!, ownId: profileConnectedUser?._id! },
+    {
+      skip: !id && !profileConnectedUser?._id,
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
+  const [followText, setFollowText] = React.useState<string>(
+    profile?.isFollowed ? t("followers.unfollow") : t("followers.follow")
+  );
+
+  const { data: publications } = useGetPublicationByProfileQuery(
+    { profileId: id!, ownId: profileConnectedUser?._id! },
+    {
+      skip: !id && !profileConnectedUser?._id,
+      refetchOnMountOrArgChange: true,
+    }
+  );
 
   const openDrawerBottom = () => {
     window.history.pushState({ page: "" }, "", "?isModal2=true");
@@ -51,42 +67,6 @@ const Profile: React.FC = () => {
   const closeDrawer = () => setDrawerOpen(false);
   const changeDrawerStatus = () => setDrawerOpen(true);
 
-  const { id } = useParams();
-
-  const fetchProfile = async () => {
-    if (profileConnectedUser) {
-      const { error, response } = await withAsync(() =>
-        getById(token, id, profileConnectedUser?._id)
-      );
-
-      if (error) {
-        ThrowErrorHandler(error as ErrorData);
-      } else {
-        setProfile(response?.data as IProfile);
-        const isProfileFollowed = response?.data as IProfile;
-        setFollowText(
-          isProfileFollowed?.isFollowed
-            ? t("followers.unfollow")
-            : t("followers.follow")
-        );
-        setIsProfileFetched(true);
-      }
-    }
-  };
-
-  const fetchPublications = async () => {
-    if (profileConnectedUser) {
-      const { error, response } = await withAsync(() =>
-        getPublicationByProfile(token, id!, profileConnectedUser?._id!)
-      );
-      if (error) {
-        ThrowErrorHandler(error as ErrorData);
-      } else {
-        setPublications(response?.data as Array<IPublication>);
-      }
-    }
-  };
-
   const follow = async () => {
     setFollowText(
       followText === t("followers.follow")
@@ -102,7 +82,7 @@ const Profile: React.FC = () => {
   };
 
   const RenderProfileComponent = (): JSX.Element => {
-    if (isProfileFetched) {
+    if (isSuccess) {
       if (profile?.profileType === "user") {
         return (
           <UserProfile
@@ -127,12 +107,6 @@ const Profile: React.FC = () => {
       return <></>;
     }
   };
-
-  useEffect(() => {
-    fetchProfile();
-    fetchPublications();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>

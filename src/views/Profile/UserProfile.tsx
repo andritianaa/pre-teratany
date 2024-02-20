@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IProfile } from "../../types/profile.type";
 import { FileServerURL } from "../../api/FileApi";
 import Button from "../../components/common/Button";
@@ -10,6 +10,7 @@ import { syncChat } from "../../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../../api/chatApi";
 import { openDiscussion } from "../../store/reducer/chat.reducer";
 import { useAppSelector } from "../../store/hooks";
+import SocketContext from "../../services/socket/socketContext";
 interface UserProfileProps {
   profile: IProfile;
   idUserViewed: string;
@@ -25,7 +26,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   onClick,
   followText,
 }) => {
-  const socket = useAppSelector((state) => state.teratany_socket.socket);
+  const { socket } = useContext(SocketContext);
 
   const dispatch = useDispatch();
 
@@ -34,15 +35,17 @@ const UserProfile: React.FC<UserProfileProps> = ({
   const connectedUser = useAppSelector((state) => state.teratany_user.id);
 
   const handdleMessage = () => {
-    socket.emit(
-      "new-conversation",
-      [connectedUser, idUserViewed],
-      async (response: number) => {
-        dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
-        navigate("/chat/one");
-        dispatch(openDiscussion(response));
-      }
-    );
+    if (socket) {
+      socket.emit(
+        "new-conversation",
+        [connectedUser, idUserViewed],
+        async (response: number) => {
+          dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+          navigate("/chat/one");
+          dispatch(openDiscussion(response));
+        }
+      );
+    }
   };
 
   const { t } = useTranslation();

@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import ToastNotification from "components/common/ToastNotification";
+import SocketProvider from "./services/socket/socketProvider";
 
 // Désactive le traitement passif pour tous les événements tactiles
 document.addEventListener("touchstart", function () {}, { passive: false });
@@ -25,7 +26,9 @@ root.render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ToastNotification />
-          <RouterProvider router={router} />
+          <SocketProvider>
+            <RouterProvider router={router} />
+          </SocketProvider>
         </PersistGate>
       </Provider>
     </I18nextProvider>
