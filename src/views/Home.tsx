@@ -42,7 +42,6 @@ const Home: React.FC = () => {
       socket.emit("connect-profile", profileConnectedUser._id);
       socket.on("new-message", (message: any) => {
         if (profileConnectedUser._id !== message.sender._id) {
-          console.log("Message ===> ", message);
           notifiate(
             message.sender.name,
             "New message on Teratany",

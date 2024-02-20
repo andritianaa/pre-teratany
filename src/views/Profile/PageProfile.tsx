@@ -51,8 +51,9 @@ export const PageProfile: React.FC<PageProfileProps> = ({
   const handdleChannel = () => {
     if (socket) {
       socket.emit(
-        "new-conversation",
-        [connectedUser, profile._id],
+        "join-channel",
+        connectedUser,
+        profile._id,
         async (response: number) => {
           dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
           navigate("/chat/one");
@@ -128,7 +129,12 @@ export const PageProfile: React.FC<PageProfileProps> = ({
       </div>
 
       <div className="flex items-center mx-2">
-        <Button width="w-full mb-2 " height="h-7" name={followText} onClick={follow} />
+        <Button
+          width="w-full mb-2 "
+          height="h-7"
+          name={followText}
+          onClick={follow}
+        />
       </div>
       <div className="flex items-center mx-2">
         <Button
@@ -140,7 +146,7 @@ export const PageProfile: React.FC<PageProfileProps> = ({
         <Button
           width="w-1/2"
           height="h-7"
-          name={t("chat.channel")}
+          name={t("chat.joinChannel")}
           onClick={handdleChannel}
         />
         <Button width="" height="h-7" name="•••" onClick={changeDrawerStatus} />

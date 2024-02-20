@@ -7,7 +7,6 @@ const URLS = {
 
 
 export const syncChat = async (profileId: string, conversationReferences: number[], fromDate: Date | undefined) => {
-
     const discussions = await api.post(URLS.sync, {
         profileId, conversationReferences, fromDate
     })
