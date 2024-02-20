@@ -3,7 +3,7 @@ import { IProfile } from "../../types/profile.type";
 import profileDefault from "../../assets/userPics.jpg";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FileServerURL } from "../../api/FileApi";
-import { Message } from "../../components/Chat/Message";
+import { Message } from "../../components/chat/Message";
 import { useAppSelector } from "../../store/hooks";
 import { Link } from "react-router-dom";
 import SocketContext from "../../services/socket/socketContext";

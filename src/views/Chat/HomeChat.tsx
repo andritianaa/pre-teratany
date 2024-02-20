@@ -1,6 +1,6 @@
 // import SearchBar from "../../components/common/SearchBar";
 import TopBar from "../../components/layouts/TopBar";
-import ChatList from "../../components/Chat/ChatList";
+import ChatList from "../../components/chat/ChatList";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../../components/common/Button";
 import { useTranslation } from "react-i18next";
