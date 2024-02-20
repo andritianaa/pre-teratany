@@ -31,16 +31,17 @@ const MapCoordonatesProfileSelected = () => {
   const map = useMap();
 
   useEffect(() => {
-    map.flyTo(
-      {
-        lat: profileCoordonates?.latitude!,
-        lng: profileCoordonates?.longitude!,
-      },
-      map.getZoom(),
-      { animate: true }
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profileCoordonates?.latitude!, profileCoordonates?.longitude!]);
+    if (profileCoordonates?.latitude && profileCoordonates?.longitude) {
+      map.flyTo(
+        {
+          lat: profileCoordonates.latitude,
+          lng: profileCoordonates.longitude,
+        },
+        map.getZoom(),
+        { animate: true }
+      );
+    }
+  }, [map, profileCoordonates?.latitude, profileCoordonates?.longitude]);
 
   return null;
 };
