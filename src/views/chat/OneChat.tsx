@@ -3,11 +3,11 @@ import { IProfile } from "../../types/profile.type";
 import profileDefault from "../../assets/userPics.jpg";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FileServerURL } from "../../api/FileApi";
-import { Message } from "../../components/Chat/Message";
+import { Message } from "../../components/chat/Message";
 import { useAppSelector } from "../../store/hooks";
 import { Link } from "react-router-dom";
 import SocketContext from "../../services/socket/socketContext";
-import { IConversation } from "../../store/reducer/chat.reducer";
+// import { IConversation } from "../../store/reducer/chat.reducer";
 
 export const OneChat: React.FC = () => {
   const { socket } = useContext(SocketContext);
@@ -81,23 +81,23 @@ export const OneChat: React.FC = () => {
           }}
         >
           {(actualDiscussion.mode === "duo" ||
-            actualDiscussion.admins.includes(connectedUser)) && (
-              <div className="flex">
-                <div className="relative w-full flex">
-                  <input
-                    type="text"
-                    className="block p-2.5 w-full z-20 text-sm text-gray-900 rounded-lg border border-1"
-                    placeholder="Message"
-                    required
-                    onChange={(v) => setTextMessage(v.target.value)}
-                    value={textMessage}
-                  />
-                  <button className="hidden" type="submit">
-                    Send
-                  </button>
-                </div>
+            actualDiscussion?.admins?.includes(connectedUser)) && (
+            <div className="flex">
+              <div className="relative w-full flex">
+                <input
+                  type="text"
+                  className="block p-2.5 w-full z-20 text-sm text-gray-900 rounded-lg border border-1"
+                  placeholder="Message"
+                  required
+                  onChange={(v) => setTextMessage(v.target.value)}
+                  value={textMessage}
+                />
+                <button className="hidden" type="submit">
+                  Send
+                </button>
               </div>
-            )}
+            </div>
+          )}
         </form>
       </div>
     </>

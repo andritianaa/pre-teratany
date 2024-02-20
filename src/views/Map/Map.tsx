@@ -38,8 +38,7 @@ const MapCoordonatesProfileSelected = () => {
       map.getZoom(),
       { animate: true }
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profileCoordonates?.latitude!, profileCoordonates?.longitude!]);
+  }, [map, profileCoordonates?.latitude, profileCoordonates?.longitude]);
 
   return null;
 };
