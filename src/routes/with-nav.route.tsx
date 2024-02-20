@@ -4,7 +4,7 @@ import AddPublication from "views/Publication/AddPublication";
 import EditPublication from "../views/Publication/EditPublication";
 import Map from "../views/Map/Map";
 import PageList from "../views/Page/PageList";
-import { HomeChat } from "../views/chat/HomeChat";
+import { HomeChat } from "../views/Chat/HomeChat";
 import Search from "../views/Search/Search";
 import SearchResult from "../views/Search/SearchResultPage";
 import Notification from "../views/Notification/Notification";

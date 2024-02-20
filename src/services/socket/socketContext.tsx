@@ -2,7 +2,7 @@ import React from "react";
 import io, { Socket } from "socket.io-client";
 
 type SocketContextType = {
-  socket: Socket | null;
+  socket: Socket;
 };
 
 const SocketContext = React.createContext<SocketContextType>({

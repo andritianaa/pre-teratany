@@ -10,7 +10,7 @@ import { syncChat } from "../../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../../api/chatApi";
 import { openDiscussion } from "../../store/reducer/chat.reducer";
 import { useAppSelector } from "../../store/hooks";
-import SocketContext from "../../services/socket/socketContext";
+import SocketContext from "services/socket/socketContext";
 interface UserProfileProps {
   profile: IProfile;
   idUserViewed: string;

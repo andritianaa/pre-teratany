@@ -1,6 +1,6 @@
 import React from "react";
 import TopNavBarProfile from "components/layouts/TopNavBarProfile";
-import Publication from "components/Publication/Publication";
+import Publication from "components/publication/Publication";
 import SwitchAccountDrawer from "components/drawer/SwitchAccountDrawer";
 import { BottomDrawer } from "components/drawer/BottomDrawer";
 import { withAsync } from "helpers/withAsync";
@@ -13,7 +13,7 @@ import DetailsPage from "./DetailsPage";
 import { ErrorData, ThrowErrorHandler } from "../../helpers/HandleError";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store/hooks";
-import { useGetProfileByIdQuery } from "../../services/api-services/profile/profile.endpoints";
+import { useGetProfileByIdQuery } from "services/api-services/profile/profile.endpoints";
 import { useGetPublicationByProfileQuery } from "../../services/api-services/publication/publication.endpoints";
 const Profile: React.FC = () => {
   const token = useToken();
