@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { setAuthentication } from "store/reducer/user.reducer";
 import { FileServerURL } from "api/FileApi";
 import profileDefault from "assets/userPics.jpg";
-// import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { useGetProfileByIdQuery } from "services/api-services/profile/profile.endpoints";

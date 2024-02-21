@@ -133,7 +133,7 @@ const EditProfileMenu: React.FC = () => {
             <p className="px-3 text-lg">{t("settings.addPage.name")}</p>
           </div>
         )}
-        <div className="flex flex-col items-start mb-4 mx-1">
+        <div className="flex flex-col items-start mb-4 mx-1 w-40">
           <p className="text-xl font-semibold mx-1 mt-2 mb-3">
             {t("langage.name")}
           </p>

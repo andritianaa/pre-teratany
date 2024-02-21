@@ -123,7 +123,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
               </p>
               <div className="flex">
                 <p className="text-left text-xs text-gray-400 font-normal mr-2">
-                  {moment(comment.date).startOf("second").fromNow()}
+                  {moment(comment.date).fromNow()}
                 </p>
 
                 {comment?.profile?._id === profile?._id && (
