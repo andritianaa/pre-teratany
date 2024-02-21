@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { addHistoryData } from "../../store/reducer/history.reducer";
 import { IHistory } from "../../types/historique.type";
 import { useAppSelector } from "../../store/hooks";
+import { useTranslation } from "react-i18next";
 
 interface horizontalCardsProps {
   name: string;
@@ -33,15 +34,20 @@ const HorizontalCards: React.FC<horizontalCardsProps> = ({
   isButtonShowed,
 }) => {
   const token = useToken();
+  const { t } = useTranslation();
   const { profile } = useAppSelector((state) => state.teratany_user);
 
   const [followText, setFollowText] = useState<string>(
-    isFollowed! === true ? "UnFollow" : "Follow"
+    isFollowed! === true ? t("followers.unfollow") : t("followers.follow")
   );
   const dispatch = useDispatch();
 
   const follow = async () => {
-    setFollowText(followText === "Follow" ? "UnFollow" : "Follow");
+    setFollowText(
+      followText === t("followers.follow")
+        ? t("followers.unfollow")
+        : t("followers.follow")
+    );
     const { error } = await withAsync(() =>
       followProfile(token, profile?._id, _id)
     );

@@ -32,24 +32,26 @@ const SearchFilterResult: React.FC = () => {
     }
   };
   return (
-    <>
-      <TopBar
-        text={
-          textFilter === "publication"
-            ? t("publications.plural")
-            : t("users.plural")
-        }
-      />
+    <div className="flex flex-col items-center w-full">
+      <div className="fixed z-40 pt-4 bg-white flex justify-center items-center w-full max-w-[600px]">
+        <TopBar
+          text={
+            textFilter === "publication"
+              ? t("publications.plural")
+              : t("users.plural")
+          }
+        />
+      </div>
 
-      <div className="fixed top-12 p-4 z-40 w-full flex items-center justify-center h-16 bg-white border-b border-gray-200">
+      <div className="fixed z-30 pt-16 p-4 w-full flex items-center justify-center max-w-[600px]  bg-white border-gray-200">
         <SearchBar textFilter={renderQueryFilterNavigation()} />
       </div>
 
       {textFilter === "publication" ? (
         results?.publications?.length! > 0 && (
           <div
-            className={`bg-gray-100 flex flex-col items-start ${
-              textFilter === "publication" && "mt-28"
+            className={`bg-gray-100 flex flex-col w-full max-w-[600px] justify-center items-start ${
+              textFilter === "publication" && "mt-32"
             }`}
           >
             {results?.publications?.map((pub) => (
@@ -70,7 +72,9 @@ const SearchFilterResult: React.FC = () => {
           </div>
         )
       ) : (
-        <div className={`flex flex-col items-start mt-28`}>
+        <div
+          className={`flex flex-col w-full max-w-[600px] justify-center items-start mt-32`}
+        >
           {results?.profiles?.map((user) => {
             const isButtonShowed = profile?._id !== user._id;
             return (
@@ -86,7 +90,7 @@ const SearchFilterResult: React.FC = () => {
           })}
         </div>
       )}
-    </>
+    </div>
   );
 };
 export default SearchFilterResult;

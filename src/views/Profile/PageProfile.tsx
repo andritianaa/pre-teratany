@@ -63,22 +63,22 @@ export const PageProfile: React.FC<PageProfileProps> = ({
     }
   };
   return (
-    <div className="mt-16 pb-6 border-b border-gray-200">
-      <div className="flex items-start justify-evenly">
-        <div className="flex flex-col">
+    <div className="flex flex-col w-full max-w-[600px] mt-16 pb-6 border-b border-gray-200">
+      <div className="flex items-start w-full justify-around mx-2">
+        <div className="flex flex-col items-center">
           <img
-            className="w-20 h-20 object-cover rounded-full  border-2 border-pink-600"
+            className="w-14 h-14 object-cover rounded-full  border-2 border-pink-600"
             src={
               profile?.image ? FileServerURL + profile.image : pictureDefault
             }
             alt="profile"
           />
-          <p className="text-lg mb-3">{profile?.name}</p>
+          <p className="text-md mb-3">{profile?.name}</p>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-end ">
           <div className="flex">
             <div className="flex flex-col ">
-              <p className="text-lg font-medium">
+              <p className="text-md font-medium">
                 {profile?.publications?.length!}
               </p>
               <p className="">
@@ -87,8 +87,8 @@ export const PageProfile: React.FC<PageProfileProps> = ({
                   : t("posts.singular")}
               </p>
             </div>
-            <div className="flex flex-col mx-6">
-              <p className="text-lg font-medium">
+            <div className="flex flex-col mx-4">
+              <p className="text-md font-medium">
                 {profile?.followers?.length!}
               </p>
               <p className="">
@@ -98,7 +98,7 @@ export const PageProfile: React.FC<PageProfileProps> = ({
               </p>
             </div>
             <div className="flex flex-col ">
-              <p className="text-lg font-medium">
+              <p className="text-md font-medium">
                 {profile?.localisation?.country?.value}
               </p>
               <p className="">{t("profile.location")}</p>
@@ -128,17 +128,10 @@ export const PageProfile: React.FC<PageProfileProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center mx-2">
+      <div className="flex items-center justify-center w-full mx-2">
+        <Button width="w-1/2" height="h-7" name={followText} onClick={follow} />
         <Button
-          width="w-full mb-2 "
-          height="h-7"
-          name={followText}
-          onClick={follow}
-        />
-      </div>
-      <div className="flex items-center mx-2">
-        <Button
-          width="w-1/2"
+          width="w-1/5"
           height="h-7"
           name={t("profile.message")}
           onClick={handdleMessage}

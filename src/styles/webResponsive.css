@@ -1,0 +1,15 @@
+.drawer{
+    left: unset !important;
+}
+@media (max-width: 640px) {
+    .feed {
+        width: 100%;
+        max-width: 100%;
+    }
+    .pageTopList{
+        width: 98%;
+    }
+    .searchBar{
+        width: 98%;
+    }
+}

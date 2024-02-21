@@ -23,8 +23,8 @@ const SearchResult: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="mx-3 my-4">
+    <div className="flex flex-col items-center w-full h-screen">
+      <div className="fixed z-40 bg-white mx-3 mb-4 pt-4 flex flex-col justify-center w-full max-w-[600px]">
         <div className="flex items-center">
           <HiArrowNarrowLeft
             size={30}
@@ -36,7 +36,7 @@ const SearchResult: React.FC = () => {
         <SearchFilterBar query={query} />
       </div>
       {results?.profiles?.length! > 0 && (
-        <div className="flex w-full flex-col pb-3 items-start border-b border-b-1">
+        <div className="mt-24 flex w-full flex-col pb-3 items-start justify-center max-w-[600px] border-b border-b-1 rounded-md">
           <p className="mx-3 mt-2 font-medium ">{t("users.plural")}</p>
           <>
             {results?.profiles?.map((user) => {
@@ -64,11 +64,11 @@ const SearchResult: React.FC = () => {
         </div>
       )}
       {results?.publications?.length! > 0 && (
-        <div className="bg-gray-100 flex flex-col items-start">
-          <p className="bg-gray-100 mx-3 mt-2 font-medium ">
+        <div className="bg-gray-100 flex flex-col items-start w-full justify-center max-w-[600px]">
+          <p className="mx-3 mt-2 font-medium w-full text-start">
             {t("publications.plural")}
           </p>
-          <div className="bg-gray-100">
+          <div className="bg-gray-100 w-full max-w-[600px]">
             {results?.publications?.map((pub) => (
               <Publication
                 key={pub?._id}
@@ -87,7 +87,7 @@ const SearchResult: React.FC = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 export default SearchResult;

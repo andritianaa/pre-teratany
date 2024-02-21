@@ -32,7 +32,11 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
         className={`${width} ${height} inline-flex justify-center  text-white bg-black font-medium rounded text-sm px-5 py-2.5 text-center mr-2 items-center ${className}`}
       >
-        {name === t("message") ? <BsFillChatDotsFill size={23} /> : name}
+        {name === t("profile.message") ? (
+          <BsFillChatDotsFill size={23} />
+        ) : (
+          name
+        )}
       </button>
     );
   } else {

@@ -97,7 +97,7 @@ const Publication: React.FC<PublicationProps> = ({
 
   return (
     // <!-- Wrapper-->
-    <div className="wrapper my-2 w-full sm:w-[30%] flex flex-col items-center bg-white rounded-lg shadow-md">
+    <div className="wrapper my-2 w-full flex flex-col items-center bg-white rounded-lg shadow-md">
       {/* <!-- Card--> */}
       <article className="mb-4 break-inside rounded-xl bg-white white:bg-slate-800 flex flex-col bg-clip-border w-full">
         <div
@@ -130,7 +130,7 @@ const Publication: React.FC<PublicationProps> = ({
           </div>
           {profileId === profile?._id && <MenuPublication id={_id!} />}
         </div>
-        <div className="z-0">
+        <div className="z-1">
           {images && (
             <Swiper
               pagination={{

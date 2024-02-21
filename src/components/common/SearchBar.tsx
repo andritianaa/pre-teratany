@@ -64,8 +64,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ textFilter }) => {
   };
 
   return (
-    <div className="flex w-full">
-      <div className="relative w-full">
+    <div className="flex w-full mx-1 ">
+      <div className="relative w-full searchBar">
         <input
           type="search"
           id="search-dropdown"
