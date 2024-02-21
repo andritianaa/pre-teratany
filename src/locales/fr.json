@@ -222,7 +222,8 @@
     }
   },
   "chat":{
-    "channel":"Canal"
+    "channel":"Canal",
+    "joinChannel":"Rejoindre le canal"
   }
 }
 

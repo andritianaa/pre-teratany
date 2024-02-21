@@ -18,7 +18,9 @@ export interface IConversation {
   overview: string;
   lastMessageDate: Date;
   newMessageCount: number;
-  mode: string; //duo ou group
+  mode: string; //duo ou group ou canal
+  admins: Array<string>;
+  owner: string;
 }
 
 export interface IProfile {
@@ -35,6 +37,7 @@ export interface chatInitialState {
   activeDiscussionReference: number;
   loading: boolean;
   error: string;
+  conversationType: string;
 }
 
 const initialState: chatInitialState = {
@@ -42,6 +45,7 @@ const initialState: chatInitialState = {
   loading: false,
   error: "",
   activeDiscussionReference: 0,
+  conversationType: "duo"
 };
 
 export const chatSlice = createSlice({
@@ -51,7 +55,6 @@ export const chatSlice = createSlice({
     syncChat: (state, action: PayloadAction<any>) => {
       // state.discussions = action.payload
       state.discussions = action.payload;
-
       for (let i = 0; i < state.discussions.length; i++) {
         console.log(state.discussions[i]);
         state.discussions[i].messages = state.discussions[i]?.messages.sort(
@@ -62,8 +65,11 @@ export const chatSlice = createSlice({
     openDiscussion: (state, action: PayloadAction<number>) => {
       state.activeDiscussionReference = action.payload;
     },
+    switchConversationType: (state, action: PayloadAction<string>) => {
+      state.conversationType = action.payload;
+    },
   },
 });
 
-export const { syncChat, openDiscussion } = chatSlice.actions;
+export const { syncChat, openDiscussion, switchConversationType } = chatSlice.actions;
 export default chatSlice.reducer;

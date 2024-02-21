@@ -23,8 +23,6 @@ const ChatList: React.FC<PageListCardsProps> = ({
   const navigate = useNavigate()
   const handleOpenChat = (reference: number) => {
     navigate("/chat/one");
-    console.log("referenced ====> ", reference);
-    
     dispatch(openDiscussion(reference))
   };
   return (

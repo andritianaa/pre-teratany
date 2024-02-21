@@ -49,7 +49,7 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
 
   return (
     <>
-      {profile?.administratedProfiles?.length! > 0 ? (
+      {accounts.length! > 0 ? (
         <React.Fragment>
           <div className="flex flex-col justify-center items-center w-full max-w-[600px]">
             <Drawer
@@ -90,8 +90,9 @@ const SwitchAccountDrawer: React.FC<DrawerProps> = ({
                 </IconButton>
               </div>
               <div className=" h-[60%] w-full overflow-y-scroll">
-                {accounts.map((account: any) => (
+                {accounts.map((account: any, index) => (
                   <PageSwitchCard
+                    key={index}
                     id={account.id}
                     name={account.name}
                     desc={

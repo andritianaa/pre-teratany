@@ -1,6 +1,6 @@
 import React from "react";
 // import EditHeader from "../../components/common/HeaderEdit";
-import Publication from "../../components/Publication/Publication";
+import Publication from "../../components/publication/Publication";
 import HorizontalCards from "../../components/common/HorizontalCards";
 import TopBar from "../../components/layouts/TopBar";
 import useFetchSearchByQuery from "../../hooks/useFetchSearchByQuery";

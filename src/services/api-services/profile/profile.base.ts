@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/hooks";
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-export const publicationsApi = createApi({
-  reducerPath: "publications",
+export const profileApi = createApi({
+  reducerPath: "profiles",
   baseQuery: fetchBaseQuery({
     baseUrl,
     credentials: "same-origin",
@@ -26,4 +26,4 @@ export const publicationsApi = createApi({
   endpoints: () => ({}),
 });
 
-export default publicationsApi;
+export default profileApi;
