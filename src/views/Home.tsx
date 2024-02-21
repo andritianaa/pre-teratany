@@ -2,6 +2,7 @@ import TopNavBar from "../components/layouts/TopNavBar";
 import Publication from "../components/publication/Publication";
 import PageTopList from "../views/Page/PageTopList";
 import { useDispatch } from "react-redux";
+import "../styles/webResponsive.css";
 
 //socket
 import { syncChat } from "../store/reducer/chat.reducer";
@@ -80,7 +81,7 @@ const Home: React.FC = () => {
     <div className="bg-gray-100 flex flex-col items-center justify-center h-full w-full mt-12">
       <TopNavBar notifCount={9} messageCount={8} />
       <PageTopList />
-      <div className="flex flex-col-reverse w-full">
+      <div className="feed flex flex-col-reverse max-w-[600px]">
         {publications?.map((pub) => (
           <Publication
             key={pub?._id}

@@ -50,7 +50,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
 
   const { t } = useTranslation();
   return (
-    <div className="mt-16 pb-3 flex w-full justify-evenly items-center border-b border-gray-200">
+    <div className="mt-16 pb-3 flex w-full max-w-[600px] justify-around items-center border-b border-gray-200">
       <img
         className="w-20 h-20 object-cover rounded-full
                  border-2 border-pink-600 mr-2"

@@ -145,31 +145,35 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
   }, [content]);
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <TopBar
-        text={`${
-          isNewPub ? t("publications.addPub") : t("publications.editPub")
-        }`}
-      />
-      <div className="w-[90%] flex justify-start items-center space-x-4 mt-20">
+    <div className="flex flex-col items-center ">
+      <div className="fixed z-40 pt-4 bg-white flex justify-center items-center w-full max-w-[500px]">
+        <TopBar
+          text={`${
+            isNewPub ? t("publications.addPub") : t("publications.editPub")
+          }`}
+        />
+      </div>
+      <div className="w-[90%] max-w-[500px] flex justify-start items-center space-x-4 mt-20 ml-10">
         <img
-          className="w-10 h-10 rounded-full"
+          className="w-10 h-10 rounded-full object-cover"
           src={profile?.image ? FileServerURL + profile?.image : profileDefault}
           alt="profileImage"
         />
         <p className="flex font-medium">{profile?.name}</p>
       </div>
-      <InputEmoji
-        value={publicationText!}
-        onChange={setPublicationText}
-        cleanOnEnter
-        placeholder={t("publications.publicationPlaceholder")}
-        inputClass="custom-emoji-style"
-        keepOpened={true}
-      />
+      <div className="flex items-center justify-center w-full max-w-[550px]">
+        <InputEmoji
+          value={publicationText!}
+          onChange={setPublicationText}
+          cleanOnEnter
+          placeholder={t("publications.publicationPlaceholder")}
+          inputClass="custom-emoji-style"
+          keepOpened={true}
+        />
+      </div>
 
       {isNewPub && (
-        <div className="flex justify-start z-50 items-center w-[90%]">
+        <div className="flex justify-start z-50 items-center w-[90%] max-w-[500px]">
           <label
             htmlFor="image"
             className="flex justify-start items-center -mt-11"
@@ -180,23 +184,23 @@ const PublicationForm: React.FC<PublicationFormProps> = ({
           <input
             type="file"
             id="image"
-            className="hidden"
+            className="hidden  max-w-[500px]"
             onChange={handleFileChange}
             multiple
           />
         </div>
       )}
-      <div className="w-[90%] flex flex-wrap justify-start">
+      <div className="w-[90%] flex flex-wrap justify-start max-w-[500px]">
         {fileViewers.map((file) => (
           <img
-            className="w-10 h-10 rounded-md mt-2 mr-2 object-cover"
+            className="w-10 h-10 rounded-md mt-2 mr-2 object-cover  max-w-[500px]"
             src={file}
             alt="selectedPhoto"
           />
         ))}
       </div>
       <Button
-        className="mt-2.5"
+        className="item-start mt-2.5 max-w-[500px]"
         name={t("publications.post")}
         width="w-[90%] !mr-0"
         isLoading={isLoading}

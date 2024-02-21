@@ -109,8 +109,8 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <>
-      <div>
+    <div className="flex flex-col items-center w-full ">
+      <div className="flex items-center justify-center w-full">
         {profileConnectedUser && (
           <TopNavBarProfile
             user={profileConnectedUser?.name as string}
@@ -122,7 +122,7 @@ const Profile: React.FC = () => {
 
       <RenderProfileComponent />
 
-      <div className="flex flex-col-reverse">
+      <div className="flex flex-col-reverse w-full max-w-[600px]">
         {publications?.map((pub) => (
           <Publication
             key={pub?._id}
@@ -171,7 +171,7 @@ const Profile: React.FC = () => {
           />
         </>
       )}
-    </>
+    </div>
   );
 };
 
