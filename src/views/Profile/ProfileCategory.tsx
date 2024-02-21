@@ -1,8 +1,7 @@
 import React from "react";
 import { CategorieList } from "../../constants/PageCategory";
 import { CheckboxButton } from "../../components/page/CategoryCheckbox";
-import useFetchProfile from "../../hooks/useFetchProfile";
-import TopBar from "../../components/common/TopBar";
+import TopBar from "../../components/layouts/TopBar";
 import Button from "../../components/common/Button";
 import { withAsync } from "../../helpers/withAsync";
 import { updateCategory } from "../../api/ProfileApi";
@@ -10,10 +9,13 @@ import useToken from "../../hooks/useToken";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import { useAppSelector } from "../../store/hooks";
 
 const ProfileCategory = () => {
   const token = useToken();
-  const profile = useFetchProfile();
+  
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
   let categories: any = profile?.categories?.split("");
   const [isLoading, startLoading, endLoading] = useLoadingButton();
 

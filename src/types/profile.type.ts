@@ -4,7 +4,7 @@ export interface IProfile {
     name: string
     localisation?: UserLocalisation;
     contact?: UserContact;
-    deviantWalletId: string;
+    deviantWalletId?: string;
     image?: string
     role?: number,
     profileType?: string
@@ -14,7 +14,8 @@ export interface IProfile {
     publications?: Array<string>
     description?: string
     categories?: string
-    isFollowed: boolean
+    isFollowed?: boolean
+    conversations?: Array<number>
 
 };
 

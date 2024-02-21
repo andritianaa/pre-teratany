@@ -5,19 +5,19 @@ import { searchProfile } from "api/ProfileApi";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import useToken from "hooks/useToken";
-import useFetchProfile from "./useFetchProfile";
 import { ISearch } from "types/search.type";
+import { useAppSelector } from "../store/hooks";
 
 const useFetchSearchByQuery = (query: string, type?: string) => {
   const token = useToken();
-  const profileConnectedUser = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
   const [results, setResults] = useState<ISearch>();
 
   useEffect(() => {
     async function fetchResults() {
-      if (profileConnectedUser) {
+      if (profile) {
         const { error, response } = await withAsync(() =>
-          searchProfile(token, query, profileConnectedUser?._id!, type)
+          searchProfile(token, query, profile?._id!, type)
         );
         if (error instanceof AxiosError) {
           const error_message: string =
@@ -26,14 +26,14 @@ const useFetchSearchByQuery = (query: string, type?: string) => {
             error.message;
           toast.error(error_message);
         } else {
-
           setResults(response?.data as ISearch);
         }
       }
-    } fetchResults()
-  }, [profileConnectedUser?._id, query])
+    }
+    fetchResults();
+  }, [profile?._id, query]);
 
   return results!;
-}
+};
 
 export default useFetchSearchByQuery;

@@ -3,7 +3,6 @@ import Button from "../../components/common/Button";
 import { withAsync } from "../../helpers/withAsync";
 import useToken from "../../hooks/useToken";
 import { deleteComment, getComments, postComment } from "../../api/CommentApi";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { IComment } from "../../types/comment.type";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
@@ -17,6 +16,7 @@ import {
 } from "@material-tailwind/react";
 import profileDefault from "../../assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 interface CommentProps {
   publicationId: string;
@@ -26,7 +26,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
   const token = useToken();
   const [content, setContent] = React.useState<string>();
   const [comments, setComments] = React.useState<IComment[]>();
-  const profile = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
 
   const addComment = async () => {
     const { error } = await withAsync(() =>
@@ -69,6 +69,8 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
   };
 
   const fetchComments = async () => {
+    console.log("comments fetching...");
+
     const { error, response } = await withAsync(() =>
       getComments(token, publicationId)
     );
@@ -79,7 +81,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
         error.message;
       toast.error(error_message);
     } else {
-      console.log("comments ", response?.data);
+      console.log("comments fetched...");
       setComments(response?.data as Array<IComment>);
     }
   };
@@ -100,19 +102,19 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
               <div className="flex gap-3 items-center">
                 <Link
                   className="flex gap-3 items-center"
-                  to={`/profile/${comment.profile._id}`}
+                  to={`/profile/${comment?.profile?._id}`}
                 >
                   <img
                     src={
-                      comment.profile.image
-                        ? FileServerURL + comment.profile.image
+                      comment?.profile?.image
+                        ? FileServerURL + comment?.profile?.image
                         : profileDefault
                     }
                     className="object-cover w-8 h-8 rounded-full   shadow-emerald-400 "
                     alt="comments"
                   />
 
-                  <h3 className="font-bold">{comment.profile.name}</h3>
+                  <h3 className="font-bold">{comment?.profile?.name}</h3>
                 </Link>
               </div>
 
@@ -124,7 +126,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
                   {moment(comment.date).startOf("second").fromNow()}
                 </p>
 
-                {comment.profile._id === profile?._id && (
+                {comment?.profile?._id === profile?._id && (
                   <Popover
                     animate={{
                       mount: { scale: 1, y: 0 },
@@ -144,7 +146,7 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
                       <div className="flex">
                         <p
                           className="text-left text-xs hover:underline font-normal text-red-500 cursor-pointer"
-                          onClick={() => removeComment(comment._id!)}
+                          onClick={() => removeComment(comment?._id!)}
                         >
                           {t("comments.deleteValidate")}
                         </p>

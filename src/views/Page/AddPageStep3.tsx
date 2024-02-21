@@ -1,36 +1,28 @@
 import { CheckboxButton } from "../../components/page/CategoryCheckbox";
 import Button from "../../components/common/Button";
-import TopBar from "../../components/common/TopBar";
+import TopBar from "../../components/layouts/TopBar";
 import useLoadingButton from "../../hooks/useLoadingButton";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
 import { withAsync } from "../../helpers/withAsync";
 import { addPage } from "../../api/PageApi";
 import useToken from "../../hooks/useToken";
-import {
-  PageInitialState,
-  resetPageInfo,
-} from "../../store/reducer/page.reducer";
+import { resetPageInfo } from "../../store/reducer/page.reducer";
 import { AxiosError } from "axios";
-import { useDispatch } from "react-redux";
 import { CategorieList } from "../../constants/PageCategory";
-import useFetchProfile from "../../hooks/useFetchProfile";
-import { addAccountConnected } from "../../store/reducer/account.reducer";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { addAccountConnected } from "../../store/reducer/account.reducer";
 
 const AddPageStep3: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, startLoading, endLoading] = useLoadingButton();
   const token = useToken();
-  const dispatch = useDispatch<AppDispatch>();
-  const profile = useFetchProfile();
+  const dispatch = useAppDispatch();
+  const { profile } = useAppSelector((state) => state.teratany_user);
   const { t } = useTranslation();
 
-  const page: PageInitialState = useSelector<RootState>(
-    (state) => state.teratany_page
-  ) as PageInitialState;
+  const page = useAppSelector((state) => state.teratany_page);
 
   let categories: Array<string> = [];
 
@@ -69,23 +61,16 @@ const AddPageStep3: React.FC = () => {
         error.message;
       toast.error(error_message);
     } else {
-      const account: any = response?.data;
+      const newAccount: any = response?.data;
       dispatch(
         addAccountConnected({
-          id: account?._id,
-          name: account?.name,
+          id: newAccount?._id,
+          name: newAccount?.name,
           followers: 0,
-          image: account?.image,
+          image: newAccount?.image,
         })
       );
-      dispatch(
-        addAccountConnected({
-          id: profile?._id!,
-          name: profile?.name!,
-          followers: profile?.followers?.length!,
-          image: profile?.image!,
-        })
-      );
+
       endLoading();
       const toastSuccess = t("settings.addPage.step3.success");
       toast(toastSuccess);

@@ -219,6 +219,10 @@
       "name":"Name",
       "remember":"Remember me"
     }
+  },
+  "chat":{
+    "channel":"Channel",
+    "joinChannel":"Join channel"
   }
 
     

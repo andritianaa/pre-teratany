@@ -76,7 +76,7 @@ const ForgotPassword = () => {
           </div>
         </div>
 
-        <p className="mt-2 text-sm text-gray-600 white:text-gray-400">
+        <p className="mt-2 text-sm text-center text-gray-600 white:text-gray-400">
           Don't have an account yet ?
           <Link
             className="text-blue-600 decoration-2 hover:underline font-medium ml-1"

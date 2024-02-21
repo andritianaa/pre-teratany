@@ -220,6 +220,10 @@
         "name": "Anarana",
         "remember": "Tadidiana aho"
       }
+    },
+    "chat":{
+      "channel":"Channel",
+      "joinChannel":"Join channel"
     }
   
 }

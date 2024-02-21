@@ -1,7 +1,7 @@
 import React from "react";
 
 import { RxDotsHorizontal } from "react-icons/rx";
-import DrawerSettings from "../../../components/DrawerSettings";
+import DrawerSettings from "../../../components/drawer/DrawerSettings";
 
 interface MenuProps {
   id: string;

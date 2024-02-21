@@ -1,20 +1,21 @@
 import React from "react";
-import SearchBar from "components/SearchBar";
-import SearchFilterBar from "components/SearchFilterBar";
+import SearchBar from "components/common/SearchBar";
+import SearchFilterBar from "components/common/SearchFilterBar";
 import { HiArrowNarrowLeft } from "react-icons/hi";
-import Publication from "components/Publication/Publication";
-import HorizontalCards from "components/HorizontalCards";
+import Publication from "components/publication/Publication";
+import HorizontalCards from "components/common/HorizontalCards";
 import { useParams } from "react-router-dom";
 import useFetchSearchByQuery from "hooks/useFetchSearchByQuery";
-import useFetchProfile from "../../hooks/useFetchProfile";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 const SearchResult: React.FC = () => {
   const { query } = useParams();
 
   const results = useFetchSearchByQuery(query!);
 
-  const profileConnectedUser = useFetchProfile();
+  const { profile } = useAppSelector((state) => state.teratany_user);
+
   const { t } = useTranslation();
 
   const handleGoBack = () => {
@@ -38,26 +39,27 @@ const SearchResult: React.FC = () => {
         <div className="flex w-full flex-col pb-3 items-start border-b border-b-1">
           <p className="mx-3 mt-2 font-medium ">{t("users.plural")}</p>
           <>
-            {results?.profiles?.map((user) => (
-              <HorizontalCards
-                _id={user._id}
-                name={user.name}
-                image={user.image!}
-                isFollowed={user?.isFollowed}
-                desc={
-                  user.numberOfFollowers > 1
-                    ? t("followers.number.plural", {
-                        followers: user?.numberOfFollowers,
-                      })
-                    : t("followers.number.singular", {
-                        followers: user?.numberOfFollowers,
-                      })
-                }
-                isButtonShowed={
-                  profileConnectedUser?._id !== user._id ? true : false
-                }
-              />
-            ))}
+            {results?.profiles?.map((user) => {
+              const isButtonShowed = profile?._id !== user._id;
+              return (
+                <HorizontalCards
+                  _id={user._id}
+                  name={user.name}
+                  image={user.image!}
+                  isFollowed={user?.isFollowed}
+                  desc={
+                    user.numberOfFollowers > 1
+                      ? t("followers.number.plural", {
+                          followers: user?.numberOfFollowers,
+                        })
+                      : t("followers.number.singular", {
+                          followers: user?.numberOfFollowers,
+                        })
+                  }
+                  isButtonShowed={isButtonShowed}
+                />
+              );
+            })}
           </>
         </div>
       )}

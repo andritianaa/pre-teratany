@@ -220,6 +220,10 @@
       "name": "Nom",
       "remember": "Se souvenir de moi"
     }
+  },
+  "chat":{
+    "channel":"Canal",
+    "joinChannel":"Rejoindre le canal"
   }
 }
 
