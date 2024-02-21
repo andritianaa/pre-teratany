@@ -235,7 +235,8 @@
     "validate":"Change password"
   },
   "chat":{
-    "channel":"Channel"
+    "channel":"Channel",
+    "joinChannel":"Join channel"
   }
 
     

@@ -3,11 +3,11 @@ import Button from "./Button";
 import useLoadingButton from "hooks/useLoadingButton";
 import { useNavigate } from "react-router-dom";
 import { setAuthentication } from "store/reducer/user.reducer";
-import useToken from "hooks/useToken";
 import { FileServerURL } from "api/FileApi";
 import profileDefault from "assets/userPics.jpg";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useGetProfileByIdQuery } from "services/api-services/profile/profile.endpoints";
 
 interface PageCardsProps {
   name: string;
@@ -27,25 +27,38 @@ const PageSwitchCard: React.FC<PageCardsProps> = ({
   const lastSegment = pathSegments[pathSegments.length - 1];
   const isEditUser = lastSegment === "edit-user";
 
+  const { token } = useAppSelector((state) => state.teratany_user);
+
+  const { currentData: profile, isSuccess } = useGetProfileByIdQuery(
+    {
+      id: id!,
+      ownId: id!,
+    },
+    {
+      skip: !id,
+    }
+  );
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const token = useToken();
+
   const { t } = useTranslation();
 
-  const switchAccount = () => {
+  const switchAccount = (id: string) => {
     startLoading();
-    dispatch(
-      setAuthentication({
-        id: id,
-        token,
-        isAuthenticated: true,
-      })
-    );
-    setTimeout(() => {
-      navigate(`/profile/${id}`);
-
-      window.location.reload();
-    }, 2000);
+    if (isSuccess) {
+      setTimeout(() => {
+        dispatch(
+          setAuthentication({
+            id: id,
+            token: token!,
+            profile,
+            isAuthenticated: true,
+          })
+        );
+        navigate(`/`);
+      }, 2000);
+    }
   };
   return (
     <div className="mx-1 py-2 mb-2">
@@ -66,7 +79,7 @@ const PageSwitchCard: React.FC<PageCardsProps> = ({
             <Button
               width="!w-[85%]"
               name={t("switchAccount.switch")}
-              onClick={switchAccount}
+              onClick={() => switchAccount(id!)}
               isLoading={isLoading}
               showLoadingText={false}
             />

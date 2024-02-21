@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 const axiosParams = {
   // Set different base URL based on the environment
   // baseURL: "https://backend.teratany.org",
-  baseURL: 'http://localhost:9900',
+  baseURL: process.env.REACT_APP_BASE_URL,
 };
 // Create axios instance with default params
 const axiosInstance = axios.create(axiosParams);
