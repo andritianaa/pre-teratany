@@ -10,7 +10,7 @@ const ErrorMessageForm: React.FC<ErrorMessageProps> = ({ name }) => {
     <ErrorMessage
       name={name}
       component="div"
-      className="text-red-500 text-sm"
+      className="text-red-500 text-sm text-start"
     />
   );
 };

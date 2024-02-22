@@ -2,7 +2,7 @@ import { AiOutlineHeart } from "@react-icons/all-files/ai/AiOutlineHeart";
 import { AiFillHeart } from "@react-icons/all-files/ai/AiFillHeart";
 import { FaRegComment } from "@react-icons/all-files/fa/FaRegComment";
 import { FiSend } from "@react-icons/all-files/fi/FiSend";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DrawerContainer } from "../drawer/DrawerContainer";
 import { FileServerURL } from "../../api/FileApi";
 import { ConvertDate } from "../../helpers/DateConverter";
@@ -54,7 +54,12 @@ const Publication: React.FC<PublicationProps> = ({
   const [react, setReact] = useState<number>(reactions!);
   const token = useToken();
   const { profile } = useAppSelector((state) => state.teratany_user);
-  const { t } = useTranslation();
+  const [formattedDate, setFormattedDate] = useState<string>("");
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    moment.locale(i18n.language);
+    setFormattedDate(moment(date).fromNow());
+  }, [date, i18n.language]);
 
   const handleClickLikePost = async (_id: string) => {
     setIsPostLiked(!isPostLiked);
@@ -93,11 +98,10 @@ const Publication: React.FC<PublicationProps> = ({
   const togglePubContentDetails = () => {
     setIsFullContent(!isFullContent);
   };
-  const formattedDate = moment(date).fromNow();
 
   return (
     // <!-- Wrapper-->
-    <div className="wrapper my-2 w-full sm:w-[30%] flex flex-col items-center bg-white rounded-lg shadow-md">
+    <div className="wrapper my-2 w-full flex flex-col items-center bg-white rounded-lg shadow-md">
       {/* <!-- Card--> */}
       <article className="mb-4 break-inside rounded-xl bg-white white:bg-slate-800 flex flex-col bg-clip-border w-full">
         <div
@@ -130,7 +134,7 @@ const Publication: React.FC<PublicationProps> = ({
           </div>
           {profileId === profile?._id && <MenuPublication id={_id!} />}
         </div>
-        <div className="z-0">
+        <div className="z-1">
           {images && (
             <Swiper
               pagination={{

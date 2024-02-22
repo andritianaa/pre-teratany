@@ -4,13 +4,17 @@ const FormField = (props: any) => {
   return (
     <>
       <div className="flex justify-between items-center mt-2">
-        <label htmlFor={props.mark} className="block text-sm white:text-white">
+        <label
+          htmlFor={props.mark}
+          className="block text-sm white:text-white pb-2"
+        >
           {props.label}
         </label>
         {props.extra && (
           <a
             className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-            href="../examples/html/recover-account.html">
+            href="../examples/html/recover-account.html"
+          >
             {props.extraDesc}
           </a>
         )}

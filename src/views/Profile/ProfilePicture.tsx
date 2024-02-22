@@ -81,9 +81,12 @@ const ProfilePicture: React.FC = () => {
   }, [profile]);
 
   return (
-    <>
-      <TopBar text={t("settings.picture.name")} />
-      <div className="mt-20 w-[90%] mx-auto flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="fixed top-0 z-20 pt-4 bg-white flex items-center w-full max-w-[500px]">
+        <TopBar text={t("settings.picture.name")} />
+      </div>
+
+      <div className="mt-20 w-[90%] max-w-[400px] mx-auto flex flex-col items-center justify-center">
         <img
           src={fileViewer ? fileViewer : profileDefault}
           alt=""
@@ -106,7 +109,7 @@ const ProfilePicture: React.FC = () => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default ProfilePicture;

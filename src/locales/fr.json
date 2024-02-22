@@ -25,12 +25,17 @@
     "publicationPlaceholder": "Écrivez vos pensées ici...",
     "editPub": "Modifier la publication",
     "deleted": "Publication supprimée",
-    "photo":"Photo"
+    "photo":"Photo",
+    "post":"Publier"
   },
   "posts": {
     "plural": "Articles",
     "singular": "Article",
-    "deleted": "Article supprimé"
+    "number":{
+      "plural":"{{post}} Articles",
+      "singular":"{{post}} Article"
+    },
+    "deleted": "Publication supprimée"
   },
   "pages": {
     "plural": "Pages",
@@ -70,8 +75,8 @@
     "follow": "Suivre",
     "unfollow": "Ne plus suivre",
     "number":{
-      "plural":"{{followers}} abonnés",
-      "singular":"{{followers}} abonné"
+      "plural":"{{followers}} Abonnés",
+      "singular":"{{followers}} Abonné"
     },
     "plural": "Abonnés",
     "singular": "Abonné",
@@ -177,7 +182,8 @@
     "name": "Détails",
     "entreprise": "Entreprise",
     "association": "Association",
-    "description": "Description"
+    "description": "Description",
+    "user":"Utilisateur"
   },
   "switchAccount":{
     "name":"Changer de compte",
@@ -195,12 +201,14 @@
     "signup": "Inscrivez-vous ici",
     "signinbutton": "Se connecter",
     "forgot": "Mot de passe oublié ?",
+    "cancelforgot": "Vous vous rappelez de votre mot de passe ?",
     "successlogin": "Connexion réussie",
     "formik": {
       "email": "Adresse e-mail invalide",
       "required": "Champ obligatoire",
       "emailAddress": "Adresse e-mail",
-      "password": "Mot de passe"
+      "password": "Mot de passe",
+      "reset": "Réinitialiser"
     }
   },
   "authregister": {
@@ -221,9 +229,15 @@
       "remember": "Se souvenir de moi"
     }
   },
+  "resetpassword":{
+    "title":"Changez votre mot de passe",
+    "new":"Nouveau mot de passe",
+    "code":"Code de vérification",
+    "validate":"Changer"
+  },
   "chat":{
     "channel":"Canal",
     "joinChannel":"Rejoindre le canal"
   }
-}
+  }
 

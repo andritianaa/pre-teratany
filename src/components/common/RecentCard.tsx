@@ -34,9 +34,9 @@ const RecentCard: React.FC<recentProps> = ({ historique }) => {
   };
 
   return (
-    <>
+    <div className="flex flex-col justify-center items-start w-full max-w-[600px]">
       {historique?.map((history) => (
-        <div>
+        <div className="w-full">
           <div className="mx-3 mb-6 flex items-center justify-between">
             <div className="flex items-center">
               <RiSearchLine size={22} />
@@ -77,7 +77,7 @@ const RecentCard: React.FC<recentProps> = ({ historique }) => {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 export default RecentCard;

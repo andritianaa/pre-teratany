@@ -60,7 +60,7 @@ export const OneChat: React.FC = () => {
   }, []);
   return (
     <>
-      <TopBar participant={actualDiscussion?.participants[0]} name={""} />
+      <TopBar participant={actualDiscussion.mode === "duo" ? actualDiscussion?.participants[0] : actualDiscussion?.admins[0]} name={""} />
       <div id="nessages" className="flex flex-col my-16 justify-end">
         {actualDiscussion?.messages.map((message: any, index: number) => (
           <Message

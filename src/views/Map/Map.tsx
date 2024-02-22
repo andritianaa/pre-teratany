@@ -21,6 +21,7 @@ import {
 import MarkerClusterGroup from "react-leaflet-cluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 const MapCoordonatesProfileSelected = () => {
@@ -30,14 +31,16 @@ const MapCoordonatesProfileSelected = () => {
   const map = useMap();
 
   useEffect(() => {
-    map.flyTo(
-      {
-        lat: profileCoordonates?.latitude!,
-        lng: profileCoordonates?.longitude!,
-      },
-      map.getZoom(),
-      { animate: true }
-    );
+    if (profileCoordonates?.latitude && profileCoordonates?.longitude) {
+      map.flyTo(
+        {
+          lat: profileCoordonates.latitude,
+          lng: profileCoordonates.longitude,
+        },
+        map.getZoom(),
+        { animate: true }
+      );
+    }
   }, [map, profileCoordonates?.latitude, profileCoordonates?.longitude]);
 
   return null;
@@ -49,6 +52,7 @@ const Map = () => {
   const [profiles, setProfiles] = useState<IProfile[]>();
   const [profilesSearched, setProfilesSearched] = useState<IProfile[]>();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const initialiseMapCoordonates = () => {
     dispatch(
@@ -169,7 +173,7 @@ const Map = () => {
               <Popup closeButton={false}>
                 <Link
                   to={`/profile/${profile?._id}`}
-                  className="flex flex-col items-start justify-start overflow-hidden max-w-[135px]"
+                  className="flex flex-col items-start justify-start overflow-hidden  max-w-[138px]"
                 >
                   <div className="flex items-center justify-between">
                     <div className="w-10 h-10 overflow-hidden">
@@ -188,16 +192,33 @@ const Map = () => {
                         {profile?.name}
                       </span>
                       <span className="text-gray-800 text-xs">
-                        {profile?.profileType}
+                        {profile?.profileType === "association"
+                          ? t("details.association")
+                          : profile?.profileType === "entreprise"
+                          ? t("details.entreprise")
+                          : t("details.user")}
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center pt-2 pl-1 text-gray-500">
+                  <div className="flex items-start pt-2  text-gray-500 w-52">
                     <span className="pr-1">
-                      {profile?.publications?.length} posts
+                      {profile?.publications?.length! > 1
+                        ? t("posts.number.plural", {
+                            post: profile?.publications?.length,
+                          })
+                        : t("posts.number.singular", {
+                            post: profile?.publications?.length,
+                          })}
                     </span>
                     <span className="pl-1">
-                      {profile?.followers?.length} followers
+                      {profile?.followers?.length !== undefined &&
+                        (profile.followers.length > 1
+                          ? t("followers.number.plural", {
+                              followers: profile.followers.length,
+                            })
+                          : t("followers.number.singular", {
+                              followers: profile.followers.length,
+                            }))}
                     </span>
                   </div>
                 </Link>{" "}
