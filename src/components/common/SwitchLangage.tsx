@@ -1,7 +1,7 @@
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import "moment/locale/fr";
-import "helpers/mg";
+// import "helpers/mg";
 import { useEffect, useState } from "react";
 
 export const SwitchLangage = () => {
