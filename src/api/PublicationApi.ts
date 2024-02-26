@@ -41,6 +41,13 @@ export const postPublication = (token: string, profile: string, content: string,
     })
 }
 
+export const sharePublication = (token: string, profile: string, publicationId: string) => {
+    return api.post(URLS.crudPublication, { profile, publicationId }, {
+        headers: {
+            'Authorization': token
+        }
+    })
+}
 
 export const toggleReactPublication = (token: string, profileId: string, publicationId: string) => {
 
