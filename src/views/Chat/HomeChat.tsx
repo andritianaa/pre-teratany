@@ -45,9 +45,17 @@ export const HomeChat: React.FC = () => {
           .map((chat: any, index: number) => (
             <ChatList
               key={index}
-              image={chat.participants[0].image}
+              image={
+                chat.mode === "duo"
+                  ? chat.participants[0].image
+                  : chat.channelPageOwner.image
+              }
               reference={chat.reference}
-              name={chat.participants[0].name}
+              name={
+                chat.mode === "duo"
+                  ? chat.participants[0].name
+                  : chat.channelPageOwner.name + " channel"
+              }
               message={
                 chat.messages[chat.messages.length - 1].text !== "###**###"
                   ? chat.messages[chat.messages.length - 1].text
