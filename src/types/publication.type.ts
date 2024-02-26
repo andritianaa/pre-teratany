@@ -6,7 +6,11 @@ export interface IPublication {
     numberOfComments?: number;
     numberOfReactions?: number;
     date: string;
-    isReacted: boolean
+    isReacted: boolean;
+    isShare: boolean;
+    originalDate?: string;
+    owner: ProfileType,
+    originalId: string
 }
 
 export type ProfileType = {

@@ -71,17 +71,22 @@ const SearchResult: React.FC = () => {
           <div className="bg-gray-100 w-full max-w-[600px]">
             {results?.publications?.map((pub) => (
               <Publication
-                key={pub?._id}
-                _id={pub?._id}
-                profileId={pub?.profile?._id}
-                profileName={pub?.profile?.name}
-                profileImage={pub?.profile?.image}
-                date={pub?.date}
-                comments={pub?.numberOfComments}
-                reactions={pub?.numberOfReactions}
-                content={pub?.content}
-                images={pub?.images!}
-                isReacted={pub.isReacted}
+              key={pub?._id}
+              _id={pub?._id}
+              profileId={pub?.profile?._id}
+              profileName={pub?.profile?.name}
+              profileImage={pub?.profile?.image}
+              date={pub?.date}
+              comments={pub?.numberOfComments}
+              reactions={pub?.numberOfReactions}
+              content={pub?.content}
+              images={pub?.images!}
+              isReacted={pub.isReacted}
+              isShare= {pub.isShare}
+              ownerId= {pub?.owner?._id}
+              ownerName= {pub?.owner?.name}
+              originalDate= {pub?.originalDate}
+              originalId= {pub?.originalId}
               />
             ))}
           </div>

@@ -136,6 +136,11 @@ const Profile: React.FC = () => {
             content={pub?.content}
             images={pub?.images!}
             isReacted={pub.isReacted}
+            isShare={pub.isShare}
+            ownerId={pub?.owner?._id}
+            ownerName={pub?.owner?.name}
+            originalDate={pub?.originalDate}
+            originalId={pub?.originalId}
           />
         ))}
       </div>

@@ -2,6 +2,7 @@ import api from "api/api";
 
 const URLS = {
     crudPublication: '/publication',
+    sharePublication: '/publication/share',
     getPublicationByProfile: '/publication/byProfile',
     getOnePublication: '/publication/one',
     getPublicationDetails: '/publication/one',
@@ -42,7 +43,7 @@ export const postPublication = (token: string, profile: string, content: string,
 }
 
 export const sharePublication = (token: string, profile: string, publicationId: string) => {
-    return api.post(URLS.crudPublication, { profile, publicationId }, {
+    return api.post(URLS.sharePublication, { profile, publicationId }, {
         headers: {
             'Authorization': token
         }
