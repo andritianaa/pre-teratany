@@ -72,6 +72,7 @@ const SearchFilterResult: React.FC = () => {
               ownerName= {pub?.owner?.name}
               originalDate= {pub?.originalDate}
               originalId= {pub?.originalId}
+            ownerImage= {pub?.owner?.image}
               />
             ))}
           </div>
