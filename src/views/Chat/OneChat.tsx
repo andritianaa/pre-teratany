@@ -142,7 +142,7 @@ const TopBar: React.FC<IProfile> = ({ participant }) => {
             />
           )}
           <p className="text-xl flex justify-center font-medium items-center">
-            {participant.name} channel
+            {participant.name}
           </p>
         </Link>
       </div>
