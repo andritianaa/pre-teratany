@@ -137,8 +137,8 @@ const TopBar: React.FC<IProfile> = ({ participant, isQuitable }) => {
         connectedUser,
         conversationReference,
         async () => {
-          dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
           navigate("/");
+          dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
         }
       );
     }
