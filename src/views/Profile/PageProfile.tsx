@@ -128,10 +128,17 @@ export const PageProfile: React.FC<PageProfileProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-center w-full mx-2">
-        <Button width="w-1/2" height="h-7" name={followText} onClick={follow} />
+      <div className="flex items-center justify-center w-full m-2">
         <Button
-          width="w-1/5"
+          width="w-full"
+          height="h-7"
+          name={followText}
+          onClick={follow}
+        />
+      </div>
+      <div className="flex items-center justify-center w-full mx-2">
+        <Button
+          width="w-1/2"
           height="h-7"
           name={t("profile.message")}
           onClick={handdleMessage}
@@ -139,10 +146,15 @@ export const PageProfile: React.FC<PageProfileProps> = ({
         <Button
           width="w-1/2"
           height="h-7"
-          name={t("chat.joinChannel")}
+          name={t("chat.channel")}
           onClick={handdleChannel}
         />
-        <Button width="" height="h-7" name="•••" onClick={changeDrawerStatus} />
+        <Button
+          width="w-1/6"
+          height="h-7"
+          name="•••"
+          onClick={changeDrawerStatus}
+        />
       </div>
     </div>
   );

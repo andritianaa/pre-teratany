@@ -7,7 +7,10 @@ import { Message } from "../../components/chat/Message";
 import { useAppSelector } from "../../store/hooks";
 import { Link } from "react-router-dom";
 import SocketContext from "../../services/socket/socketContext";
-// import { IConversation } from "../../store/reducer/chat.reducer";
+import { useDispatch } from "react-redux";
+import { syncChat } from "../../store/reducer/chat.reducer";
+import { syncChat as syncChatApi } from "../../api/chatApi";
+import { useNavigate } from "react-router-dom";
 
 export const OneChat: React.FC = () => {
   const { socket } = useContext(SocketContext);
@@ -28,8 +31,6 @@ export const OneChat: React.FC = () => {
   const actualDiscussion = conversations.find(
     (element: any) => element.reference === conversationReference
   );
-
-  console.log("actualDiscussion ===> ", actualDiscussion);
 
   const handdleMessage = () => {
     if (socket) {
@@ -67,6 +68,10 @@ export const OneChat: React.FC = () => {
           actualDiscussion.mode === "duo"
             ? actualDiscussion?.participants[0]
             : actualDiscussion?.channelPageOwner
+        }
+        isQuitable={
+          actualDiscussion.mode !== "duo" &&
+          !actualDiscussion?.admins?.includes(connectedUser)
         }
         name={""}
       />
@@ -113,16 +118,35 @@ export const OneChat: React.FC = () => {
   );
 };
 
-const TopBar: React.FC<IProfile> = ({ participant }) => {
+const TopBar: React.FC<IProfile> = ({ participant, isQuitable }) => {
   const handleGoBack = () => {
     window.history.back();
   };
+  const { socket } = useContext(SocketContext);
+  const connectedUser = useAppSelector((state) => state.teratany_user.id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const conversationReference: number = useAppSelector(
+    (state) => state.teratany_chat.activeDiscussionReference
+  );
 
+  const handdleQuit = () => {
+    if (socket) {
+      socket.emit(
+        "quit-channel",
+        connectedUser,
+        conversationReference,
+        async () => {
+          dispatch(syncChat(await syncChatApi(connectedUser!, [], undefined)));
+          navigate("/");
+        }
+      );
+    }
+  };
   return (
-    <div className="fixed top-0 z-40 w-full h-14 bg-white border-b border-gray-200">
-      <div className="flex items-center h-full mx-auto">
+    <div className="fixed top-0 z-40 w-full h-14 bg-white border-b border-gray-200 flex justify-between">
+      <div className="flex items-center justify-start h-full">
         <HiArrowNarrowLeft onClick={handleGoBack} size={26} className="mx-3" />
-
         <Link className="flex" to={`/profile/${participant._id}`}>
           {participant.image && participant.image.length ? (
             <img
@@ -145,6 +169,17 @@ const TopBar: React.FC<IProfile> = ({ participant }) => {
             {participant.name}
           </p>
         </Link>
+      </div>
+      <div className="mx-3 flex items-center">
+        {isQuitable && (
+          <button
+            type="submit"
+            onClick={handdleQuit}
+            className={` inline-flex justify-center  text-white bg-red-600 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 items-center`}
+          >
+            Quit
+          </button>
+        )}
       </div>
     </div>
   );
