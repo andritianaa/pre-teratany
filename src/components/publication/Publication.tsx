@@ -138,6 +138,9 @@ const Publication: React.FC<PublicationProps> = ({
     setIsFullContent(!isFullContent);
   };
 
+  console.log('images ', ownerImage)
+  console.log('profileImage ', profileImage)
+
   return (
     // <!-- Wrapper-->
     <div className="wrapper my-2 w-full flex flex-col items-center bg-white rounded-lg shadow-md">
@@ -160,7 +163,7 @@ const Publication: React.FC<PublicationProps> = ({
           }
         >
           <div className="flex">
-            <Link className="flex" to={`/profile/${isShare ?ownerId: profileId}`}>
+            <Link className="flex" to={`/profile/${isShare ? ownerId: profileId}`}>
               <img
                 alt="profilePubImage"
                 className="rounded-full max-w-[3rem] max-h-[3rem] min-h-[3rem] min-w-[3rem] w-12 h-12 mr-4 object-cover"
@@ -326,8 +329,7 @@ const Publication: React.FC<PublicationProps> = ({
             </p>
           )}
           <p className="text-left text-xs text-gray-400 font-normal">
-            {/* {t("time.ago", { time: formattedDate })} */}
-            {moment(date).fromNow()}
+          {moment(date).startOf("second").fromNow()}
           </p>
         </div>
         <DrawerContainer _id={_id} isOpen={drawerOpen} onClose={closeDrawer} />

@@ -139,6 +139,7 @@ const Profile: React.FC = () => {
             isShare={pub.isShare}
             ownerId={pub?.owner?._id}
             ownerName={pub?.owner?.name}
+            ownerImage={pub?.owner?.image}
             originalDate={pub?.originalDate}
             originalId={pub?.originalId}
           />
