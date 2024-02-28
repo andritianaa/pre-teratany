@@ -106,7 +106,6 @@ const Publication: React.FC<PublicationProps> = ({
 
   const handdleSharePublication = async() => {
     const { error } = await withAsync(() =>{
-      console.log("originalId ===> ", originalId);
       
       if (_id) sharePublication(token, profile?._id!, isShare? originalId! : _id)
       else  toast.error(toastMessage[0]);
@@ -160,7 +159,7 @@ const Publication: React.FC<PublicationProps> = ({
           }
         >
           <div className="flex">
-            <Link className="flex" to={`/profile/${isShare ?ownerId: profileId}`}>
+            <Link className="flex" to={`/profile/${isShare ? ownerId: profileId}`}>
               <img
                 alt="profilePubImage"
                 className="rounded-full max-w-[3rem] max-h-[3rem] min-h-[3rem] min-w-[3rem] w-12 h-12 mr-4 object-cover"
@@ -326,8 +325,7 @@ const Publication: React.FC<PublicationProps> = ({
             </p>
           )}
           <p className="text-left text-xs text-gray-400 font-normal">
-            {/* {t("time.ago", { time: formattedDate })} */}
-            {moment(date).fromNow()}
+          {moment(date).startOf("second").fromNow()}
           </p>
         </div>
         <DrawerContainer _id={_id} isOpen={drawerOpen} onClose={closeDrawer} />

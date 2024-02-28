@@ -64,7 +64,7 @@ export const PageProfile: React.FC<PageProfileProps> = ({
   };
   return (
     <div className="flex flex-col w-full max-w-[600px] mt-16 pb-6 border-b border-gray-200">
-      <div className="flex items-start w-full justify-around mx-2">
+      <div className="flex items-start w-auto justify-around mx-2">
         <div className="flex flex-col items-center">
           <img
             className="w-14 h-14 object-cover rounded-full  border-2 border-pink-600"
@@ -78,30 +78,30 @@ export const PageProfile: React.FC<PageProfileProps> = ({
         <div className="flex flex-col items-end ">
           <div className="flex">
             <div className="flex flex-col ">
-              <p className="text-md font-medium">
+              <p className="text-md text-center font-medium">
                 {profile?.publications?.length!}
               </p>
-              <p className="">
+              <p className="text-center">
                 {profile?.publications?.length! > 1
                   ? t("posts.plural")
                   : t("posts.singular")}
               </p>
             </div>
             <div className="flex flex-col mx-4">
-              <p className="text-md font-medium">
+              <p className="text-md text-center font-medium">
                 {profile?.followers?.length!}
               </p>
-              <p className="">
+              <p className="text-center">
                 {profile?.followers?.length! > 1
                   ? t("followers.plural")
                   : t("followers.singular")}
               </p>
             </div>
             <div className="flex flex-col ">
-              <p className="text-md font-medium">
+              <p className="text-md text-center font-medium">
                 {profile?.localisation?.country?.value}
               </p>
-              <p className="">{t("profile.location")}</p>
+              <p className="text-center">{t("profile.location")}</p>
             </div>
           </div>
           <div className="flex  items-center justify-evenly my-3">
@@ -128,7 +128,7 @@ export const PageProfile: React.FC<PageProfileProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-center w-full m-2">
+      <div className="flex items-center justify-center w-auto m-2">
         <Button
           width="w-full"
           height="h-7"
@@ -136,7 +136,7 @@ export const PageProfile: React.FC<PageProfileProps> = ({
           onClick={follow}
         />
       </div>
-      <div className="flex items-center justify-center w-full mx-2">
+      <div className="flex items-center justify-center w-auto mx-2">
         <Button
           width="w-1/2"
           height="h-7"

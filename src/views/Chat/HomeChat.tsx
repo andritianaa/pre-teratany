@@ -19,20 +19,24 @@ export const HomeChat: React.FC = () => {
   };
   return (
     <>
-      <TopBar text="Discussions" />
-      <div className="w-full overflow-y-auto flex flex-col items-center mt-16">
+      <div className="pt-4 bg-white flex items-center w-full max-w-[500px]">
+        <TopBar text='Discussions' />
+      </div>
+      <div className="w-full overflow-y-auto flex flex-col items-center mt-4">
         <div className="flex items-center ml-2 w-full justify-center">
           <Button
             width="w-full"
             height="h-7"
             name="Discussions"
             onClick={() => switchMode("duo")}
+            className={convType === 'duo' ? 'opacity-100' : 'bg-opacity-30'}
           />
           <Button
             width="w-full"
             height="h-7"
             name="Channels"
             onClick={() => switchMode("canal")}
+            className={convType === 'canal' ? 'opacity-100' : 'bg-opacity-30'}
           />
         </div>
         {/* <div className="pl-2 pr-2 mb-2 w-full">

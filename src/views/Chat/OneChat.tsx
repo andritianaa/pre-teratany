@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { syncChat } from "../../store/reducer/chat.reducer";
 import { syncChat as syncChatApi } from "../../api/chatApi";
 import { useNavigate } from "react-router-dom";
+import { IoIosSend } from "react-icons/io";
 
 export const OneChat: React.FC = () => {
   const { socket } = useContext(SocketContext);
@@ -97,17 +98,17 @@ export const OneChat: React.FC = () => {
           {(actualDiscussion?.mode === "duo" ||
             actualDiscussion?.admins?.includes(connectedUser)) && (
             <div className="flex">
-              <div className="relative w-full flex">
+              <div className="relative w-full gap-x-2 flex">
                 <input
                   type="text"
-                  className="block p-2.5 w-full z-20 text-sm text-gray-900 rounded-lg border border-1"
+                  className="block p-2.5 w-[90%] z-20 text-sm text-gray-900 rounded-lg border border-1"
                   placeholder="Message"
                   required
                   onChange={(v) => setTextMessage(v.target.value)}
                   value={textMessage}
                 />
-                <button className="hidden" type="submit">
-                  Send
+                <button className="bg-gray-900 p-2 w-11 h-w-10 text-white rounded-md" type="submit">
+                  <IoIosSend size={25}/>
                 </button>
               </div>
             </div>
