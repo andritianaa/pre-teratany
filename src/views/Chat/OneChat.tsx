@@ -65,12 +65,12 @@ export const OneChat: React.FC = () => {
     <>
       <TopBar
         participant={
-          actualDiscussion.mode === "duo"
+          actualDiscussion?.mode === "duo"
             ? actualDiscussion?.participants[0]
             : actualDiscussion?.channelPageOwner
         }
         isQuitable={
-          actualDiscussion.mode !== "duo" &&
+          actualDiscussion?.mode !== "duo" &&
           !actualDiscussion?.admins?.includes(connectedUser)
         }
         name={""}
@@ -94,7 +94,7 @@ export const OneChat: React.FC = () => {
             handdleMessage(); // Appelle la fonction de gestion du message
           }}
         >
-          {(actualDiscussion.mode === "duo" ||
+          {(actualDiscussion?.mode === "duo" ||
             actualDiscussion?.admins?.includes(connectedUser)) && (
             <div className="flex">
               <div className="relative w-full flex">
@@ -147,13 +147,13 @@ const TopBar: React.FC<IProfile> = ({ participant, isQuitable }) => {
     <div className="fixed top-0 z-40 w-full h-14 bg-white border-b border-gray-200 flex justify-between">
       <div className="flex items-center justify-start h-full">
         <HiArrowNarrowLeft onClick={handleGoBack} size={26} className="mx-3" />
-        <Link className="flex" to={`/profile/${participant._id}`}>
-          {participant.image && participant.image.length ? (
+        <Link className="flex" to={`/profile/${participant?._id}`}>
+          {participant?.image && participant?.image.length ? (
             <img
               className="w-8 h-8 object-cover p-0.5 rounded-full ring-2 ring-gray-300 mr-2"
               src={
-                participant.image
-                  ? FileServerURL + participant.image
+                participant?.image
+                  ? FileServerURL + participant?.image
                   : profileDefault
               }
               alt="Bordered avatar"
@@ -166,7 +166,7 @@ const TopBar: React.FC<IProfile> = ({ participant, isQuitable }) => {
             />
           )}
           <p className="text-xl flex justify-center font-medium items-center">
-            {participant.name}
+            {participant?.name}
           </p>
         </Link>
       </div>

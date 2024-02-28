@@ -326,7 +326,8 @@ const Publication: React.FC<PublicationProps> = ({
             </p>
           )}
           <p className="text-left text-xs text-gray-400 font-normal">
-            {t("time.ago", { time: formattedDate })}
+            {/* {t("time.ago", { time: formattedDate })} */}
+            {moment(date).fromNow()}
           </p>
         </div>
         <DrawerContainer _id={_id} isOpen={drawerOpen} onClose={closeDrawer} />
