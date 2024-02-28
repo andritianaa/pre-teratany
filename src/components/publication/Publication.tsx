@@ -106,7 +106,6 @@ const Publication: React.FC<PublicationProps> = ({
 
   const handdleSharePublication = async() => {
     const { error } = await withAsync(() =>{
-      console.log("originalId ===> ", originalId);
       
       if (_id) sharePublication(token, profile?._id!, isShare? originalId! : _id)
       else  toast.error(toastMessage[0]);
@@ -137,9 +136,6 @@ const Publication: React.FC<PublicationProps> = ({
   const togglePubContentDetails = () => {
     setIsFullContent(!isFullContent);
   };
-
-  console.log('images ', ownerImage)
-  console.log('profileImage ', profileImage)
 
   return (
     // <!-- Wrapper-->

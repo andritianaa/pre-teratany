@@ -69,8 +69,6 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
   };
 
   const fetchComments = async () => {
-    console.log("comments fetching...");
-
     const { error, response } = await withAsync(() =>
       getComments(token, publicationId)
     );
@@ -81,7 +79,6 @@ const Comments: React.FC<CommentProps> = ({ publicationId }) => {
         error.message;
       toast.error(error_message);
     } else {
-      console.log("comments fetched...");
       setComments(response?.data as Array<IComment>);
     }
   };

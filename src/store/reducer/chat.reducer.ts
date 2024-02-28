@@ -62,7 +62,6 @@ export const chatSlice = createSlice({
       }
     },
     openDiscussion: (state, action: PayloadAction<number>) => {
-        console.log(action.payload);
       state.activeDiscussionReference = action.payload;
     },
     switchConversationType: (state, action: PayloadAction<string>) => {
